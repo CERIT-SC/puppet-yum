@@ -1,4 +1,4 @@
-# Define: yum::rpm_gpgkey
+# Define: yum::gpgkey
 #
 # This definition saves and imports public GPG key for RPM. Key can
 # be stored on Puppet's fileserver or as inline content. Key can be
@@ -19,14 +19,14 @@
 #   RPM based system
 #
 # Sample usage:
-#   yum::rpm_gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
+#   yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
 #     ensure  => present,
 #     content => '-----BEGIN PGP PUBLIC KEY BLOCK-----
 #   ...
 #   -----END PGP PUBLIC KEY BLOCK-----';
 #   }
 #
-define yum::rpm_gpgkey (
+define yum::gpgkey (
 	$path		= $name,
 	$ensure		= present,
 	$content	= '',
@@ -39,12 +39,11 @@ define yum::rpm_gpgkey (
 		fail('Missing params: $content or $source must be specified')
 	}
 
-	file {
-		"${path}":
-			ensure	=> $ensure,
-			owner	=> $owner,
-			group	=> $group,
-			mode	=> $mode,
+	file { "${path}":
+		ensure	=> $ensure,
+		owner	=> $owner,
+		group	=> $group,
+		mode	=> $mode,
 	}
 
 	if $content {
@@ -59,22 +58,20 @@ define yum::rpm_gpgkey (
 
 	case $ensure {
 		present: {
-			exec {
-				"rpm-import-${name}":
-					path	=> '/bin:/usr/bin:/sbin/:/usr/sbin',
-					command	=> "rpm --import ${path}",
-					unless	=> "rpm -q ${rpmname}",
-					require	=> File["${path}"],
+			exec { "rpm-import-${name}":
+				path	=> '/bin:/usr/bin:/sbin/:/usr/sbin',
+				command	=> "rpm --import ${path}",
+				unless	=> "rpm -q ${rpmname}",
+				require	=> File["${path}"],
 			}
 		}
 
 		absent: {
-			exec {
-				"rpm-delete-${name}":
-					path	=> '/bin:/usr/bin:/sbin/:/usr/sbin',
-					command	=> "rpm -e ${rpmname}",
-					onlyif	=> ["test -f ${path}", "rpm -q ${rpmname}"],
-					before	=> File["${path}"],
+			exec { "rpm-delete-${name}":
+				path	=> '/bin:/usr/bin:/sbin/:/usr/sbin',
+				command	=> "rpm -e ${rpmname}",
+				onlyif	=> ["test -f ${path}", "rpm -q ${rpmname}"],
+				before	=> File["${path}"],
 			}
 		}
 

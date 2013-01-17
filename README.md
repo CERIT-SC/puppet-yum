@@ -30,3 +30,11 @@ Key stored on Puppet fileserver:
       ensure  => present,
       source  => 'puppet:///modules/elrepo/RPM-GPG-KEY-elrepo.org',
     }
+
+### yum::plugin
+
+Install or remove Yum plugin:
+
+    yum::plugin { "versionlock":
+      ensure  => present
+    }

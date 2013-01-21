@@ -43,8 +43,15 @@ Install or remove Yum plugin:
 
 Locks explicitly specified packages from updates. Package name must
 be precisely specified in format *`EPOCH:NAME-VERSION-RELEASE.ARCH`*.
+Wild cards in package name are allowed or automatically appended,
+but be careful with them and always first check on target machine if your
+packages are matched correctly! Following definitions creates same
+configuration lines:
 
-    yum::versionlock { '0:bash-4.1.2-9.el6_2':
-      ensure  => present,
+    yum::versionlock {
+      '0:bash-4.1.2-9.el6_2.*':
+        ensure  => present;
+      '0:bash-4.1.2-9.el6_2.':
+        ensure  => present;
     }
 

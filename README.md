@@ -43,9 +43,9 @@ Install or remove Yum plugin:
 
 Locks explicitly specified packages from updates. Package name must
 be precisely specified in format *`EPOCH:NAME-VERSION-RELEASE.ARCH`*.
-Wild cards in package name are allowed or automatically appended,
-but be careful with them and always first check on target machine if your
-packages are matched correctly! Following definitions creates same
+Wild card in package name is allowed or automatically appended,
+but be careful and always first check on target machine if your
+package is matched correctly! Following definitions create same
 configuration lines:
 
     yum::versionlock {

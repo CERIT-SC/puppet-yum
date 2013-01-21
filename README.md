@@ -38,3 +38,13 @@ Install or remove Yum plugin:
     yum::plugin { "versionlock":
       ensure  => present
     }
+
+### yum::versionlock
+
+Locks explicitly specified packages from updates. Package name must
+be precisely specified in format "EPOCH:NAME-VERSION-RELEASE.ARCH".
+
+    yum::versionlock { '0:bash-4.1.2-9.el6_2':
+      ensure  => present,
+    }
+

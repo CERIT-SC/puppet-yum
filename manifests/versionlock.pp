@@ -12,7 +12,7 @@
 #   RPM based system, Yum versionlock plugin
 #
 # Sample usage:
-#   yum::versionlock { '0:bash-4.1.2-9.el6_2':
+#   yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
 #     ensure  => present,
 #   }
 #
@@ -23,15 +23,18 @@ define yum::versionlock (
 	require	stdlib
 	require yum::plugin::versionlock
 
-	if ($name !~ /^[0-9]:.+-.+-.+\./) {
+	if ($name =~ /^[0-9]+:.+\*$/) {
+		$_name = $name
+	} elsif ($name =~ /^[0-9]+:.+-.+-.+\./) {
+		$_name= "${name}*"
+	} else {
 		fail("Package name must be explicitly specified as 'EPOCH:NAME-VERSION-RELEASE.ARCH'")
 	}
-
 	case $ensure {
 		present,absent,exclude: {
 			if ($ensure == present) or ($ensure == absent) {
 				file_line { "versionlock.list-${name}":
-					line	=> "${name}*",
+					line	=> "${_name}",
 					path	=> $path,
 					ensure	=> $ensure,
 				}
@@ -39,7 +42,7 @@ define yum::versionlock (
 		
 			if ($ensure == exclude) or ($ensure == absent) {
 				file_line { "versionlock.list-!${name}":
-					line	=> "!${name}*",
+					line	=> "!${_name}",
 					path	=> $path,
 					ensure	=> $ensure,
 				}

@@ -1,3 +1,3 @@
 yum::plugin { 'versionlock':
-  ensure  => present,
+  ensure => present,
 }

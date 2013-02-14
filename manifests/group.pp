@@ -34,7 +34,7 @@ define yum::group (
 
     absent,purged: {
       exec { "yum-groupremove-${name}":
-        command => "yum groupremove '${name}'",
+        command => "yum -y groupremove '${name}'",
         onlyif  => "yum grouplist '${name}' | egrep '^Installed Groups:'",
       }
     }

@@ -1,12 +1,12 @@
 # Puppet yum module
 
-This module provides helpful definitions for dealing with Yum.
+This module provides helpful definitions for dealing with *yum*.
 
 ### Requirements
 
 Module has been tested on:
 
-* Puppet 3.0
+* Puppet 3.1.0
 * CentOS 6.3
 
 # Usage
@@ -17,7 +17,7 @@ Import/remove GPG RPM signing key.
 
 Key defined in recipe (inline):
 
-    yum::gpgkey { "/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1":
+    yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
       ensure  => present,
       content => '-----BEGIN PGP PUBLIC KEY BLOCK-----
     ...
@@ -26,17 +26,17 @@ Key defined in recipe (inline):
 
 Key stored on Puppet fileserver:
 
-    yum::gpgkey { "/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org":
+    yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org':
       ensure  => present,
       source  => 'puppet:///modules/elrepo/RPM-GPG-KEY-elrepo.org',
     }
 
 ### yum::plugin
 
-Install or remove Yum plugin:
+Install or remove *yum* plugin:
 
-    yum::plugin { "versionlock":
-      ensure  => present
+    yum::plugin { 'versionlock':
+      ensure  => present,
     }
 
 ### yum::versionlock
@@ -55,3 +55,10 @@ configuration lines:
         ensure  => present;
     }
 
+### yum::group
+
+Install or remove *yum* package group:
+
+    yum::plugin { 'X Window System':
+      ensure  => present,
+    }

@@ -27,57 +27,61 @@
 #   }
 #
 define yum::gpgkey (
-	$path		= $name,
-	$ensure		= present,
-	$content	= '',
-	$source		= '',
-	$owner		= 'root',
-	$group		= 'root',
-	$mode		= '0644'
+  $path    = $name,
+  $ensure  = present,
+  $content = '',
+  $source  = '',
+  $owner   = 'root',
+  $group   = 'root',
+  $mode    = '0644'
 ) {
-	if ($content == '') and ($source == '') {
-		fail('Missing params: $content or $source must be specified')
-	}
+  if ($content == '') and ($source == '') {
+    fail('Missing params: $content or $source must be specified')
+  }
 
-	file { "${path}":
-		ensure	=> $ensure,
-		owner	=> $owner,
-		group	=> $group,
-		mode	=> $mode,
-	}
+  file { $path:
+    ensure => $ensure,
+    owner  => $owner,
+    group  => $group,
+    mode   => $mode,
+  }
 
-	if $content {
-		File["${path}"] { content => $content }
-		$rpmname = "gpg-pubkey-$(echo '${content}' | gpg --quiet --with-colon --throw-keyids | cut -d: -f5 | cut -c9- | tr [A-Z] [a-z] | head -1)"
-	}
+  if $content {
+    File[$path] { content => $content }
+    $rpmname = "gpg-pubkey-$( \
+echo '${content}' | \
+gpg --quiet --with-colon --throw-keyids | \
+cut -d: -f5 | cut -c9- | tr [A-Z] [a-z] | head -1)"
+  }
 
-	if $source {
-		File["${path}"] { source => $source }
-		$rpmname = "gpg-pubkey-$(gpg --quiet --with-colon --throw-keyids <${path} | cut -d: -f5 | cut -c9- | tr [A-Z] [a-z] | head -1)"
-	}
+  if $source {
+    File[$path] { source => $source }
+    $rpmname = "gpg-pubkey-$( \
+gpg --quiet --with-colon --throw-keyids <${path} | \
+cut -d: -f5 | cut -c9- | tr [A-Z] [a-z] | head -1)"
+  }
 
-	case $ensure {
-		present: {
-			exec { "rpm-import-${name}":
-				path	=> '/bin:/usr/bin:/sbin/:/usr/sbin',
-				command	=> "rpm --import ${path}",
-				unless	=> "rpm -q ${rpmname}",
-				require	=> File["${path}"],
-			}
-		}
+  case $ensure {
+    present: {
+      exec { "rpm-import-${name}":
+        path    => '/bin:/usr/bin:/sbin/:/usr/sbin',
+        command => "rpm --import ${path}",
+        unless  => "rpm -q ${rpmname}",
+        require => File[$path],
+      }
+    }
 
-		absent: {
-			exec { "rpm-delete-${name}":
-				path	=> '/bin:/usr/bin:/sbin/:/usr/sbin',
-				command	=> "rpm -e ${rpmname}",
-				onlyif	=> ["test -f ${path}", "rpm -q ${rpmname}"],
-				before	=> File["${path}"],
-			}
-		}
+    absent: {
+      exec { "rpm-delete-${name}":
+        path    => '/bin:/usr/bin:/sbin/:/usr/sbin',
+        command => "rpm -e ${rpmname}",
+        onlyif  => ["test -f ${path}", "rpm -q ${rpmname}"],
+        before  => File[$path],
+      }
+    }
 
-		default: {
-			fail("Invalid ensure state: ${ensure}")
-		}
-	}
+    default: {
+      fail("Invalid ensure state: ${ensure}")
+    }
+  }
 }
-

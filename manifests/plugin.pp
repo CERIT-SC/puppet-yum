@@ -16,16 +16,16 @@
 #   }
 #
 define yum::plugin (
-	$ensure		= present,
-	$pkg_prefix	= 'yum-plugin',
-	$pkg_name	= ''
+  $ensure     = present,
+  $pkg_prefix = 'yum-plugin',
+  $pkg_name   = ''
 ) {
-	$_pkg_name = $pkg_name ? {
-		''		=> "${pkg_prefix}-${name}",
-		default	=> "${pkg_prefix}-${pkg_name}"
-	}
+  $_pkg_name = $pkg_name ? {
+    ''      => "${pkg_prefix}-${name}",
+    default => "${pkg_prefix}-${pkg_name}"
+  }
 
-	package { "${_pkg_name}":
-		ensure	=> $ensure,
-	}
+  package { $_pkg_name:
+    ensure  => $ensure,
+  }
 }

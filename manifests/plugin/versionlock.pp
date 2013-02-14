@@ -1,7 +1,7 @@
 class yum::plugin::versionlock (
-	$ensure	= present
+  $ensure = present
 ) {
-	yum::plugin { 'versionlock':
-		ensure	=> $ensure,
-	}
+  yum::plugin { 'versionlock':
+    ensure  => $ensure,
+  }
 }

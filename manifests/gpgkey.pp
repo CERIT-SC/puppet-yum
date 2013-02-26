@@ -51,14 +51,14 @@ define yum::gpgkey (
     $rpmname = "gpg-pubkey-$( \
 echo '${content}' | \
 gpg --quiet --with-colon --throw-keyids | \
-cut -d: -f5 | cut -c9- | tr [A-Z] [a-z] | head -1)"
+cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
   }
 
   if $source {
     File[$path] { source => $source }
     $rpmname = "gpg-pubkey-$( \
 gpg --quiet --with-colon --throw-keyids <${path} | \
-cut -d: -f5 | cut -c9- | tr [A-Z] [a-z] | head -1)"
+cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
   }
 
   case $ensure {

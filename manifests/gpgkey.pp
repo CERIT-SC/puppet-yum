@@ -50,14 +50,14 @@ define yum::gpgkey (
     File[$path] { content => $content }
     $rpmname = "gpg-pubkey-$( \
 echo '${content}' | \
-gpg --quiet --with-colon --throw-keyids | \
+gpg --quiet --with-colon --homedir=/root --throw-keyids | \
 cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
   }
 
   if $source {
     File[$path] { source => $source }
     $rpmname = "gpg-pubkey-$( \
-gpg --quiet --with-colon --throw-keyids <${path} | \
+gpg --quiet --with-colon --homedir=/root --throw-keyids <${path} | \
 cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
   }
 

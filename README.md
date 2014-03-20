@@ -59,6 +59,6 @@ configuration lines:
 
 Install or remove *yum* package group:
 
-    yum::plugin { 'X Window System':
+    yum::group { 'X Window System':
       ensure  => present,
     }

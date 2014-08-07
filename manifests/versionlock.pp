@@ -20,7 +20,6 @@ define yum::versionlock (
   $ensure = present,
   $path   = '/etc/yum/pluginconf.d/versionlock.list'
 ) {
-  require stdlib
   require yum::plugin::versionlock
 
   if ($name =~ /^[0-9]+:.+\*$/) {

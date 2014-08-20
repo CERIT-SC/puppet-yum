@@ -1,6 +1,6 @@
 {
   "name": "ceritsc-yum",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "author": "ceritsc",
   "summary": "YUM utilities",
   "license": "MIT",
@@ -23,6 +23,12 @@
     },
     {
       "operatingsystem": "Scientific"
+    },
+    {
+      "operatingsystem": "SLES"
+    },
+    {
+      "operatingsystem": "SLED"
     }
   ],
   "requirements": [

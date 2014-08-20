@@ -35,9 +35,8 @@ define yum::gpgkey (
   $group   = 'root',
   $mode    = '0644'
 ) {
-  if ($content == '') and ($source == '') {
-    fail('Missing params: $content or $source must be specified')
-  }
+  validate_absolute_path($path)
+  validate_string($owner, $group, $mode)
 
   file { $path:
     ensure => $ensure,
@@ -46,20 +45,21 @@ define yum::gpgkey (
     mode   => $mode,
   }
 
-  if $content {
-    File[$path] { content => $content }
-    $rpmname = "gpg-pubkey-$( \
-echo '${content}' | \
-gpg --quiet --with-colon --homedir=/root --throw-keyids | \
-cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
+  if ($content == '') and ($source == '') {
+    fail('Missing params: $content or $source must be specified')
+  } elsif $content {
+    File[$path] {
+      content => $content
+    }
+  } else {
+    File[$path] {
+      source => $source
+    }
   }
 
-  if $source {
-    File[$path] { source => $source }
-    $rpmname = "gpg-pubkey-$( \
+  $rpmname = "gpg-pubkey-$( \
 gpg --quiet --with-colon --homedir=/root --throw-keyids <${path} | \
 cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
-  }
 
   case $ensure {
     present: {

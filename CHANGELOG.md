@@ -2,11 +2,11 @@
 
 ### Summary
 
-Fix GPG key import check when key specified in $content.
+Fix GPG key import check when key is specified in $content.
 
 #### Bugfixes
 
-- Fix wrong check if GPG key is imported when key specified in $content
+- Fix GPG key import check when key is specified in $content.
 
 ## 2014-08-07 - Release 0.9.0
 

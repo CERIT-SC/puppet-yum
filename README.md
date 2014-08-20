@@ -62,3 +62,7 @@ Install or remove *yum* package group:
     yum::group { 'X Window System':
       ensure  => present,
     }
+
+***
+
+CERIT Scientific Cloud, <support@cerit-sc.cz>

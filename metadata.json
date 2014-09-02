@@ -1,6 +1,6 @@
 {
   "name": "ceritsc-yum",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "author": "ceritsc",
   "summary": "YUM utilities",
   "license": "MIT",
@@ -43,7 +43,7 @@
   ],
   "dependencies": [
     {
-      "name": "puppetlabs-stdlib",
+      "name": "puppetlabs/stdlib",
       "version_requirement": ">= 4.0.0"
     }
   ]

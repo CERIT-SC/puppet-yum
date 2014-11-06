@@ -1,3 +1,12 @@
+## 2014-11-06 - Release 0.9.3
+
+Enable yum.conf plugins if disabled.
+
+#### Bugfixes
+
+- Enable yum.conf plugins (if disabled) when we
+  install plugin via yum::plugin.
+
 ## 2014-09-02 - Release 0.9.2
 
 Fix metadata.json

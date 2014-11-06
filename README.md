@@ -17,27 +17,33 @@ Import/remove GPG RPM signing key.
 
 Key defined in recipe (inline):
 
-    yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
-      ensure  => present,
-      content => '-----BEGIN PGP PUBLIC KEY BLOCK-----
-    ...
-    -----END PGP PUBLIC KEY BLOCK-----',
-    }
+```puppet
+yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
+  ensure  => present,
+  content => '-----BEGIN PGP PUBLIC KEY BLOCK-----
+...
+-----END PGP PUBLIC KEY BLOCK-----',
+}
+```
 
 Key stored on Puppet fileserver:
 
-    yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org':
-      ensure  => present,
-      source  => 'puppet:///modules/elrepo/RPM-GPG-KEY-elrepo.org',
-    }
+```puppet
+yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org':
+  ensure => present,
+  source => 'puppet:///modules/elrepo/RPM-GPG-KEY-elrepo.org',
+}
+```
 
 ### yum::plugin
 
 Install or remove *yum* plugin:
 
-    yum::plugin { 'versionlock':
-      ensure  => present,
-    }
+```puppet
+yum::plugin { 'versionlock':
+  ensure => present,
+}
+```
 
 ### yum::versionlock
 
@@ -48,20 +54,32 @@ but be careful and always first check on target machine if your
 package is matched correctly! Following definitions create same
 configuration lines:
 
-    yum::versionlock {
-      '0:bash-4.1.2-9.el6_2.*':
-        ensure  => present;
-      '0:bash-4.1.2-9.el6_2.':
-        ensure  => present;
-    }
+```puppet
+yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
+  ensure => present,
+}
+
+yum::versionlock { '0:bash-4.1.2-9.el6_2.':
+  ensure => present,
+}
+```
+
+Correct name for installed package can be easily get by running e.g.:
+
+```bash
+# rpm -q bash --qf '%|EPOCH?{%{EPOCH}}:{0}|:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n'
+0:bash-4.2.45-5.el7_0.4.x86_64
+```
 
 ### yum::group
 
 Install or remove *yum* package group:
 
-    yum::group { 'X Window System':
-      ensure  => present,
-    }
+```puppet
+yum::group { 'X Window System':
+  ensure => present,
+}
+```
 
 ***
 

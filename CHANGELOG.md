@@ -1,3 +1,11 @@
+## 2014-12-08 - Release 0.9.4
+
+Fix file/directory permissions.
+
+#### Bugfixes
+
+- Fix PF module archive file/directory permissions.
+
 ## 2014-11-06 - Release 0.9.3
 
 Enable yum.conf plugins if disabled.

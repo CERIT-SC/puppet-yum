@@ -29,12 +29,9 @@ define yum::plugin (
     ensure  => $ensure,
   }
 
-  if ! defined(Augeas['yum.conf_plugins_enable']) {
-    augeas { 'yum.conf_plugins_enable':
-      lens    => 'Yum.lns',
-      incl    => '/etc/yum.conf',
-      context => '/files/etc/yum.conf',
-      changes => 'set main/plugins 1',
+  if ! defined(Yum::Config['plugins']) {
+    yum::config { 'plugins':
+      ensure => 1,
     }
   }
 }

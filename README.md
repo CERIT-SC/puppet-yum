@@ -11,6 +11,20 @@ Module has been tested on:
 
 # Usage
 
+### yum::config
+
+Manage yum.conf.
+
+```puppet
+yum::config { 'installonly_limit':
+  ensure => 2,
+}
+
+yum::config { 'debuglevel':
+  ensure => absent,
+}
+```
+
 ### yum::gpgkey
 
 Import/remove GPG RPM signing key.

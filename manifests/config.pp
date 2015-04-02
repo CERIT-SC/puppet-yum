@@ -26,7 +26,11 @@ define yum::config (
   $key     = $title,
   $section = 'main'
 ) {
-  validate_string($key, $ensure, $section)
+  validate_string($key, $section)
+
+  unless is_integer($ensure) {
+    validate_string($ensure)
+  }
 
   $_changes = $ensure ? {
     absent  => "rm  ${key}",

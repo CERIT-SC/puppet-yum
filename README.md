@@ -6,10 +6,28 @@ This module provides helpful definitions for dealing with *yum*.
 
 Module has been tested on:
 
-* Puppet 3.1.0
-* CentOS 6.3
+* Puppet 3.7.x
+* CentOS 6, 7
 
 # Usage
+
+### yum
+
+Manage main Yum configuration.
+
+```puppet
+class { 'yum':
+  keepcache         => false|true,
+  debuglevel        => number,
+  exactarch         => false|true,
+  obsoletes         => false|true,
+  gpgcheck          => false|true,
+  installonly_limit => number,
+  keep_kernel_devel => false|true,
+}
+```
+
+If `installonly_limit` is changed, purging of old kernel packages is triggered.
 
 ### yum::config
 

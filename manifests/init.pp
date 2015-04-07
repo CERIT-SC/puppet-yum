@@ -1,3 +1,26 @@
+# Class: yum
+#
+# Manage Yum configuration.
+#
+# Parameters:
+#   [*keepcache*]         - Yum option keepcache
+#   [*debuglevel*]        - Yum option debuglevel
+#   [*exactarch*]         - Yum option exactarch
+#   [*obsoletes*]         - Yum option obsoletes
+#   [*gpgcheck*]          - Yum option gpgcheck
+#   [*installonly_limit*] - Yum option installonly_limit
+#   [*keep_kernel_devel*] - On old kernels purge keep devel packages.
+#
+# Actions:
+#
+# Requires:
+#   RPM based system
+#
+# Sample usage:
+#   class { 'yum':
+#     installonly_limit => 2,
+#   }
+#
 class yum (
   $keepcache         = $yum::params::keepcache,
   $debuglevel        = $yum::params::debuglevel,

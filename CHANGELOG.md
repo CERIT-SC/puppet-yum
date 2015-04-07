@@ -1,3 +1,13 @@
+## 2015-04-07 - Release 0.9.5
+
+New class yum, defined resource yum::config. Trigger old kernels purge.
+
+#### Features
+
+- New defined resource yum::config to allow changes in /etc/yum.conf.
+- New class yum to set common global parameters
+- If installonly_limit is changed, old kernels above the limit are purged.
+
 ## 2014-12-08 - Release 0.9.4
 
 Fix file/directory permissions.

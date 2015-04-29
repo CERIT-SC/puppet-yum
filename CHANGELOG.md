@@ -1,3 +1,11 @@
+## 2015-05-29 - Release 0.9.6
+
+Fixed check for installed YUM group on RHEL 7.
+
+#### Bugfixes
+
+- Fixed check for installed YUM group on RHEL/CentOS 7
+
 ## 2015-04-07 - Release 0.9.5
 
 New class yum, defined resource yum::config. Trigger old kernels purge.

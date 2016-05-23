@@ -28,14 +28,14 @@ define yum::group (
     present,installed: {
       exec { "yum-groupinstall-${name}":
         command => "yum -y groupinstall '${name}'",
-        unless  => "yum grouplist '${name}' | egrep -i '^Installed.+Groups:$'",
+        unless  => "yum grouplist hidden '${name}' | egrep -i '^Installed.+Groups:$'",
       }
     }
 
     absent,purged: {
       exec { "yum-groupremove-${name}":
         command => "yum -y groupremove '${name}'",
-        onlyif  => "yum grouplist '${name}' | egrep -i '^Installed.+Groups:$'",
+        onlyif  => "yum grouplist hidden '${name}' | egrep -i '^Installed.+Groups:$'",
       }
     }
 

@@ -121,6 +121,7 @@ yum::group { 'X Window System':
 * Eugene Dementiev <eugene@dementiev.eu>
 * Mark McKinstry <mmckinst@nexcess.net>
 * Trey Dockendorf <treydock@gmail.com>
+* Derek McEachern <a0216331@ti.com>
 
 ***
 

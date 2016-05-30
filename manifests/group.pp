@@ -17,7 +17,8 @@
 #   }
 #
 define yum::group (
-  $ensure = present
+  $ensure  = present,
+  $timeout = undef,
 ) {
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
@@ -29,6 +30,7 @@ define yum::group (
       exec { "yum-groupinstall-${name}":
         command => "yum -y groupinstall '${name}'",
         unless  => "yum grouplist '${name}' | egrep -i '^Installed.+Groups:$'",
+        timeout => $timeout,
       }
     }
 
@@ -36,6 +38,7 @@ define yum::group (
       exec { "yum-groupremove-${name}":
         command => "yum -y groupremove '${name}'",
         onlyif  => "yum grouplist '${name}' | egrep -i '^Installed.+Groups:$'",
+        timeout => $timeout,
       }
     }
 

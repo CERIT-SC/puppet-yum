@@ -1,3 +1,11 @@
+## 2015-05-30 - Release 0.9.7
+
+Fix yum plugins on RHEL 5.x.
+
+#### Bugfixes
+
+- Properly detect YUM plugins prefixes on RHEL 5.x
+
 ## 2015-05-29 - Release 0.9.6
 
 Fixed check for installed YUM group on RHEL 7.

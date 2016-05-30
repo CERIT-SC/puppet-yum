@@ -1,5 +1,7 @@
 # Puppet yum module
 
+## Please note this plugin is deprecated, future maintenance took over the Puppet Community. Please use new https://forge.puppet.com/puppet/yum
+
 This module provides helpful definitions for dealing with *yum*.
 
 ### Requirements
@@ -112,6 +114,10 @@ yum::group { 'X Window System':
   ensure => present,
 }
 ```
+
+# Contributors
+
+* Eugene Dementiev <eugene@dementiev.eu>
 
 ***
 

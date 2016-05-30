@@ -116,6 +116,29 @@ yum::group { 'X Window System':
 }
 ```
 
+### yum::localinstall
+
+Install or remove packages via *yum* localinstall subcommand:
+
+```puppet
+# From URL
+yum::localinstall { 'package-name':
+  ensure => present,
+  rpm_source => 'http://path/to/package/filename.rpm',
+}
+```
+
+```puppet
+# From Local Filesystem
+yum::localinstall { 'package-name':
+  ensure => present,
+  rpm_source => '/path/to/package/filename.rpm',
+}
+```
+
+Please note that the title must be the package name as it is referenced in the
+package manager after it is installed.
+
 # Contributors
 
 * Eugene Dementiev <eugene@dementiev.eu>

@@ -1,6 +1,6 @@
 # Puppet yum module
 
-## Please note this plugin is deprecated, future maintenance took over the Puppet Community. Please use new https://forge.puppet.com/puppet/yum
+## Please note this module is deprecated, future maintenance took over the Puppet Community. Please use new https://forge.puppet.com/puppet/yum
 
 This module provides helpful definitions for dealing with *yum*.
 

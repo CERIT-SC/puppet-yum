@@ -2,11 +2,13 @@
 
 YUM group commands can set exec. timeout and respect hidden groups.
 Fix yum plugins on RHEL 5.x. At least puppetlabs/stdlib 4.2.0 is
-required.
+required. New resource yum::install for installing of local/remote
+packages.
 
 #### Features
 
 - Tunable exec. timeout for YUM group management commands.
+- New defined resource yum::install for local or remote (URL) packages install.
 
 #### Bugfixes
 

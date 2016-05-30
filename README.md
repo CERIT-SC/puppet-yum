@@ -146,6 +146,7 @@ Please note that resource name must be same as installed package name.
 * Mark McKinstry <mmckinst@nexcess.net>
 * Trey Dockendorf <treydock@gmail.com>
 * Derek McEachern <a0216331@ti.com>
+* John Zimmerman <zimmermj@trimet.org>
 
 ***
 

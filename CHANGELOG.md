@@ -1,10 +1,11 @@
 ## 2015-05-30 - Release 0.9.7
 
-Fix yum plugins on RHEL 5.x.
+Fix yum plugins on RHEL 5.x. At least puppetlabs/stdlib 4.2.0 is required.
 
 #### Bugfixes
 
 - Properly detect YUM plugins prefixes on RHEL 5.x
+- Increased requirements on puppetlabs/stdlib to 4.2.0
 
 ## 2015-05-29 - Release 0.9.6
 

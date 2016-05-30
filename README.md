@@ -118,6 +118,7 @@ yum::group { 'X Window System':
 # Contributors
 
 * Eugene Dementiev <eugene@dementiev.eu>
+* Mark McKinstry <mmckinst@nexcess.net>
 
 ***
 

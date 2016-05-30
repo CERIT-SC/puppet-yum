@@ -5,6 +5,7 @@
 # Parameters:
 #   [*ensure*]   - specifies if package group should be
 #                  present (installed) or absent (purged)
+#   [*timeout*]  - exec timeout for yum groupinstall command
 #
 # Actions:
 #

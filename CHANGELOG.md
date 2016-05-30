@@ -1,6 +1,11 @@
 ## 2015-05-30 - Release 0.9.7
 
-Fix yum plugins on RHEL 5.x. At least puppetlabs/stdlib 4.2.0 is required.
+YUM group commands can set exec. timeout. Fix yum plugins on RHEL 5.x.
+At least puppetlabs/stdlib 4.2.0 is required.
+
+#### Features
+
+- Tunable exec. timeout for YUM group management commands.
 
 #### Bugfixes
 

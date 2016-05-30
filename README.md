@@ -111,7 +111,8 @@ Install or remove *yum* package group:
 
 ```puppet
 yum::group { 'X Window System':
-  ensure => present,
+  ensure  => present,
+  timeout => 600,
 }
 ```
 
@@ -119,6 +120,7 @@ yum::group { 'X Window System':
 
 * Eugene Dementiev <eugene@dementiev.eu>
 * Mark McKinstry <mmckinst@nexcess.net>
+* Trey Dockendorf <treydock@gmail.com>
 
 ***
 

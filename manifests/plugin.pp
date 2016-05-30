@@ -20,15 +20,15 @@ define yum::plugin (
   $pkg_prefix = undef,
   $pkg_name   = ''
 ) {
-
   if $pkg_prefix {
     $_pkg_prefix = $pkg_prefix
   } else {
-    $_pkg_prefix = "${::operatingsystem}${::operatingsystemmajrelease}" ? {
-      'CentOS5' => 'yum',
+    $_pkg_prefix = $::operatingsystemmajrelease ? {
+      5         => 'yum',
       default   => 'yum-plugin'
     }
   }
+
   $_pkg_name = $pkg_name ? {
     ''      => "${_pkg_prefix}-${name}",
     default => "${_pkg_prefix}-${pkg_name}"

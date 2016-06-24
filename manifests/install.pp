@@ -29,7 +29,7 @@ define yum::install (
 
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
-    environment => 'LC_ALL=C'
+    environment => 'LC_ALL=C',
   }
 
   case $ensure {

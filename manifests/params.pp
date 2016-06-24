@@ -1,6 +1,6 @@
 class yum::params {
   case $::osfamily {
-    redhat: {
+    'redhat': {
       $keepcache = false
       $debuglevel = 2
       $exactarch = true

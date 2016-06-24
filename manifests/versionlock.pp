@@ -20,7 +20,7 @@ define yum::versionlock (
   $ensure = present,
   $path   = '/etc/yum/pluginconf.d/versionlock.list'
 ) {
-  require yum::plugin::versionlock
+  require ::yum::plugin::versionlock
 
   if ($name =~ /^[0-9]+:.+\*$/) {
     $_name = $name
@@ -31,7 +31,7 @@ define yum::versionlock (
   }
 
   case $ensure {
-    present,absent,exclude: {
+    'present', 'absent', 'exclude': {
       if ($ensure == present) or ($ensure == absent) {
         file_line { "versionlock.list-${name}":
           ensure => $ensure,

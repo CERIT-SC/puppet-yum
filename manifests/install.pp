@@ -33,7 +33,7 @@ define yum::install (
   }
 
   case $ensure {
-    present,installed: {
+    'present', 'installed': {
       exec { "yum-install-${name}":
         command => "yum -y install '${source}'",
         unless  => "rpm -q '${name}'",
@@ -41,7 +41,7 @@ define yum::install (
       }
     }
 
-    absent,purged: {
+    'absent', 'purged': {
       package { $name:
         ensure => $ensure,
       }

@@ -27,7 +27,7 @@ define yum::group (
   }
 
   case $ensure {
-    present,installed: {
+    'present', 'installed': {
       exec { "yum-groupinstall-${name}":
         command => "yum -y groupinstall '${name}'",
         unless  => "yum grouplist hidden '${name}' | egrep -i '^Installed.+Groups:$'",
@@ -35,7 +35,7 @@ define yum::group (
       }
     }
 
-    absent,purged: {
+    'absent', 'purged': {
       exec { "yum-groupremove-${name}":
         command => "yum -y groupremove '${name}'",
         onlyif  => "yum grouplist hidden '${name}' | egrep -i '^Installed.+Groups:$'",

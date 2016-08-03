@@ -33,8 +33,8 @@ define yum::config (
   }
 
   $_changes = $ensure ? {
-    absent  => "rm  ${key}",
-    default => "set ${key} ${ensure}",
+    'absent'  => "rm  ${key}",
+    default   => "set ${key} ${ensure}",
   }
 
   augeas { "yum.conf_${section}_${key}":

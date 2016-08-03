@@ -1,9 +1,14 @@
+## 2016-06-25 - Release 0.9.9
+
+- Move to VoxPupuli org.
+- Add base modulesync configs.
+
 ## 2016-05-30 - Release 0.9.8
 
-YUM group commands can set exec. timeout and respect hidden groups.
-Fix yum plugins on RHEL 5.x. At least puppetlabs/stdlib 4.2.0 is
-required. New resource yum::install for installing of local/remote
-packages.
+- YUM group commands can set exec. timeout and respect hidden groups.
+- Fix yum plugins on RHEL 5.x.
+- At least puppetlabs/stdlib 4.2.0 is required.
+- New resource yum::install for installing of local/remote packages.
 
 #### Features
 

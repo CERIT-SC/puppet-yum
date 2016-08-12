@@ -1,7 +1,8 @@
-## 2016-06-25 - Release 0.9.9
 
-- Move to VoxPupuli org.
-- Add base modulesync configs.
+## 2016-06-25 - Release 0.9.12
+
+- Move to VoxPupuli org
+- Add base modulesync configs
 
 ## 2016-05-30 - Release 0.9.8
 

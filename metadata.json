@@ -1,6 +1,6 @@
 {
   "name": "puppet-yum",
-  "version": "0.9.8",
+  "version": "0.9.9-rc0",
   "author": "puppet",
   "summary": "YUM utilities",
   "license": "MIT",
@@ -8,7 +8,10 @@
   "project_page": "https://github.com/voxpupuli/puppet-yum",
   "issues_url": "https://github.com/voxpupuli/puppet-yum/issues",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.2.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.2.0"
+    }
   ],
   "tags": [
     "yum",

@@ -1,6 +1,6 @@
 {
   "name": "puppet-yum",
-  "version": "0.9.14-rc0",
+  "version": "0.9.14",
   "author": "Voxpupuli",
   "summary": "YUM utilities",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.2.0"
+      "version_requirement": ">= 4.2.0 < 5.0.0"
     }
   ],
   "tags": [
@@ -21,7 +21,36 @@
   ],
   "operatingsystem_support": [
     {
-      "osfamily": "RedHat"
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease" : [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease" : [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease" : [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease" : [
+        "5",
+        "6",
+        "7"
+      ]
     }
   ],
   "requirements": [
@@ -31,7 +60,7 @@
     },
     {
       "name": "puppet",
-      "version_requirement": ">= 3.3"
+      "version_requirement": ">= 3.0.0 < 5.0.0"
     }
   ]
 }

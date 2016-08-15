@@ -1,6 +1,6 @@
 {
   "name": "puppet-yum",
-  "version": "0.9.14",
+  "version": "0.9.15-rc0",
   "author": "Voxpupuli",
   "summary": "YUM utilities",
   "license": "MIT",
@@ -22,7 +22,7 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
-      "operatingsystemrelease" : [
+      "operatingsystemrelease": [
         "5",
         "6",
         "7"
@@ -30,7 +30,7 @@
     },
     {
       "operatingsystem": "CentOS",
-      "operatingsystemrelease" : [
+      "operatingsystemrelease": [
         "5",
         "6",
         "7"
@@ -38,7 +38,7 @@
     },
     {
       "operatingsystem": "Scientific",
-      "operatingsystemrelease" : [
+      "operatingsystemrelease": [
         "5",
         "6",
         "7"
@@ -46,7 +46,7 @@
     },
     {
       "operatingsystem": "OracleLinux",
-      "operatingsystemrelease" : [
+      "operatingsystemrelease": [
         "5",
         "6",
         "7"

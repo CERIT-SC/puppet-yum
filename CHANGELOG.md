@@ -1,3 +1,8 @@
+## 2016-08-15 - Release Releasing 0.9.14
+
+- Release to Forge again
+- Fix module metadata
+
 ## 2016-08-13 - Release Releasing 0.9.13
 
 - Release to Forge

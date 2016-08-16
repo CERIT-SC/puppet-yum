@@ -1,14 +1,12 @@
 # Puppet yum module
 
-## Please note this module is deprecated, future maintenance took over the Puppet Community. Please use new https://forge.puppet.com/puppet/yum
-
 This module provides helpful definitions for dealing with *yum*.
 
 ### Requirements
 
 Module has been tested on:
 
-* Puppet 3.7.x
+* Puppet 3.x
 * CentOS 6, 7
 
 # Usage
@@ -142,6 +140,7 @@ Please note that resource name must be same as installed package name.
 
 # Contributors
 
+* Joseph Yaworski <jyaworski@carotid.us>
 * Eugene Dementiev <eugene@dementiev.eu>
 * Mark McKinstry <mmckinst@nexcess.net>
 * Trey Dockendorf <treydock@gmail.com>

@@ -47,7 +47,7 @@ define yum::gpgkey (
 
   if ($content == '') and ($source == '') {
     fail('Missing params: $content or $source must be specified')
-  } elsif $content {
+  } elsif $content != '' {
     File[$path] {
       content => $content
     }

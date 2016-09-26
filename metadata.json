@@ -1,7 +1,7 @@
 {
   "name": "puppet-yum",
-  "version": "0.9.15-rc0",
-  "author": "Voxpupuli",
+  "version": "0.9.15",
+  "author": "Vox Pupuli",
   "summary": "YUM utilities",
   "license": "MIT",
   "source": "https://github.com/voxpupuli/puppet-yum.git",

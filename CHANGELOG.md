@@ -5,12 +5,12 @@
 - Puppet no longer creates empty files when using Hiera and create_resources()
   to create Yum keys
 
-## 2016-08-15 - Release Releasing 0.9.14
+## 2016-08-15 - Release 0.9.14
 
 - Release to Forge again
 - Fix module metadata
 
-## 2016-08-13 - Release Releasing 0.9.13
+## 2016-08-13 - Release 0.9.13
 
 - Release to Forge
 

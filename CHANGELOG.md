@@ -1,4 +1,4 @@
-## 2016-09-26
+## 2016-09-26 - Release 0.9.15
 
 - Remove invalid dependency from metadata
 

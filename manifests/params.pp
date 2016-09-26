@@ -9,9 +9,8 @@ class yum::params {
       $installonly_limit = 5
       $keep_kernel_devel = false
     }
-
     default: {
-      fail("Unsupported OS family: ${::osfamily}")
+      fail("${::operatingsystem} not supported")
     }
   }
 }

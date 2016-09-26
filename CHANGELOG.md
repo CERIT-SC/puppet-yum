@@ -1,3 +1,7 @@
+## 2016-09-26
+
+- Remove invalid dependency from metadata
+
 ## 2016-08-15 - Release Releasing 0.9.14
 
 - Release to Forge again

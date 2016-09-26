@@ -1,6 +1,9 @@
 ## 2016-09-26 - Release 0.9.15
 
 - Remove invalid dependency from metadata
+- Manage yum::versionlock with concat
+- Puppet no longer creates empty files when using Hiera and create_resources()
+  to create Yum keys
 
 ## 2016-08-15 - Release Releasing 0.9.14
 

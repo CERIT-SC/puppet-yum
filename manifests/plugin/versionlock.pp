@@ -13,9 +13,15 @@
 #   include yum::plugin::versionlock
 #
 class yum::plugin::versionlock (
-  $ensure = present
+  $ensure = present,
+  $path   = '/etc/yum/pluginconf.d/versionlock.list'
 ) {
   yum::plugin { 'versionlock':
     ensure  => $ensure,
+  }
+  concat { $path:
+    mode  => '0644',
+    owner => 'root',
+    group => 'root',
   }
 }

@@ -47,7 +47,7 @@ define yum::gpgkey (
 
   if ($content == '') and ($source == '') {
     fail('Missing params: $content or $source must be specified')
-  } elsif $content {
+  } elsif $content != '' {
     File[$path] {
       content => $content
     }
@@ -62,7 +62,7 @@ gpg --quiet --with-colon --homedir=/root --throw-keyids <${path} | \
 cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
 
   case $ensure {
-    present: {
+    'present': {
       exec { "rpm-import-${name}":
         path    => '/bin:/usr/bin:/sbin/:/usr/sbin',
         command => "rpm --import ${path}",
@@ -71,7 +71,7 @@ cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
       }
     }
 
-    absent: {
+    'absent': {
       exec { "rpm-delete-${name}":
         path    => '/bin:/usr/bin:/sbin/:/usr/sbin',
         command => "rpm -e ${rpmname}",

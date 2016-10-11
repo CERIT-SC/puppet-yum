@@ -52,15 +52,15 @@ class yum (
   }
 
   yum::config { 'exactarch':
-    ensure => bool2num($exactarch)
+    ensure => bool2num($exactarch),
   }
 
   yum::config { 'obsoletes':
-    ensure => bool2num($obsoletes)
+    ensure => bool2num($obsoletes),
   }
 
   yum::config { 'gpgcheck':
-    ensure => bool2num($gpgcheck)
+    ensure => bool2num($gpgcheck),
   }
 
   yum::config { 'installonly_limit':

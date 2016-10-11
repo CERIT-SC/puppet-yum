@@ -4,7 +4,6 @@
 #
 # Parameters:
 #   [*ensure*] - specifies if versionlock should be present, absent or exclude
-#   [*path*]   - configuration of Yum plugin versionlock
 #
 # Actions:
 #
@@ -18,37 +17,32 @@
 #
 define yum::versionlock (
   $ensure = present,
-  $path   = '/etc/yum/pluginconf.d/versionlock.list'
 ) {
-  require yum::plugin::versionlock
+  include ::yum::plugin::versionlock
 
   if ($name =~ /^[0-9]+:.+\*$/) {
-    $_name = $name
+    $line = $name
   } elsif ($name =~ /^[0-9]+:.+-.+-.+\./) {
-    $_name= "${name}*"
+    $line= "${name}*"
   } else {
     fail('Package name must be formated as \'EPOCH:NAME-VERSION-RELEASE.ARCH\'')
   }
 
-  case $ensure {
-    present,absent,exclude: {
-      if ($ensure == present) or ($ensure == absent) {
-        file_line { "versionlock.list-${name}":
-          ensure => $ensure,
-          line   => $_name,
-          path   => $path,
-        }
-      }
+  $line_prefix = $ensure ? {
+    'exclude' => '!',
+    default => '',
+  }
 
-      if ($ensure == exclude) or ($ensure == absent) {
-        file_line { "versionlock.list-!${name}":
-          ensure => $ensure,
-          line   => "!${_name}",
-          path   => $path,
-        }
+  case $ensure {
+    'present','exclude': {
+      concat::fragment { "yum-versionlock-${name}":
+        content => "${line_prefix}${line}\n",
+        target  => $yum::plugin::versionlock::path,
       }
     }
-
+    'absent':{
+      # fragment will be removed
+    }
     default: {
       fail("Invalid ensure state: ${ensure}")
     }

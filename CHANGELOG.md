@@ -1,9 +1,30 @@
+## 2016-09-26 - Release 0.9.15
+
+- Remove invalid dependency from metadata
+- Manage yum::versionlock with concat
+- Puppet no longer creates empty files when using Hiera and create_resources()
+  to create Yum keys
+
+## 2016-08-15 - Release 0.9.14
+
+- Release to Forge again
+- Fix module metadata
+
+## 2016-08-13 - Release 0.9.13
+
+- Release to Forge
+
+## 2016-06-25 - Release 0.9.12
+
+- Move to VoxPupuli org
+- Add base modulesync configs
+
 ## 2016-05-30 - Release 0.9.8
 
-YUM group commands can set exec. timeout and respect hidden groups.
-Fix yum plugins on RHEL 5.x. At least puppetlabs/stdlib 4.2.0 is
-required. New resource yum::install for installing of local/remote
-packages.
+- YUM group commands can set exec. timeout and respect hidden groups.
+- Fix yum plugins on RHEL 5.x.
+- At least puppetlabs/stdlib 4.2.0 is required.
+- New resource yum::install for installing of local/remote packages.
 
 #### Features
 

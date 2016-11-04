@@ -8,6 +8,7 @@ class yum::params {
       $gpgcheck = true
       $installonly_limit = 5
       $keep_kernel_devel = false
+      $clean_old_kernels = true
     }
     default: {
       fail("${::operatingsystem} not supported")

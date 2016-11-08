@@ -28,11 +28,12 @@ class yum (
   $obsoletes         = $yum::params::obsoletes,
   $gpgcheck          = $yum::params::gpgcheck,
   $installonly_limit = $yum::params::installonly_limit,
-  $keep_kernel_devel = $yum::params::keep_kernel_devel
+  $keep_kernel_devel = $yum::params::keep_kernel_devel,
+  $clean_old_kernels = $yum::params::clean_old_kernels
 ) inherits yum::params {
 
   validate_bool($keepcache, $exactarch, $obsoletes, $gpgcheck)
-  validate_bool($keep_kernel_devel)
+  validate_bool($keep_kernel_devel, $clean_old_kernels)
 
   unless is_integer($installonly_limit) {
     validate_string($installonly_limit)
@@ -40,6 +41,12 @@ class yum (
 
   unless is_integer($debuglevel) {
     validate_string($debuglevel)
+  }
+
+  if $clean_old_kernels {
+    $_installonly_limit_notify = Exec['package-cleanup_oldkernels']
+  } else {
+    $_installonly_limit_notify = undef
   }
 
   # configure Yum
@@ -65,7 +72,7 @@ class yum (
 
   yum::config { 'installonly_limit':
     ensure => $installonly_limit,
-    notify => Exec['package-cleanup_oldkernels'],
+    notify => $_installonly_limit_notify,
   }
 
   # cleanup old kernels

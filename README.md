@@ -24,10 +24,11 @@ class { 'yum':
   gpgcheck          => false|true,
   installonly_limit => number,
   keep_kernel_devel => false|true,
+  clean_old_kernels => false|true,
 }
 ```
 
-If `installonly_limit` is changed, purging of old kernel packages is triggered.
+If `installonly_limit` is changed, purging of old kernel packages is triggered if `clean_old_kernels` is `true`.
 
 ### yum::config
 

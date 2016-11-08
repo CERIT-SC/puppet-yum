@@ -12,6 +12,18 @@ describe 'yum' do
           it { is_expected.to compile.with_all_deps }
 
           it { is_expected.to contain_class('yum::params') }
+
+          it do
+            is_expected.to contain_yum__config('installonly_limit').with(
+              ensure: '5',
+              notify: 'Exec[package-cleanup_oldkernels]'
+            )
+          end
+        end
+
+        context 'clean_old_kernels => false' do
+          let(:params) { { clean_old_kernels: false } }
+          it { is_expected.to contain_yum__config('installonly_limit').without_notify }
         end
       end
     end

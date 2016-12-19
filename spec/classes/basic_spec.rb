@@ -11,8 +11,6 @@ describe 'yum' do
         context 'yum class without any parameters' do
           it { is_expected.to compile.with_all_deps }
 
-          it { is_expected.to contain_class('yum::params') }
-
           it do
             is_expected.to contain_yum__config('installonly_limit').with(
               ensure: '5',
@@ -33,12 +31,14 @@ describe 'yum' do
     describe 'yum class without any parameters on Solaris/Nexenta' do
       let(:facts) do
         {
-          osfamily:        'Solaris',
-          operatingsystem: 'Nexenta'
+          os: {
+            family: 'Solaris',
+            name:   'Nexenta'
+          }
         }
       end
 
-      it { expect { is_expected.to contain_package('yum') }.to raise_error(Puppet::Error, %r{Nexenta not supported}) }
+      it { is_expected.to raise_error(Puppet::Error, %r{Nexenta not supported}) }
     end
   end
 end

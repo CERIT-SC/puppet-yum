@@ -14,12 +14,12 @@
 #
 # Sample usage:
 #   yum::group { 'X Window System':
-#     ensure  => present,
+#     ensure  => 'present',
 #   }
 #
 define yum::group (
-  $ensure  = present,
-  $timeout = undef,
+  Enum['present', 'installed', 'absent', 'purged'] $ensure  = 'present',
+  Optional[Integer]                                $timeout = undef,
 ) {
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
@@ -27,7 +27,7 @@ define yum::group (
   }
 
   case $ensure {
-    'present', 'installed': {
+    'present', 'installed', default: {
       exec { "yum-groupinstall-${name}":
         command => "yum -y groupinstall '${name}'",
         unless  => "yum grouplist hidden '${name}' | egrep -i '^Installed.+Groups:$'",
@@ -41,10 +41,6 @@ define yum::group (
         onlyif  => "yum grouplist hidden '${name}' | egrep -i '^Installed.+Groups:$'",
         timeout => $timeout,
       }
-    }
-
-    default: {
-      fail("Invalid ensure state: ${ensure}")
     }
   }
 }

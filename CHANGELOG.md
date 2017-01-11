@@ -1,3 +1,10 @@
+## 2017-01-11 - Release 0.10.0
+
+- Last Release with Puppet 3 support!
+- Fix requirements for Beaker tests
+- Add parameter clean_old_kernels that can be used to disable cleaning up of old kernels when installonly_limit is changed
+- Bump min version_requirement for Puppet + deps
+
 ## 2016-09-26 - Release 0.9.15
 
 - Remove invalid dependency from metadata

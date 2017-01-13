@@ -13,8 +13,8 @@
 #   include yum::plugin::versionlock
 #
 class yum::plugin::versionlock (
-  $ensure = present,
-  $path   = '/etc/yum/pluginconf.d/versionlock.list'
+  Enum['present', 'absent'] $ensure = 'present',
+  String                    $path   = '/etc/yum/pluginconf.d/versionlock.list'
 ) {
   yum::plugin { 'versionlock':
     ensure  => $ensure,

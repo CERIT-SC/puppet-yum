@@ -22,25 +22,24 @@
 #   }
 #
 class yum (
-  $keepcache         = $yum::params::keepcache,
-  $debuglevel        = $yum::params::debuglevel,
-  $exactarch         = $yum::params::exactarch,
-  $obsoletes         = $yum::params::obsoletes,
-  $gpgcheck          = $yum::params::gpgcheck,
-  $installonly_limit = $yum::params::installonly_limit,
-  $keep_kernel_devel = $yum::params::keep_kernel_devel,
-  $clean_old_kernels = $yum::params::clean_old_kernels
-) inherits yum::params {
+  Boolean                                 $keepcache         = false,
+  Variant[Integer[0, 10], Enum['absent']] $debuglevel        = 2,
+  Boolean                                 $exactarch         = true,
+  Boolean                                 $obsoletes         = true,
+  Boolean                                 $gpgcheck          = true,
+  Variant[Integer[0], Enum['absent']]     $installonly_limit = 5,
+  Boolean                                 $keep_kernel_devel = false,
+  Boolean                                 $clean_old_kernels = true,
+) {
 
-  validate_bool($keepcache, $exactarch, $obsoletes, $gpgcheck)
-  validate_bool($keep_kernel_devel, $clean_old_kernels)
-
-  unless is_integer($installonly_limit) {
-    validate_string($installonly_limit)
+  $module_metadata            = load_module_metadata($module_name)
+  $supported_operatingsystems = $module_metadata['operatingsystem_support']
+  $supported_os_names         = $supported_operatingsystems.map |$os| {
+    $os['operatingsystem']
   }
 
-  unless is_integer($debuglevel) {
-    validate_string($debuglevel)
+  unless member($supported_os_names, $::os['name']) {
+    fail("${::os['name']} not supported")
   }
 
   if $clean_old_kernels {

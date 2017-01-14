@@ -22,9 +22,9 @@
 #   }
 #
 define yum::config (
-  Variant[Boolean, Integer, Enum['absent']] $ensure,
-  String                                    $key     = $title,
-  String                                    $section = 'main'
+  Variant[Boolean, Integer, Enum['absent'], String] $ensure,
+  String                                            $key     = $title,
+  String                                            $section = 'main'
 ) {
 
   $_ensure = $ensure ? {
@@ -34,7 +34,7 @@ define yum::config (
 
   $_changes = $ensure ? {
     'absent'  => "rm  ${key}",
-    default   => "set ${key} ${_ensure}",
+    default   => "set ${key} '${_ensure}'",
   }
 
   augeas { "yum.conf_${section}_${key}":

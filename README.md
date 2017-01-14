@@ -6,7 +6,7 @@ This module provides helpful definitions for dealing with *yum*.
 
 Module has been tested on:
 
-* Puppet 3.x
+* Puppet 4.6.1 and newer
 * CentOS 6, 7
 
 # Usage

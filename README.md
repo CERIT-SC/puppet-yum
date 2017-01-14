@@ -139,15 +139,6 @@ yum::install { 'package-name':
 
 Please note that resource name must be same as installed package name.
 
-# Contributors
+---
 
-* Joseph Yaworski <jyaworski@carotid.us>
-* Eugene Dementiev <eugene@dementiev.eu>
-* Mark McKinstry <mmckinst@nexcess.net>
-* Trey Dockendorf <treydock@gmail.com>
-* Derek McEachern <a0216331@ti.com>
-* John Zimmerman <zimmermj@trimet.org>
-
-***
-
-CERIT Scientific Cloud, <support@cerit-sc.cz>
+This module was donated by CERIT Scientific Cloud, <support@cerit-sc.cz> to Vox Pupuli

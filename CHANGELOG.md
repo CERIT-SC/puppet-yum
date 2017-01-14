@@ -1,3 +1,12 @@
+# Changelog
+
+## 2017-01-14 - Release 1.0.0
+
+This is the first release with only Puppet 4.6.1 and newer support!
+- drop centos5 acceptance tests
+- Add Puppet 4 type validation
+- Wrap $ensure in single quotes to allow comma seperated values
+
 ## 2017-01-11 - Release 0.10.0
 
 - Last Release with Puppet 3 support!

@@ -9,7 +9,7 @@ describe 'yum::versionlock' do
     context 'and no parameters' do
       it { is_expected.to compile.with_all_deps }
       it 'contains a well-formed Concat::Fragment' do
-        is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}*\n")
+        is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
       end
     end
 
@@ -18,7 +18,7 @@ describe 'yum::versionlock' do
 
       it { is_expected.to compile.with_all_deps }
       it 'contains a well-formed Concat::Fragment' do
-        is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}*\n")
+        is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
       end
     end
 
@@ -41,8 +41,22 @@ describe 'yum::versionlock' do
     end
   end
 
+  context 'with a complex wildcard title' do
+    let(:title) { '0:bash-4.*-*.el6' }
+
+    it 'contains a well-formed Concat::Fragment' do
+      is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
+    end
+  end
+
   context 'with an invalid title' do
     let(:title) { 'bash-4.1.2' }
+
+    it { is_expected.to raise_error(Puppet::PreformattedError, %r(%\{EPOCH\}:%\{NAME\}-%\{VERSION\}-%\{RELEASE\}\.%\{ARCH\})) }
+  end
+
+  context 'with an invalid wildcard pattern' do
+    let(:title) { '0:bash-4.1.2*' }
 
     it { is_expected.to raise_error(Puppet::PreformattedError, %r(%\{EPOCH\}:%\{NAME\}-%\{VERSION\}-%\{RELEASE\}\.%\{ARCH\})) }
   end

@@ -28,14 +28,8 @@ define yum::versionlock (
 ) {
   include ::yum::plugin::versionlock
 
-  unless $name.is_a(Pattern[/^[0-9]+:.+\*$/, /^[0-9]+:.+-.+-.+\./]) {
+  unless $name.is_a(Yum::VersionlockString) {
     fail('Package name must be formated as %{EPOCH}:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}. See Yum::Versionlock documentation for details.')
-  }
-
-  $line = $name ? {
-    /^[0-9]+:.+\*$/      => $name,
-    /^[0-9]+:.+-.+-.+\./ => "${name}*",
-    default              =>  $name,
   }
 
   $line_prefix = $ensure ? {
@@ -46,7 +40,7 @@ define yum::versionlock (
   case $ensure {
     'present', 'exclude', default: {
       concat::fragment { "yum-versionlock-${name}":
-        content => "${line_prefix}${line}\n",
+        content => "${line_prefix}${name}\n",
         target  => $yum::plugin::versionlock::path,
       }
     }

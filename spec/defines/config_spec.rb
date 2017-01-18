@@ -12,7 +12,7 @@ describe 'yum::config' do
 
     it { is_expected.to compile.with_all_deps }
     it 'contains an Augeas resource with the correct changes' do
-      is_expected.to contain_augeas("yum.conf_main_#{title}").with(
+      is_expected.to contain_augeas("yum.conf_#{title}").with(
         changes: "set assumeyes '1'"
       )
     end
@@ -24,7 +24,7 @@ describe 'yum::config' do
 
     it { is_expected.to compile.with_all_deps }
     it 'contains an Augeas resource with the correct changes' do
-      is_expected.to contain_augeas("yum.conf_main_#{title}").with(
+      is_expected.to contain_augeas("yum.conf_#{title}").with(
         changes: "set assumeyes '0'"
       )
     end
@@ -36,7 +36,7 @@ describe 'yum::config' do
 
     it { is_expected.to compile.with_all_deps }
     it 'contains an Augeas resource with the correct changes' do
-      is_expected.to contain_augeas("yum.conf_main_#{title}").with(
+      is_expected.to contain_augeas("yum.conf_#{title}").with(
         changes: "set assumeyes '1, 2'"
       )
     end

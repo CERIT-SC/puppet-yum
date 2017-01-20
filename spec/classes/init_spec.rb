@@ -8,11 +8,24 @@ describe 'yum' do
       end
 
       it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_class('yum') }
 
       context 'without any parameters' do
         let(:params) { {} }
 
         it { is_expected.to contain_yum__config('installonly_limit').with_ensure('5').that_notifies('Exec[package-cleanup_oldkernels]') }
+        it { is_expected.to contain_yum__config('keepcache').with_ensure('0') }
+        it { is_expected.to contain_yum__config('debuglevel').with_ensure('2') }
+        it { is_expected.to contain_yum__config('exactarch').with_ensure('1') }
+        it { is_expected.to contain_yum__config('obsoletes').with_ensure('1') }
+        it { is_expected.to contain_yum__config('gpgcheck').with_ensure('1') }
+
+        it 'contains Exec[package-cleanup_oldkernels' do
+          is_expected.to contain_exec('package-cleanup_oldkernels').with(
+            command: '/usr/bin/package-cleanup --oldkernels --count=5 -y',
+            refreshonly: true
+          ).that_requires('Package[yum-utils]')
+        end
       end
 
       context 'when clean_old_kernels => false' do

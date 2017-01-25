@@ -1,5 +1,9 @@
 # Puppet yum module
 
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-yum.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-yum)
+
+## Description
+
 This module provides helpful definitions for dealing with *yum*.
 
 ### Requirements

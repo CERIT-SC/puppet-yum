@@ -1,35 +1,16 @@
-# Class: yum
+# A class to install and manage Yum configuration.
 #
-# Manage Yum configuration.
-#
-# Parameters:
-#   [*keepcache*]         - Yum option keepcache
-#   [*debuglevel*]        - Yum option debuglevel
-#   [*exactarch*]         - Yum option exactarch
-#   [*obsoletes*]         - Yum option obsoletes
-#   [*gpgcheck*]          - Yum option gpgcheck
-#   [*installonly_limit*] - Yum option installonly_limit
-#   [*keep_kernel_devel*] - On old kernels purge keep devel packages.
-#
-# Actions:
-#
-# Requires:
-#   RPM based system
-#
-# Sample usage:
-#   class { 'yum':
-#     installonly_limit => 2,
-#   }
+# @param clean_old_kernels Whether or not to purge old kernel version beyond the `keeponly_limit`.
+# @param keep_kernel_devel Whether or not to keep kernel devel packages on old kernel purge.
+# @param config_options A Hash where keys are the names of `Yum::Config` resources and the values
+#   are either the direct `ensure` value, or a Hash of the resource's attributes.
+#   @note Boolean values will be converted to either a `1` or `0`; use a quoted string to get a
+#     literal `true` or `false`.
 #
 class yum (
-  Boolean                                 $keepcache         = false,
-  Variant[Integer[0, 10], Enum['absent']] $debuglevel        = 2,
-  Boolean                                 $exactarch         = true,
-  Boolean                                 $obsoletes         = true,
-  Boolean                                 $gpgcheck          = true,
-  Variant[Integer[0], Enum['absent']]     $installonly_limit = 5,
-  Boolean                                 $keep_kernel_devel = false,
-  Boolean                                 $clean_old_kernels = true,
+  Boolean $clean_old_kernels = true,
+  Boolean $keep_kernel_devel = false,
+  Hash[String, Variant[String, Integer, Boolean, Hash[String, Variant[String, Integer, Boolean]]]] $config_options = { },
 ) {
 
   $module_metadata            = load_module_metadata($module_name)
@@ -42,45 +23,64 @@ class yum (
     fail("${::os['name']} not supported")
   }
 
-  if $clean_old_kernels {
-    $_installonly_limit_notify = Exec['package-cleanup_oldkernels']
-  } else {
-    $_installonly_limit_notify = undef
+  unless empty($config_options) {
+
+    if has_key($config_options, 'installonly_limit') {
+      assert_type(Variant[Integer, Hash[String, Integer]], $config_options['installonly_limit']) |$expected, $actual| {
+        fail("The value or ensure for `\$yum::config_options[installonly_limit]` must be an Integer, but it is not.")
+      }
+    }
+
+    $_normalized_config_options = $config_options.map |$key, $attrs| {
+      $_ensure = $attrs ? {
+        Hash    => $attrs[ensure],
+        default => $attrs,
+      }
+
+      $_normalized_ensure = $_ensure ? {
+        Boolean => Hash({ ensure => bool2num($_ensure) }), # lint:ignore:unquoted_string_in_selector
+        default => Hash({ ensure => $_ensure }), # lint:ignore:unquoted_string_in_selector
+      }
+
+      $_normalized_attrs = $attrs ? {
+        Hash    => merge($attrs, $_normalized_ensure),
+        default => $_normalized_ensure,
+      }
+
+      Hash({ $key => $_normalized_attrs })
+    }.reduce |$memo, $cfg_opt_hash| {
+      merge($memo, $cfg_opt_hash)
+    }
+
+    $_normalized_config_options.each |$config, $attributes| {
+      Resource['yum::config'] {
+        $config: * => $attributes,
+      }
+    }
   }
 
-  # configure Yum
-  yum::config { 'keepcache':
-    ensure => bool2num($keepcache),
+  unless defined(Yum::Config['installonly_limit']) {
+    yum::config { 'installonly_limit': ensure => '3' }
   }
 
-  yum::config { 'debuglevel':
-    ensure => $debuglevel,
-  }
-
-  yum::config { 'exactarch':
-    ensure => bool2num($exactarch),
-  }
-
-  yum::config { 'obsoletes':
-    ensure => bool2num($obsoletes),
-  }
-
-  yum::config { 'gpgcheck':
-    ensure => bool2num($gpgcheck),
-  }
-
-  yum::config { 'installonly_limit':
-    ensure => $installonly_limit,
-    notify => $_installonly_limit_notify,
+  $_clean_old_kernels_subscribe = $clean_old_kernels ? {
+    true    => Yum::Config['installonly_limit'],
+    default => undef,
   }
 
   # cleanup old kernels
   ensure_packages(['yum-utils'])
 
+  $_real_installonly_limit = $config_options['installonly_limit'] ? {
+    Variant[String, Integer] => $config_options['installonly_limit'],
+    Hash                     => $config_options['installonly_limit']['ensure'],
+    default                  => '3',
+  }
+
   $_pc_cmd = delete_undef_values([
     '/usr/bin/package-cleanup',
     '--oldkernels',
-    "--count=${installonly_limit}",
+    "--count=${_real_installonly_limit}",
     '-y',
     $keep_kernel_devel ? {
       true    => '--keepdevel',
@@ -92,5 +92,6 @@ class yum (
     command     => shellquote($_pc_cmd),
     refreshonly => true,
     require     => Package['yum-utils'],
+    subscribe   => $_clean_old_kernels_subscribe,
   }
 }

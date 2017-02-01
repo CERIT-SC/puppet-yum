@@ -1,0 +1,4 @@
+---
+lookup_options:
+    yum::config_options:
+        merge: 'hash'

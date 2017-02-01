@@ -21,16 +21,24 @@ Manage main Yum configuration.
 
 ```puppet
 class { 'yum':
-  keepcache         => false|true,
-  debuglevel        => number,
-  exactarch         => false|true,
-  obsoletes         => false|true,
-  gpgcheck          => false|true,
-  installonly_limit => number,
   keep_kernel_devel => false|true,
   clean_old_kernels => false|true,
+  config_options    => {
+      my_cachedir => {
+        ensure => '/home/waldo/.local/yum/cache',
+        key    => 'cachedir',
+      },
+      gpgcheck    => true,
+      debuglevel  => 5,
+      assumeyes   => {
+        ensure => 'absent',
+      },
+    },
+  },
 }
 ```
+
+NOTE: The `config_options` parameter takes a Hash where keys are the names of `Yum::Config` resources and the values are either the direct `ensure` value (`gpgcheck` or `debuglevel` in the example above), or a Hash of the resource's attributes (`my_cachedir` or `assumeyes` in the example above).  Values may be Strings, Integers, or Booleans.  Booleans will be converted to either a `1` or `0`; use a quoted string to get a literal `true` or `false`.
 
 If `installonly_limit` is changed, purging of old kernel packages is triggered if `clean_old_kernels` is `true`.
 

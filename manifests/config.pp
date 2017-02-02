@@ -24,7 +24,6 @@
 define yum::config (
   Variant[Boolean, Integer, Enum['absent'], String] $ensure,
   String                                            $key     = $title,
-  String                                            $section = 'main'
 ) {
 
   $_ensure = $ensure ? {
@@ -37,10 +36,10 @@ define yum::config (
     default   => "set ${key} '${_ensure}'",
   }
 
-  augeas { "yum.conf_${section}_${key}":
+  augeas { "yum.conf_${key}":
     incl    => '/etc/yum.conf',
     lens    => 'Yum.lns',
-    context => "/files/etc/yum.conf/${section}/",
+    context => '/files/etc/yum.conf/main/',
     changes => $_changes,
   }
 }

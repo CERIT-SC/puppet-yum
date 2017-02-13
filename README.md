@@ -52,6 +52,160 @@ yum::config { 'debuglevel':
 }
 ```
 
+### Manage a custom repo via Hiera data
+
+Using Hiera and automatic parameter lookup (APL), this module can manage Yumrepos.  The `repos` parameter takes a hash of hashes, where the first-level keys are the `Yumrepo` resource names and their value hashes contain parameters and values to feed into the resource definition. **On its own, the `repos` parameter does nothing.**  The resource names from the hash must be selected via the `managed_repos` parameter.  This example defines a custom repo.
+
+First, include the class.
+
+```puppet
+include 'yum'
+```
+
+In Hiera data, add the name of the repo to the `yum::managed_repos` key (an Array), and define the repo in the `yum::repos` key:
+
+```yaml
+---
+yum::managed_repos:
+    - 'example_repo'
+yum::repos:
+    example_repo:
+        ensure: 'present'
+        enabled: true
+        descr: 'Example Repo'
+        baseurl: 'https://repos.example.com/example/'
+        gpgcheck: true
+        gpgkey: 'file:///etc/pki/gpm-gpg/RPM-GPG-KEY-Example'
+        target: '/etc/yum.repos.d/example.repo'
+```
+
+### Enable management of one of the pre-defined repos
+
+This module includes several pre-defined Yumrepos for easy management.  This example enables management of the Extras repository for CentOS using its default settings.
+
+**NOTE:** This only works if the data for the repository is included with the module.  Please see the `/data` directory of this module for a list of available repos.
+
+```puppet
+include 'yum'
+```
+
+```yaml
+---
+yum::managed_repos:
+    - 'extras'
+```
+
+### Enable management of one of the pre-defined repos AND modify its settings
+
+Here the Extras repository for CentOS is enabled and its settings are modified.  Because the `repos` parameter uses a deep merge strategy when fed via automatic parameter lookup (APL), only the values requiring modification need be defined.
+
+By default, `mirrorlist` contains some data, and `baseurl` is undefined.  To undefine the `mirrorlist`, we pass it the *knockout prefix*, `--`.  This works with any key.
+
+**NOTE:** This only works if the data for the repository is included with the module.  Please see the `/data` directory of this module for a list of available repos.
+
+```puppet
+include 'yum'
+```
+
+```yaml
+---
+yum::managed_repos:
+    - 'extras'
+yum::repos:
+    extras:
+        enable: true
+        baseurl: 'https://mirror.example.com/extras'
+        mirrorlist: '--'
+```
+
+### Enable managemnt of multiple repos
+
+The `managed_repos` parameter uses the `unique` Hiera merge strategy, so it's possible to define repos to be managed at multiple levels of the hierarchy.  For example, given the following hierarchy and the following two yaml files, the module would receive the array `['base', 'extras', 'debug']`.
+
+```yaml
+---
+hierarchy:
+    - name: 'Common'
+      paths:
+        - "%{trusted.certname}"
+        - 'common.yaml'
+```
+
+```yaml
+---
+# node01
+yum::managed_repos:
+    - 'base'
+    - 'debug'
+```
+
+```yaml
+# common
+yum::managed_repos:
+    - 'base'
+    - 'extras'
+```
+
+### Negate previously enabled repos
+
+The `repo_exclusions` parameter is used to *exclude* repos from management.  It is mainly useful in complex Hiera hierarchies where repos need to be removed from a baseline.  Here we define a baseline set of repos in `common.yaml`, but disable one of them for a specific node.
+
+```yaml
+---
+hierarchy:
+    - name: 'Common'
+      paths:
+        - "%{trusted.certname}"
+        - 'common.yaml'
+```
+
+```yaml
+---
+# node01
+yum::repo_exclusions:
+    - 'updates' #yolo
+```
+
+```
+---
+# common
+yum::managed_repos:
+    - 'base'
+    - 'updates
+    - 'extras'
+```
+
+### Enable management of the default OS Yumrepos
+
+This module includes the boolean helper parameter `manage_os_default_repos` easily select select OS repos.  It uses module data to add the appropriate repos to the `managed_repos` parameter based on OS facts.  Just like adding them manually, they can be negated via the `repo_exclusions` parameter.
+
+**NOTE:** This only works for operating systems who's Yumrepos are defined in the module's data AND who's default repos are defined in the module's data.
+
+On a CentOS 7 machine these two snippets are functionally equivalent.
+
+```puppet
+class { 'yum':
+  manage_os_default_repos => true,
+}
+```
+
+```puppet
+class { 'yum':
+  managed_repos => [
+    'base',
+    'updates',
+    'extras',
+    'centosplus',
+    'base-source',
+    'updates-source',
+    'extras-source',
+    'base-debuginfo',
+    'centos-media',
+    'cr',
+  ]
+}
+```
+
 ### Add/remove a GPG RPM signing key using an inline key block
 
 

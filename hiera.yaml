@@ -2,13 +2,15 @@
 version: 4
 datadir: data
 hierarchy:
-    - name: 'Operating System'
+    - name: 'OS Data'
       backend: yaml
-      path: "os/%{facts.os.family}/%{facts.os}"
+      paths:
+        - "os/%{facts.os.family}/%{facts.os.name}/%{facts.os.release.full}"
+        - "os/%{facts.os.family}/%{facts.os.name}/%{facts.os.release.major}/%{facts.os.release.minor}"
+        - "os/%{facts.os.family}/%{facts.os.name}/%{facts.os.release.major}"
+        - "os/%{facts.os.family}/%{facts.os.name}"
+        - "os/%{facts.os.family}"
 
-    - name: 'OS family'
+    - name: 'Common Data'
       backend: yaml
-      path: "os/%{facts.os.family}"
-
-    - name: 'common'
-      backend: yaml
+      path: 'common'

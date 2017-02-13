@@ -12,6 +12,12 @@ shared_examples 'a Yum class' do |value|
   end
 end
 
+shared_examples 'a catalog containing repos' do |repos|
+  repos.each do |repo|
+    it { is_expected.to contain_yumrepo(repo) }
+  end
+end
+
 describe 'yum' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
@@ -26,6 +32,58 @@ describe 'yum' do
         let(:params) { {} }
 
         it_behaves_like 'a Yum class'
+        it { is_expected.to have_yumrepo_resource_count(0) }
+      end
+
+      context 'when `manage_os_default_repos` is enabled' do
+        let(:params) { { 'manage_os_default_repos' => true } }
+
+        case facts[:os]['name']
+        when 'CentOS'
+          it { is_expected.to have_yumrepo_resource_count(10) }
+          it_behaves_like 'a catalog containing repos', [
+            'base',
+            'updates',
+            'extras',
+            'base-source',
+            'updates-source',
+            'extras-source',
+            'base-debuginfo',
+            'centosplus',
+            'centos-media'
+          ]
+          case facts[:os]['release']['major']
+          when '7'
+            it { is_expected.to contain_yumrepo('cr') }
+            it { is_expected.not_to contain_yumrepo('contrib') }
+          when '6'
+            it { is_expected.to contain_yumrepo('contrib') }
+            it { is_expected.not_to contain_yumrepo('cr') }
+          end
+        else
+          it { is_expected.to have_yumrepo_resource_count(0) }
+        end
+
+        context 'and the CentOS base repo is negated' do
+          let(:facts) { facts.merge(hiera_fixture: 'repo_exclusions') }
+
+          case facts[:os]['name']
+          when 'CentOS'
+            it { is_expected.not_to contain_yumrepo('base') }
+            it_behaves_like 'a catalog containing repos', [
+              'updates',
+              'extras',
+              'base-source',
+              'updates-source',
+              'extras-source',
+              'base-debuginfo',
+              'centosplus',
+              'centos-media'
+            ]
+          else
+            it { is_expected.to have_yumrepo_resource_count(0) }
+          end
+        end
       end
 
       context 'when `config_options[installonly_limit]` is modified' do

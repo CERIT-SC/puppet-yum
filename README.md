@@ -1,8 +1,8 @@
-# Puppet yum module
+# Yum
 
 [![Build Status](https://travis-ci.org/voxpupuli/puppet-yum.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-yum)
 
-## Description
+## Module description
 
 This module provides helpful definitions for dealing with *yum*.
 
@@ -13,11 +13,9 @@ Module has been tested on:
 * Puppet 4.6.1 and newer
 * CentOS 6, 7
 
-# Usage
+## Usage
 
-### yum
-
-Manage main Yum configuration.
+### Manage global Yum configuration via the primary class
 
 ```puppet
 class { 'yum':
@@ -42,9 +40,7 @@ NOTE: The `config_options` parameter takes a Hash where keys are the names of `Y
 
 If `installonly_limit` is changed, purging of old kernel packages is triggered if `clean_old_kernels` is `true`.
 
-### yum::config
-
-Manage yum.conf.
+### Manage yum.conf entries via defined types
 
 ```puppet
 yum::config { 'installonly_limit':
@@ -56,11 +52,8 @@ yum::config { 'debuglevel':
 }
 ```
 
-### yum::gpgkey
+### Add/remove a GPG RPM signing key using an inline key block
 
-Import/remove GPG RPM signing key.
-
-Key defined in recipe (inline):
 
 ```puppet
 yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
@@ -71,7 +64,7 @@ yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
 }
 ```
 
-Key stored on Puppet fileserver:
+### Add/remove a GPGP RPM signing key using a key stored on a Puppet fileserver
 
 ```puppet
 yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org':
@@ -80,9 +73,7 @@ yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org':
 }
 ```
 
-### yum::plugin
-
-Install or remove *yum* plugin:
+### Install or remove *yum* plugin
 
 ```puppet
 yum::plugin { 'versionlock':
@@ -90,35 +81,24 @@ yum::plugin { 'versionlock':
 }
 ```
 
-### yum::versionlock
+### Lock a package with the *versionlock* plugin
 
-Locks explicitly specified packages from updates. Package name must
-be precisely specified in format *`EPOCH:NAME-VERSION-RELEASE.ARCH`*.
-Wild card in package name is allowed or automatically appended,
-but be careful and always first check on target machine if your
-package is matched correctly! Following definitions create same
-configuration lines:
+Locks explicitly specified packages from updates. Package name must be precisely specified in format *`EPOCH:NAME-VERSION-RELEASE.ARCH`*. Wild card in package name is allowed provided it does not span a field seperator.
 
 ```puppet
 yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
   ensure => present,
 }
-
-yum::versionlock { '0:bash-4.1.2-9.el6_2.':
-  ensure => present,
-}
 ```
 
-Correct name for installed package can be easily get by running e.g.:
+Use the following command to retrieve a properly-formated string:
 
-```bash
-$ rpm -q bash --qf '%|EPOCH?{%{EPOCH}}:{0}|:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n'
-0:bash-4.2.45-5.el7_0.4.x86_64
+```sh
+PACKAGE_NAME='bash'
+rpm -q "$PACKAGE_NAME" --qf '%|EPOCH?{%{EPOCH}}:{0}|:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n'
 ```
 
-### yum::group
-
-Install or remove *yum* package group:
+### Install or remove *yum* package group
 
 ```puppet
 yum::group { 'X Window System':
@@ -127,16 +107,16 @@ yum::group { 'X Window System':
 }
 ```
 
-### yum::install
+### Install or remove packages via `yum install`
 
-Install or remove packages via *yum* install subcommand:
+This is a workaround for [PUP-3323](https://tickets.puppetlabs.com/browse/PUP-3323).  It enables the installation of packages from non-repo sources while still providing dependency resolution.  For example, say there is a package *foo* that requires the package *bar*.  *bar* is in a Yum repository and *foo* is stored on a stand-alone HTTP server.  Using the standard providers for the `Package` resource type, `rpm` and `yum`, the `rpm` provider would be required to install *foo*, because only it can install from a non-repo source, i.e., a URL.  However, since the `rpm` provider cannot do dependency resolution, it would fail on its own unless *bar* was already installed.  This workaround enables *foo* to be installed without having to define its dependencies in Puppet.
 
 From URL:
 
 ```puppet
 yum::install { 'package-name':
   ensure => present,
-  source => 'http://path/to/package/filename.rpm',
+  source => 'http://example.com/path/to/package/filename.rpm',
 }
 ```
 
@@ -145,7 +125,7 @@ From local filesystem:
 ```puppet
 yum::install { 'package-name':
   ensure => present,
-  source => '/path/to/package/filename.rpm',
+  source => 'file:///path/to/package/filename.rpm',
 }
 ```
 

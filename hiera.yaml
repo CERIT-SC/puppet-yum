@@ -11,6 +11,10 @@ hierarchy:
         - "os/%{facts.os.family}/%{facts.os.name}"
         - "os/%{facts.os.family}"
 
+    - name: 'Non-OS Yumrepos'
+      backend: yaml
+      path: 'repos'
+
     - name: 'Common Data'
       backend: yaml
       path: 'common'

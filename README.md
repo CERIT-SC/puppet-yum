@@ -113,7 +113,7 @@ yum::managed_repos:
     - 'extras'
 yum::repos:
     extras:
-        enable: true
+        enabled: true
         baseurl: 'https://mirror.example.com/extras'
         mirrorlist: '--'
 ```

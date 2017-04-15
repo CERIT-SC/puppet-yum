@@ -8,6 +8,7 @@ describe 'yum::plugin' do
 
       context 'with no parameters' do
         let(:title) { 'fastestmirror' }
+
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_package("#{prefix}-#{title}").with_ensure('present') }
       end
@@ -15,6 +16,7 @@ describe 'yum::plugin' do
       context 'when explicitly set to install' do
         let(:title) { 'fastestmirror' }
         let(:params) { { ensure: 'present' } }
+
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_package("#{prefix}-#{title}").with_ensure('present') }
       end
@@ -22,6 +24,7 @@ describe 'yum::plugin' do
       context 'when explicitly set to remove' do
         let(:title) { 'fastestmirror' }
         let(:params) { { ensure: 'absent' } }
+
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_package("#{prefix}-#{title}").with_ensure('absent') }
       end

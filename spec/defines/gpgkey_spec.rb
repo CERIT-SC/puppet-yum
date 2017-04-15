@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'yum::gpgkey' do
   context 'with no parameters' do
     let(:title) { '/test-key' }
+
     it { is_expected.to raise_error(Puppet::PreformattedError, %r{Missing params: \$content or \$source must be specified}) }
   end
 

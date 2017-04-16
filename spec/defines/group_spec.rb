@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'yum::group' do
   context 'with no parameters' do
     let(:title) { 'Core' }
+
     it { is_expected.to compile.with_all_deps }
     it { is_expected.to contain_exec("yum-groupinstall-#{title}").with_command("yum -y groupinstall 'Core'") }
   end

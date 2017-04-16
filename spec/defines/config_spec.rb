@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'yum::config' do
   context 'with no parameters' do
     let(:title) { 'assumeyes' }
+
     it { is_expected.to raise_error(Puppet::PreformattedError, %r{expects a value for parameter 'ensure'}) }
   end
 

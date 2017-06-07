@@ -49,6 +49,14 @@ describe 'yum::versionlock' do
     end
   end
 
+  context 'with a release containing dots' do
+    let(:title) { '1:java-1.7.0-openjdk-1.7.0.121-2.6.8.0.el7_3.x86_64' }
+
+    it 'contains a well-formed Concat::Fragment' do
+      is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
+    end
+  end
+
   context 'with an invalid title' do
     let(:title) { 'bash-4.1.2' }
 

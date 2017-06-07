@@ -81,7 +81,7 @@ yum::repos:
 
 ### Enable management of one of the pre-defined repos
 
-This module includes several pre-defined Yumrepos for easy management.  This example enables management of the Extras repository for CentOS using its default settings.
+This module includes several pre-defined Yumrepos for easy management.  This example enables management of the EPEL repository using its default settings.
 
 **NOTE:** This only works if the data for the repository is included with the module.  Please see the `/data` directory of this module for a list of available repos.
 
@@ -92,7 +92,7 @@ include 'yum'
 ```yaml
 ---
 yum::managed_repos:
-    - 'extras'
+    - 'epel'
 ```
 
 ### Enable management of one of the pre-defined repos AND modify its settings

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'deep_merge'
 
 shared_examples 'a Yum class' do |value|
   value ||= 3
@@ -83,6 +84,32 @@ describe 'yum' do
           else
             it { is_expected.to have_yumrepo_resource_count(0) }
           end
+        end
+      end
+
+      context 'when `managed_repos` is set' do
+        # TODO: This should be generated with something like `lookup('yum::repos').keys`,
+        # but the setup for `Puppet::Pops::Lookup` is to complicated to be worth it as of
+        # this writing (2017-04-11).  For now, we just pull from `repos.yaml`.
+        repos_yaml_data = YAML.load(File.read('./spec/fixtures/modules/yum/data/repos.yaml'))
+        supported_repos = repos_yaml_data['yum::repos'].keys
+
+        supported_repos.each do |supported_repo|
+          context "to ['#{supported_repo}']" do
+            let(:params) { { managed_repos: [supported_repo] } }
+
+            it { is_expected.to compile.with_all_deps }
+            it { is_expected.to have_yumrepo_resource_count(1) }
+            it { is_expected.to contain_yumrepo(supported_repo) }
+          end
+        end
+
+        context 'to an array of all supported repos' do
+          let(:params) { { managed_repos: supported_repos } }
+
+          it { is_expected.to compile.with_all_deps }
+          it { is_expected.to have_yumrepo_resource_count(supported_repos.count) }
+          it_behaves_like 'a catalog containing repos', supported_repos
         end
       end
 

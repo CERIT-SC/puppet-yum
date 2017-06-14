@@ -13,6 +13,7 @@ These should not impact the functionality of the module.
 - Manage yumrepos via data [\#40](https://github.com/voxpupuli/puppet-yum/pull/40) ([lamawithonel](https://github.com/lamawithonel))
 - Update README.md [\#39](https://github.com/voxpupuli/puppet-yum/pull/39) ([Yuav](https://github.com/Yuav))
 - Be more strict about versionlock strings [\#38](https://github.com/voxpupuli/puppet-yum/pull/38) ([lamawithonel](https://github.com/lamawithonel))
+- BREAKING: Config create resources pattern [\#37](https://github.com/voxpupuli/puppet-yum/pull/37) ([lamawithonel](https://github.com/lamawithonel))
 
 **Fixed bugs:**
 
@@ -28,10 +29,6 @@ These should not impact the functionality of the module.
 - Remove individual configs from init.pp, use create\_resources pattern instead [\#36](https://github.com/voxpupuli/puppet-yum/issues/36)
 - Fix versionlock regex [\#35](https://github.com/voxpupuli/puppet-yum/issues/35)
 -  yum::config fails with comma separated values [\#21](https://github.com/voxpupuli/puppet-yum/issues/21)
-
-**Merged pull requests:**
-
-- Config create resources pattern [\#37](https://github.com/voxpupuli/puppet-yum/pull/37) ([lamawithonel](https://github.com/lamawithonel))
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-yum/tree/v1.0.0) (2017-01-14)
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v0.10.0...v1.0.0)

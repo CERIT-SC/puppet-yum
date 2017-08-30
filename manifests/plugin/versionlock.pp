@@ -24,4 +24,10 @@ class yum::plugin::versionlock (
     owner => 'root',
     group => 'root',
   }
+
+  concat::fragment { 'versionlock_header':
+    target  => $path,
+    content => "# File managed by puppet\n",
+    order   => '01',
+  }
 }

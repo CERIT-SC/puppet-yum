@@ -8,6 +8,7 @@ describe 'yum::versionlock' do
 
     context 'and no parameters' do
       it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_concat__fragment('versionlock_header').with_content("# File managed by puppet\n") }
       it 'contains a well-formed Concat::Fragment' do
         is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
       end
@@ -17,6 +18,7 @@ describe 'yum::versionlock' do
       let(:params) { { ensure: 'present' } }
 
       it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_concat__fragment('versionlock_header').with_content("# File managed by puppet\n") }
       it 'contains a well-formed Concat::Fragment' do
         is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
       end
@@ -26,6 +28,7 @@ describe 'yum::versionlock' do
       let(:params) { { ensure: 'absent' } }
 
       it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_concat__fragment('versionlock_header').with_content("# File managed by puppet\n") }
       it 'contains a well-formed Concat::Fragment' do
         is_expected.not_to contain_concat__fragment("yum-versionlock-#{title}")
       end

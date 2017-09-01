@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
+## [v2.0.1](https://github.com/voxpupuli/puppet-yum/tree/v2.0.1) (2017-09-01)
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v2.0.0...v2.0.1)
+
+**Implemented enhancements:**
+
+- Update concat dependency [\#58](https://github.com/voxpupuli/puppet-yum/pull/58) ([cdenneen](https://github.com/cdenneen))
+
+**Fixed bugs:**
+
+- Drop empty yaml file [\#55](https://github.com/voxpupuli/puppet-yum/pull/55) ([traylenator](https://github.com/traylenator))
+
+**Closed issues:**
+
+- yum::versionlock with ensure =\> absent doesn't purge entries [\#61](https://github.com/voxpupuli/puppet-yum/issues/61)
+- versionlock.list updated after package {} install [\#43](https://github.com/voxpupuli/puppet-yum/issues/43)
+
+**Merged pull requests:**
+
+- Contain the versionlock subclass to help with ordering around package resources [\#65](https://github.com/voxpupuli/puppet-yum/pull/65) ([bovy89](https://github.com/bovy89))
+- Support `ensure =\> absent` with yum::versionlock [\#62](https://github.com/voxpupuli/puppet-yum/pull/62) ([bovy89](https://github.com/bovy89))
+
 ## [v2.0.0](https://github.com/voxpupuli/puppet-yum/tree/v2.0.0) (2017-06-14)
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v1.0.0...v2.0.0)
 
@@ -29,6 +50,10 @@ These should not impact the functionality of the module.
 - Remove individual configs from init.pp, use create\_resources pattern instead [\#36](https://github.com/voxpupuli/puppet-yum/issues/36)
 - Fix versionlock regex [\#35](https://github.com/voxpupuli/puppet-yum/issues/35)
 -  yum::config fails with comma separated values [\#21](https://github.com/voxpupuli/puppet-yum/issues/21)
+
+**Merged pull requests:**
+
+- Prepare release 2.0.0 [\#52](https://github.com/voxpupuli/puppet-yum/pull/52) ([traylenator](https://github.com/traylenator))
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-yum/tree/v1.0.0) (2017-01-14)
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v0.10.0...v1.0.0)

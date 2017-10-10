@@ -1,8 +1,21 @@
-# Change log
+# Changelog
 
 All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
-These should not impact the functionality of the module.
+These should not affect the functionality of the module.
+
+## [v2.0.2](https://github.com/voxpupuli/puppet-yum/tree/v2.0.2) (2017-10-11)
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v2.0.1...v2.0.2)
+
+**Closed issues:**
+
+- concat dependency update [\#57](https://github.com/voxpupuli/puppet-yum/issues/57)
+- Yumrepo provider fork? [\#32](https://github.com/voxpupuli/puppet-yum/issues/32)
+
+**Merged pull requests:**
+
+- Update README.md [\#69](https://github.com/voxpupuli/puppet-yum/pull/69) ([arjenz](https://github.com/arjenz))
+- Emtpy hiera files throw puppet 4 warnings [\#67](https://github.com/voxpupuli/puppet-yum/pull/67) ([benohara](https://github.com/benohara))
 
 ## [v2.0.1](https://github.com/voxpupuli/puppet-yum/tree/v2.0.1) (2017-09-01)
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v2.0.0...v2.0.1)
@@ -17,12 +30,14 @@ These should not impact the functionality of the module.
 
 **Closed issues:**
 
+- Update to puppetlabs/concat 3 or 4 [\#66](https://github.com/voxpupuli/puppet-yum/issues/66)
 - yum::versionlock with ensure =\> absent doesn't purge entries [\#61](https://github.com/voxpupuli/puppet-yum/issues/61)
 - versionlock.list updated after package {} install [\#43](https://github.com/voxpupuli/puppet-yum/issues/43)
 
 **Merged pull requests:**
 
 - Contain the versionlock subclass to help with ordering around package resources [\#65](https://github.com/voxpupuli/puppet-yum/pull/65) ([bovy89](https://github.com/bovy89))
+- Prepare 2.0.1 [\#64](https://github.com/voxpupuli/puppet-yum/pull/64) ([jeefberkey](https://github.com/jeefberkey))
 - Support `ensure =\> absent` with yum::versionlock [\#62](https://github.com/voxpupuli/puppet-yum/pull/62) ([bovy89](https://github.com/bovy89))
 
 ## [v2.0.0](https://github.com/voxpupuli/puppet-yum/tree/v2.0.0) (2017-06-14)

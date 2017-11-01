@@ -19,7 +19,7 @@ yum::os_default_repos:
   - 'epel-testing-source'
 yum::repos:
   amzn-main:
-    name: "amzn-main-Base"
+    descr: "amzn-main-Base"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/main/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -34,7 +34,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-main.repo"
   amzn-main-debuginfo:
-    name: "amzn-main-debuginfo"
+    descr: "amzn-main-debuginfo"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/main/debuginfo/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -49,7 +49,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-main.repo"
   amzn-main-source:
-    name: "amzn-main-source"
+    descr: "amzn-main-source"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/main/SRPMS/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -64,7 +64,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-main.repo"
   amzn-nosrc:
-    name: "amzn-nosrc-Base"
+    descr: "amzn-nosrc-Base"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/nosrc/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -79,7 +79,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-nosrc.repo"
   amzn-preview:
-    name: "amzn-preview-Base"
+    descr: "amzn-preview-Base"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/preview/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -94,7 +94,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-preview.repo"
   amzn-preview-debuginfo:
-    name: "amzn-preview-debuginfo"
+    descr: "amzn-preview-debuginfo"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/preview/debuginfo/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -109,7 +109,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-preview.repo"
   amzn-preview-source:
-    name: "amzn-preview-source"
+    descr: "amzn-preview-source"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/preview/SRPMS/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -124,7 +124,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-preview.repo"
   amzn-updates:
-    name: "amzn-updates-Base"
+    descr: "amzn-updates-Base"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/updates/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -139,7 +139,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-updates.repo"
   amzn-updates-debuginfo:
-    name: "amzn-updates-debuginfo"
+    descr: "amzn-updates-debuginfo"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/updates/debuginfo/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -154,7 +154,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-updates.repo"
   amzn-updates-source:
-    name: "amzn-updates-source"
+    descr: "amzn-updates-source"
     mirrorlist: "http://repo.$awsregion.$awsdomain/$releasever/updates/SRPMS/mirror.list"
     mirrorlist_expire: 300
     metadata_expire: 300
@@ -169,7 +169,7 @@ yum::repos:
     report_instanceid: true
     target: "/etc/yum.repos.d/amzn-updates.repo"
   epel:
-    name: "Extra Packages for Enterprise Linux 6 - $basearch"
+    descr: "Extra Packages for Enterprise Linux 6 - $basearch"
     #baseurl: "http://download.fedoraproject.org/pub/epel/6/$basearch"
     mirrorlist: "https://mirrors.fedoraproject.org/metalink?repo=epel-6&arch=$basearch"
     failovermethod: "priority"
@@ -178,7 +178,7 @@ yum::repos:
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6"
     target: "/etc/yum.repos.d/epel.repo"
   epel-debuginfo:
-    name: "Extra Packages for Enterprise Linux 6 - $basearch - Debug"
+    descr: "Extra Packages for Enterprise Linux 6 - $basearch - Debug"
     #baseurl: "http://download.fedoraproject.org/pub/epel/6/$basearch/debug"
     mirrorlist: "https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&arch=$basearch"
     failovermethod: "priority"
@@ -187,7 +187,7 @@ yum::repos:
     gpgcheck: true
     target: "/etc/yum.repos.d/epel.repo"
   epel-source:
-    name: "Extra Packages for Enterprise Linux 6 - $basearch - Source"
+    descr: "Extra Packages for Enterprise Linux 6 - $basearch - Source"
     #baseurl: "http://download.fedoraproject.org/pub/epel/6/SRPMS"
     mirrorlist: "https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&arch=$basearch"
     failovermethod: "priority"
@@ -196,7 +196,7 @@ yum::repos:
     gpgcheck: true
     target: "/etc/yum.repos.d/epel.repo"
   epel-testing:
-    name: "Extra Packages for Enterprise Linux 6 - Testing - $basearch"
+    descr: "Extra Packages for Enterprise Linux 6 - Testing - $basearch"
     #baseurl: "http://download.fedoraproject.org/pub/epel/testing/6/$basearch"
     mirrorlist: "https://mirrors.fedoraproject.org/metalink?repo=testing-epel6&arch=$basearch"
     failovermethod: "priority"
@@ -205,7 +205,7 @@ yum::repos:
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6"
     target: "/etc/yum.repos.d/epel-testing.repo"
   epel-testing-debuginfo:
-    name: "Extra Packages for Enterprise Linux 6 - Testing - $basearch - Debug"
+    descr: "Extra Packages for Enterprise Linux 6 - Testing - $basearch - Debug"
     #baseurl: "http://download.fedoraproject.org/pub/epel/testing/6/$basearch/debug"
     mirrorlist: "https://mirrors.fedoraproject.org/metalink?repo=testing-debug-epel6&arch=$basearch"
     failovermethod: "priority"
@@ -214,7 +214,7 @@ yum::repos:
     gpgcheck: true
     target: "/etc/yum.repos.d/epel-testing.repo"
   epel-testing-source:
-    name: "Extra Packages for Enterprise Linux 6 - Testing - $basearch - Source"
+    descr: "Extra Packages for Enterprise Linux 6 - Testing - $basearch - Source"
     #baseurl: "http://download.fedoraproject.org/pub/epel/testing/6/SRPMS"
     mirrorlist: "https://mirrors.fedoraproject.org/metalink?repo=testing-source-epel6&arch=$basearch"
     failovermethod: "priority"

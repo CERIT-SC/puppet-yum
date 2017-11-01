@@ -12,6 +12,8 @@ Module has been tested on:
 
 * Puppet 4.6.1 and newer
 * CentOS 6, 7
+* Amazon Linux 2017
+* RHEL 7
 
 ## Usage
 

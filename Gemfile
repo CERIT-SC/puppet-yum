@@ -57,8 +57,8 @@ group :system_tests do
 end
 
 group :release do
-  gem 'github_changelog_generator',  :require => false if RUBY_VERSION >= '2.2.2'
-  gem 'puppet-blacksmith',           :require => false
+  gem 'github_changelog_generator',  :require => false, :git => 'https://github.com/skywinder/github-changelog-generator'
+  gem 'puppet-blacksmith',           :require => false, :git => 'https://github.com/voxpupuli/puppet-blacksmith'
   gem 'voxpupuli-release',           :require => false, :git => 'https://github.com/voxpupuli/voxpupuli-release-gem'
   gem 'puppet-strings', '~> 1.0',    :require => false
 end

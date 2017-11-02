@@ -52,6 +52,12 @@
         "6",
         "7"
       ]
+    },
+    {
+      "operatingsystem": "Amazon",
+      "operatingsystemrelease": [
+        "2017"
+      ]
     }
   ],
   "requirements": [

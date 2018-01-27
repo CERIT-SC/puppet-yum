@@ -7,7 +7,6 @@
   "source": "https://github.com/voxpupuli/puppet-yum.git",
   "project_page": "https://github.com/voxpupuli/puppet-yum",
   "issues_url": "https://github.com/voxpupuli/puppet-yum/issues",
-  "data_provider": "hiera",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",

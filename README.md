@@ -254,12 +254,22 @@ yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
   ensure => present,
 }
 ```
-
 Use the following command to retrieve a properly-formated string:
 
 ```sh
 PACKAGE_NAME='bash'
 rpm -q "$PACKAGE_NAME" --qf '%|EPOCH?{%{EPOCH}}:{0}|:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}\n'
+```
+
+To run a `yum clean all` after the versionlock file is updated.
+
+```puppet
+class{'yum::plugin::versionlock':
+  clean => true,
+}
+yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
+  ensure => present,
+}
 ```
 
 ### Install or remove *yum* package group

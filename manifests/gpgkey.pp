@@ -58,9 +58,8 @@ define yum::gpgkey (
     mode   => $mode,
   }
 
-  $rpmname = "gpg-pubkey-$( \
-gpg --quiet --with-colon --homedir=/root --throw-keyids <${path} | \
-cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
+  $rpmname = "gpg-pubkey-$(gpg ${path} | head -1 | cut -c12-20 | \
+tr '[A-Z]' '[a-z]')"
 
   case $ensure {
     'present', default: {

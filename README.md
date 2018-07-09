@@ -81,6 +81,35 @@ yum::repos:
         target: '/etc/yum.repos.d/example.repo'
 ```
 
+You can include gpgkeys in yaml as well, and if the key filename matches a
+gpgkey from a mananged repo, it will be included. For example a gpg key for the
+repo above could look like:
+
+```yaml
+---
+yum::gpgkeys:
+    /etc/pki/gpm-gpg/RPM-GPG-KEY-Example:
+        content: |
+            -----BEGIN PGP PUBLIC KEY BLOCK-----
+            Version: GnuPG v1.4.11 (GNU/Linux)
+
+            mQINBFKuaIQBEAC1UphXwMqCAarPUH/ZsOFslabeTVO2pDk5YnO96f+rgZB7xArB
+            OSeQk7B90iqSJ85/c72OAn4OXYvT63gfCeXpJs5M7emXkPsNQWWSju99lW+AqSNm
+            (SNIP SEVERAL LINES)
+            RjsC7FDbL017qxS+ZVA/HGkyfiu4cpgV8VUnbql5eAZ+1Ll6Dw==
+            =hdPa
+            -----END PGP PUBLIC KEY BLOCK-----
+```
+
+... or
+
+```yaml
+---
+yum::gpgkeys:
+    /etc/pki/gpm-gpg/RPM-GPG-KEY-Example:
+        source: puppet:///repos/RPM-GPG-KEY-Example
+```
+
 ### Enable management of one of the pre-defined repos
 
 This module includes several pre-defined Yumrepos for easy management.  This example enables management of the EPEL repository using its default settings.

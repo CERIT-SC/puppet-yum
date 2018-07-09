@@ -46,6 +46,11 @@
 #   Values in this array will be subtracted from the `managed_repos` array as a last step before
 #   instantiation.
 #
+# @param gpgkeys
+#   A hash of yum::gpgkey types, which will be automatically included if they
+#   are referenced by a managed_repo. This will use the same merging behavior
+#   as repos.
+#
 # @example Enable management of the default repos for a supported OS:
 #   ```yaml
 #   ---
@@ -104,6 +109,7 @@ class yum (
   Boolean $manage_os_default_repos = false,
   Array[String] $os_default_repos = [],
   Array[String] $repo_exclusions = [],
+  Hash[String, Hash[String, String]] $gpgkeys = {},
 ) {
 
   $module_metadata            = load_module_metadata($module_name)
@@ -130,6 +136,20 @@ class yum (
         Resource['yumrepo'] {
           $yumrepo: * => $attributes,
         }
+        # Handle GPG Key
+        if has_key($attributes, 'gpgkey') {
+          $matches = $attributes['gpgkey'].match('^file://(.*)$')
+          if $matches {
+            $gpgkey = $matches[1]
+            if $gpgkey =~ Stdlib::AbsolutePath and has_key($gpgkeys, $gpgkey) {
+              if !defined(Yum::Gpgkey[$gpgkey]) {
+                yum::gpgkey { $gpgkey:
+                  * => $gpgkeys[$gpgkey],
+                }
+              } # end if Yum::Gpgkey[$gpgkey] is not defined
+            } # end if $gpgkey exists in gpgkeys
+          } # end if gpgkey is a file:// resource
+        } # end if $attributes has a gpgkey
       }
     }
   }

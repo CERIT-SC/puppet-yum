@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.0.0](https://github.com/voxpupuli/puppet-yum/tree/v3.0.0) (2018-07-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v2.2.1...v3.0.0)
+
+**Breaking changes:**
+
+- Remove fastestmirror\_enabled and report\_instanceid parameters [\#103](https://github.com/voxpupuli/puppet-yum/pull/103) ([Zordrak](https://github.com/Zordrak))
+
+**Implemented enhancements:**
+
+- EPEL GPG Key [\#95](https://github.com/voxpupuli/puppet-yum/issues/95)
+- Clean yum metadata after versionlock file update [\#102](https://github.com/voxpupuli/puppet-yum/pull/102) ([traylenator](https://github.com/traylenator))
+- Fixes \#95 Add EPEL GPG Key and logic to handle yum::gpgkeys [\#96](https://github.com/voxpupuli/puppet-yum/pull/96) ([TJM](https://github.com/TJM))
+
+**Fixed bugs:**
+
+- Don't litter /root/ with GPG-related files. [\#56](https://github.com/voxpupuli/puppet-yum/pull/56) ([djl](https://github.com/djl))
+
+**Closed issues:**
+
+- Amazon Linux manage\_os\_default\_repos does not compile due to unsupported parameters [\#100](https://github.com/voxpupuli/puppet-yum/issues/100)
+- how does the module get the name of the package? [\#50](https://github.com/voxpupuli/puppet-yum/issues/50)
+
+**Merged pull requests:**
+
+- drop EOL OSs; fix puppet version range [\#101](https://github.com/voxpupuli/puppet-yum/pull/101) ([bastelfreak](https://github.com/bastelfreak))
+- Rely on beaker-hostgenerator for docker nodesets [\#98](https://github.com/voxpupuli/puppet-yum/pull/98) ([ekohl](https://github.com/ekohl))
+
 ## [v2.2.1](https://github.com/voxpupuli/puppet-yum/tree/v2.2.1) (2018-03-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v2.2.0...v2.2.1)
@@ -64,7 +92,6 @@ These should not affect the functionality of the module.
 - Release 2.0.2 [\#70](https://github.com/voxpupuli/puppet-yum/pull/70) ([bastelfreak](https://github.com/bastelfreak))
 - Update README.md [\#69](https://github.com/voxpupuli/puppet-yum/pull/69) ([arjenz](https://github.com/arjenz))
 - Emtpy hiera files throw puppet 4 warnings [\#67](https://github.com/voxpupuli/puppet-yum/pull/67) ([benohara](https://github.com/benohara))
-- Prepare 2.0.1 [\#64](https://github.com/voxpupuli/puppet-yum/pull/64) ([jeefberkey](https://github.com/jeefberkey))
 
 ## [v2.0.1](https://github.com/voxpupuli/puppet-yum/tree/v2.0.1) (2017-09-01)
 
@@ -109,7 +136,6 @@ These should not affect the functionality of the module.
 - Versionlock release string may contain dots [\#49](https://github.com/voxpupuli/puppet-yum/pull/49) ([traylenator](https://github.com/traylenator))
 - Fix typo. [\#45](https://github.com/voxpupuli/puppet-yum/pull/45) ([johntconklin](https://github.com/johntconklin))
 - Remove `section` parameter from `yum::config` [\#33](https://github.com/voxpupuli/puppet-yum/pull/33) ([lamawithonel](https://github.com/lamawithonel))
-- Comma seperated values puppet3 [\#31](https://github.com/voxpupuli/puppet-yum/pull/31) ([matonb](https://github.com/matonb))
 
 **Closed issues:**
 
@@ -118,10 +144,6 @@ These should not affect the functionality of the module.
 - Remove individual configs from init.pp, use create\_resources pattern instead [\#36](https://github.com/voxpupuli/puppet-yum/issues/36)
 - Fix versionlock regex [\#35](https://github.com/voxpupuli/puppet-yum/issues/35)
 -  yum::config fails with comma separated values [\#21](https://github.com/voxpupuli/puppet-yum/issues/21)
-
-**Merged pull requests:**
-
-- Release 1.0.0 [\#30](https://github.com/voxpupuli/puppet-yum/pull/30) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-yum/tree/v1.0.0) (2017-01-14)
 
@@ -145,16 +167,13 @@ These should not affect the functionality of the module.
 - Add parameter clean\_old\_kernels [\#20](https://github.com/voxpupuli/puppet-yum/pull/20) ([treydock](https://github.com/treydock))
 - Correct format of fixtures file. [\#14](https://github.com/voxpupuli/puppet-yum/pull/14) ([traylenator](https://github.com/traylenator))
 
-**Merged pull requests:**
-
-- Update changelog and version [\#12](https://github.com/voxpupuli/puppet-yum/pull/12) ([Yuav](https://github.com/Yuav))
-
 ## [v0.9.15](https://github.com/voxpupuli/puppet-yum/tree/v0.9.15) (2016-09-26)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v0.9.14...v0.9.15)
 
 **Merged pull requests:**
 
+- Update changelog and version [\#12](https://github.com/voxpupuli/puppet-yum/pull/12) ([Yuav](https://github.com/Yuav))
 - Added basic spec tests [\#11](https://github.com/voxpupuli/puppet-yum/pull/11) ([Yuav](https://github.com/Yuav))
 - Bug: Puppet creates empty key files when using Hiera and create\_resources\(\) [\#7](https://github.com/voxpupuli/puppet-yum/pull/7) ([lklimek](https://github.com/lklimek))
 - Manage yum::versionlock with concat [\#6](https://github.com/voxpupuli/puppet-yum/pull/6) ([jpoittevin](https://github.com/jpoittevin))

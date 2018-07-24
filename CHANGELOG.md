@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.1.0](https://github.com/voxpupuli/puppet-yum/tree/v3.1.0) (2018-07-24)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- \(\#107\) YUM update puppet task support [\#108](https://github.com/voxpupuli/puppet-yum/pull/108) ([catay](https://github.com/catay))
+
+**Closed issues:**
+
+- feature yum update puppet task support [\#107](https://github.com/voxpupuli/puppet-yum/issues/107)
+
 ## [v3.0.0](https://github.com/voxpupuli/puppet-yum/tree/v3.0.0) (2018-07-09)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v2.2.1...v3.0.0)

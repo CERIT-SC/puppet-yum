@@ -334,6 +334,26 @@ yum::install { 'package-name':
 
 Please note that resource name must be same as installed package name.
 
+### Puppet tasks 
+
+The module has a puppet task that allows to run `yum update` or `yum upgrade`.
+Please refer to the [Bolt documentation](https://puppet.com/docs/bolt/latest/bolt.html) on how to execute a task.
+
+```bash
+$ bolt task show yum
+
+yum - Allows you to perform yum functions
+
+USAGE:
+bolt task run --nodes <node-name> yum action=<value> [quiet=<value>]
+
+PARAMETERS:
+- action: Enum['update', 'upgrade']
+    Action to perform 
+- quiet: Optional[Boolean]
+    Run without output 
+```
+
 ---
 
 This module was donated by CERIT Scientific Cloud, <support@cerit-sc.cz> to Vox Pupuli

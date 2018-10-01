@@ -207,7 +207,7 @@ class yum (
     default                  => '3',
   }
 
-  $_pc_cmd = delete_undef_values([
+  $_pc_cmd = [
     '/usr/bin/package-cleanup',
     '--oldkernels',
     "--count=${_real_installonly_limit}",
@@ -216,7 +216,7 @@ class yum (
       true    => '--keepdevel',
       default => undef,
     },
-  ])
+  ].filter |$val| { $val =~ NotUndef }
 
   exec { 'package-cleanup_oldkernels':
     command     => shellquote($_pc_cmd),

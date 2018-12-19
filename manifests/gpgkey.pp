@@ -58,7 +58,10 @@ define yum::gpgkey (
     mode   => $mode,
   }
 
-  $rpmname = "gpg-pubkey-$(gpg ${path} | head -1 | cut -c12-20 | \
+  $rpmname = "gpg-pubkey-$(gpg --with-colons ${path} | \
+head -n 1 | \
+cut -d: -f5 | \
+cut -c9-16 | \
 tr '[A-Z]' '[a-z]')"
 
   case $ensure {

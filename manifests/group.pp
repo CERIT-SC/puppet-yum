@@ -19,9 +19,9 @@
 #   }
 #
 define yum::group (
-  Enum['present', 'installed', 'absent', 'purged'] $ensure  = 'present',
-  Integer                                          $timeout = undef,
   Array[String]                                    $install_options = [],
+  Enum['present', 'installed', 'absent', 'purged'] $ensure  = 'present',
+  Optional[Integer]                                $timeout = undef,
 ) {
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',

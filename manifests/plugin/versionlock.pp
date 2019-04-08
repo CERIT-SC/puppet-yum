@@ -23,7 +23,7 @@ class yum::plugin::versionlock (
     ensure  => $ensure,
   }
 
-  include ::yum::clean
+  include yum::clean
   $_clean_notify = $clean ? {
     true  => Exec['yum_clean_all'],
     false => undef,

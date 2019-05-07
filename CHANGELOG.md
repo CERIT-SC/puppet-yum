@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-yum/tree/v4.0.0) (2019-05-07)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v3.1.1...v4.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.7.0 and drop puppet 4 [\#133](https://github.com/voxpupuli/puppet-yum/pull/133) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add optional parameters to groupinstall [\#86](https://github.com/voxpupuli/puppet-yum/pull/86) ([jfroche](https://github.com/jfroche))
+
+**Fixed bugs:**
+
+- Correctly calculate rpmname for all gpg versions [\#126](https://github.com/voxpupuli/puppet-yum/pull/126) ([towo](https://github.com/towo))
+- Puppet 6 issue and knockout\_prefix problem [\#121](https://github.com/voxpupuli/puppet-yum/pull/121) ([avidspartan1](https://github.com/avidspartan1))
+
+**Closed issues:**
+
+- gpgkey applied on every run due to output change [\#125](https://github.com/voxpupuli/puppet-yum/issues/125)
+- In Puppet 6, remove\_undef\_values doesn't work as expected [\#120](https://github.com/voxpupuli/puppet-yum/issues/120)
+- --knock-out-prefix "--" knocks out valid content of yum::gpgkeys  [\#111](https://github.com/voxpupuli/puppet-yum/issues/111)
+- removal of mirrorlist is set by 'absent' not by using a knockout. [\#63](https://github.com/voxpupuli/puppet-yum/issues/63)
+
+**Merged pull requests:**
+
+- replace deprecated has\_key\(\) with `in` [\#129](https://github.com/voxpupuli/puppet-yum/pull/129) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v3.1.1](https://github.com/voxpupuli/puppet-yum/tree/v3.1.1) (2018-10-14)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v3.1.0...v3.1.1)

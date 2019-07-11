@@ -30,4 +30,13 @@ describe 'yum::group' do
     it { is_expected.to compile.with_all_deps }
     it { is_expected.to contain_exec("yum-groupinstall-#{title}").with_command("yum -y groupinstall 'Core' --enablerepo=epel") }
   end
+
+  context 'when ensure is set to `latest`' do
+    let(:title) { 'Core' }
+    let(:params) { { ensure: 'latest' } }
+
+    it { is_expected.to compile.with_all_deps }
+    it { is_expected.to contain_exec("yum-groupinstall-#{title}").with_command("yum -y groupinstall 'Core'") }
+    it { is_expected.to contain_exec("yum-groupinstall-#{title}-latest").with_command("yum -y groupinstall 'Core'") }
+  end
 end

@@ -279,6 +279,13 @@ describe 'yum' do
           it { is_expected.to contain_yum__gpgkey('/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6') }
         end
       end
+
+      context 'when utils_package_name is set' do
+        let(:params) { { utils_package_name: 'dnf-utils' } }
+        
+        it { is_expected.not_to contain_package('yum-utils') }
+        it { is_expected.to contain_package('dnf-utils') }
+      end
     end
   end
 

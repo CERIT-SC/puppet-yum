@@ -9,7 +9,7 @@ shared_examples 'a Yum class' do |value|
     is_expected.to contain_exec('package-cleanup_oldkernels').with(
       command: "/usr/bin/package-cleanup --oldkernels --count=#{value} -y",
       refreshonly: true
-    ).that_requires('Package[yum-utils]').that_subscribes_to('Yum::Config[installonly_limit]')
+    ).that_subscribes_to('Yum::Config[installonly_limit]')
   end
 end
 
@@ -280,9 +280,18 @@ describe 'yum' do
         end
       end
 
+      context 'when utils_package_name is not set' do
+        case facts[:os]['name']
+        when 'Fedora'
+          it { is_expected.to contain_package('dnf-utils') }
+        else
+          it { is_expected.to contain_package('yum-utils') }
+        end
+      end
+
       context 'when utils_package_name is set' do
         let(:params) { { utils_package_name: 'dnf-utils' } }
-        
+
         it { is_expected.not_to contain_package('yum-utils') }
         it { is_expected.to contain_package('dnf-utils') }
       end

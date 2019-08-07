@@ -14,6 +14,7 @@ Module has been tested on:
 * CentOS 6, 7
 * Amazon Linux 2017
 * RHEL 7
+* Fedora 30 (partial support)
 
 ## Usage
 
@@ -358,6 +359,10 @@ PARAMETERS:
 - quiet: Optional[Boolean]
     Run without output
 ```
+
+### Fedora partial support
+
+Support for fedora is minimal at this time. The yum class can be included without error and resources such as `yum::group` can be managed. No repositories or GPG keys are managed by default. Old kernel cleanup is known not to work, and plugins may not work due to different package naming. Pull requests for additional support would be welcomed.
 
 ---
 

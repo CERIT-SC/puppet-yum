@@ -118,8 +118,8 @@ class yum (
     $os['operatingsystem']
   }
 
-  unless member($supported_os_names, $::os['name']) {
-    fail("${::os['name']} not supported")
+  unless member($supported_os_names, $facts['os']['name']) {
+    fail("${facts['os']['name']} not supported")
   }
 
   $_managed_repos = $manage_os_default_repos ? {

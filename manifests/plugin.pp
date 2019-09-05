@@ -23,7 +23,7 @@ define yum::plugin (
   if $pkg_prefix {
     $_pkg_prefix = $pkg_prefix
   } else {
-    $_pkg_prefix = $::os['release']['major'] ? {
+    $_pkg_prefix = $facts['os']['release']['major'] ? {
       Variant[Integer[5,5], Enum['5']] => 'yum',
       default                          => 'yum-plugin',
     }

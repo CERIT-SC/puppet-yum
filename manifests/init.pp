@@ -133,8 +133,8 @@ class yum (
 
     $normalized_repos.each |$yumrepo, $attributes| {
       if member($_managed_repos_minus_exclusions, $yumrepo) {
-        Resource['yumrepo'] {
-          $yumrepo: * => $attributes,
+        yumrepo { $yumrepo:
+          * => $attributes,
         }
         # Handle GPG Key
         if ('gpgkey' in $attributes) {
@@ -183,8 +183,8 @@ class yum (
     }
 
     $_normalized_config_options.each |$config, $attributes| {
-      Resource['yum::config'] {
-        $config: * => $attributes,
+      yum::config { $config:
+        * => $attributes,
       }
     }
   }

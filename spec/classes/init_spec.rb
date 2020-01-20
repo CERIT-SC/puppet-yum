@@ -62,7 +62,7 @@ describe 'yum' do
             it { is_expected.not_to contain_yumrepo('cr') }
           end
         when 'Amazon'
-          it { is_expected.to have_yumrepo_resource_count(16) }
+          it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
           it_behaves_like 'a catalog containing repos', [
             'amzn-main',
             'amzn-main-debuginfo',
@@ -103,6 +103,45 @@ describe 'yum' do
             'rhui-REGION-rhel-server-debug-supplementary',
             'rhui-REGION-rhel-server-source-supplementary'
           ]
+        when 'VirtuozzoLinux'
+          case facts[:os]['release']['major']
+          when '6'
+            it { is_expected.to have_yumrepo_resource_count(12) }
+            it_behaves_like 'a catalog containing repos', [
+              'virtuozzolinux-base',
+              'virtuozzolinux-updates',
+              'virtuozzolinux-base-debuginfo',
+              'virtuozzolinux-updates-debuginfo',
+              'virtuozzolinux-factory',
+              'virtuozzolinux-factory-debuginfo',
+              'virtuozzo-os',
+              'virtuozzo-updates',
+              'virtuozzo-os-debuginfo',
+              'virtuozzo-updates-debuginfo',
+              'virtuozzo-readykernel',
+              'obsoleted_tmpls'
+            ]
+          when '7'
+            it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
+            it_behaves_like 'a catalog containing repos', [
+              'virtuozzolinux-base',
+              'virtuozzolinux-updates',
+              'virtuozzolinux-base-debuginfo',
+              'virtuozzolinux-updates-debuginfo',
+              'virtuozzolinux-factory',
+              'virtuozzolinux-factory-debuginfo',
+              'virtuozzo-os',
+              'virtuozzo-updates',
+              'virtuozzo-os-debuginfo',
+              'virtuozzo-updates-debuginfo',
+              'virtuozzo-readykernel',
+              'obsoleted_tmpls',
+              'factory',
+              'factory-debuginfo',
+              'virtuozzolinux-vz-factory',
+              'virtuozzolinux-vz-factory-debuginfo'
+            ]
+          end
         else
           it { is_expected.to have_yumrepo_resource_count(0) }
         end
@@ -124,7 +163,7 @@ describe 'yum' do
               'centos-media'
             ]
           when 'Amazon'
-            it { is_expected.to have_yumrepo_resource_count(16) }
+            it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
             it_behaves_like 'a catalog containing repos', [
               'amzn-main',
               'amzn-main-debuginfo',
@@ -165,6 +204,45 @@ describe 'yum' do
               'rhui-REGION-rhel-server-debug-supplementary',
               'rhui-REGION-rhel-server-source-supplementary'
             ]
+          when 'VirtuozzoLinux'
+            case facts[:os]['release']['major']
+            when '6'
+              it { is_expected.to have_yumrepo_resource_count(12) }
+              it_behaves_like 'a catalog containing repos', [
+                'virtuozzolinux-base',
+                'virtuozzolinux-updates',
+                'virtuozzolinux-base-debuginfo',
+                'virtuozzolinux-updates-debuginfo',
+                'virtuozzolinux-factory',
+                'virtuozzolinux-factory-debuginfo',
+                'virtuozzo-os',
+                'virtuozzo-updates',
+                'virtuozzo-os-debuginfo',
+                'virtuozzo-updates-debuginfo',
+                'virtuozzo-readykernel',
+                'obsoleted_tmpls'
+              ]
+            when '7'
+              it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
+              it_behaves_like 'a catalog containing repos', [
+                'virtuozzolinux-base',
+                'virtuozzolinux-updates',
+                'virtuozzolinux-base-debuginfo',
+                'virtuozzolinux-updates-debuginfo',
+                'virtuozzolinux-factory',
+                'virtuozzolinux-factory-debuginfo',
+                'virtuozzo-os',
+                'virtuozzo-updates',
+                'virtuozzo-os-debuginfo',
+                'virtuozzo-updates-debuginfo',
+                'virtuozzo-readykernel',
+                'obsoleted_tmpls',
+                'factory',
+                'factory-debuginfo',
+                'virtuozzolinux-vz-factory',
+                'virtuozzolinux-vz-factory-debuginfo'
+              ]
+            end
           else
             it { is_expected.to have_yumrepo_resource_count(0) }
           end

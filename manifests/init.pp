@@ -51,6 +51,9 @@
 #   are referenced by a managed_repo. This will use the same merging behavior
 #   as repos.
 #
+# @param utils_package_name
+#   Name of the utils package, e.g. 'yum-utils', or 'dnf-utils'.
+#
 # @example Enable management of the default repos for a supported OS:
 #   ```yaml
 #   ---
@@ -110,6 +113,7 @@ class yum (
   Array[String] $os_default_repos = [],
   Array[String] $repo_exclusions = [],
   Hash[String, Hash[String, String]] $gpgkeys = {},
+  String $utils_package_name = 'yum-utils',
 ) {
 
   $module_metadata            = load_module_metadata($module_name)
@@ -199,7 +203,7 @@ class yum (
   }
 
   # cleanup old kernels
-  ensure_packages(['yum-utils'])
+  ensure_packages([$utils_package_name])
 
   $_real_installonly_limit = $config_options['installonly_limit'] ? {
     Variant[String, Integer] => $config_options['installonly_limit'],
@@ -221,7 +225,7 @@ class yum (
   exec { 'package-cleanup_oldkernels':
     command     => shellquote($_pc_cmd),
     refreshonly => true,
-    require     => Package['yum-utils'],
+    require     => Package[$utils_package_name],
     subscribe   => $_clean_old_kernels_subscribe,
   }
 }

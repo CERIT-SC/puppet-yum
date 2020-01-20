@@ -41,7 +41,6 @@ describe 'yum' do
 
         case facts[:os]['name']
         when 'CentOS'
-          it { is_expected.to have_yumrepo_resource_count(10) }
           it_behaves_like 'a catalog containing repos', [
             'base',
             'updates',
@@ -54,12 +53,16 @@ describe 'yum' do
             'centos-media'
           ]
           case facts[:os]['release']['major']
+          when '8'
+            it { is_expected.to have_yumrepo_resource_count(9) }
           when '7'
             it { is_expected.to contain_yumrepo('cr') }
             it { is_expected.not_to contain_yumrepo('contrib') }
           when '6'
             it { is_expected.to contain_yumrepo('contrib') }
             it { is_expected.not_to contain_yumrepo('cr') }
+          else
+            it { is_expected.to have_yumrepo_resource_count(10) }
           end
         when 'Amazon'
           it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
@@ -360,8 +363,11 @@ describe 'yum' do
 
       context 'when utils_package_name is not set' do
         case facts[:os]['name']
-        when 'Fedora'
-          it { is_expected.to contain_package('dnf-utils') }
+        when 'Fedora', 'RedHat', 'CentOS', 'Scientific', 'Amazon', 'OEL', 'OracleLinux'
+          case facts[:os]['release']['major']
+          when '8', '27', '28', '29', '30', '31', '32'
+            it { is_expected.to contain_package('dnf-utils') }
+          end
         else
           it { is_expected.to contain_package('yum-utils') }
         end

@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.1.0](https://github.com/voxpupuli/puppet-yum/tree/v4.1.0) (2020-01-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.0.0...v4.1.0)
+
+**Implemented enhancements:**
+
+- add 'VirtuozzoLinux' support [\#147](https://github.com/voxpupuli/puppet-yum/pull/147) ([kBite](https://github.com/kBite))
+- Support for DNF-based distros, and Fedora defaults [\#143](https://github.com/voxpupuli/puppet-yum/pull/143) ([optiz0r](https://github.com/optiz0r))
+- Updated utils package for RHEL 8 [\#137](https://github.com/voxpupuli/puppet-yum/pull/137) ([rcalixte](https://github.com/rcalixte))
+
+**Fixed bugs:**
+
+- `require` \(not `contain`\) yum::plugin::versionlock [\#154](https://github.com/voxpupuli/puppet-yum/pull/154) ([alexjfisher](https://github.com/alexjfisher))
+
+**Merged pull requests:**
+
+- instantiate yumrepo & yum::config directly [\#148](https://github.com/voxpupuli/puppet-yum/pull/148) ([igalic](https://github.com/igalic))
+- Clean up acceptance spec helper [\#146](https://github.com/voxpupuli/puppet-yum/pull/146) ([ekohl](https://github.com/ekohl))
+- use $facts when accessing os fact [\#144](https://github.com/voxpupuli/puppet-yum/pull/144) ([igalic](https://github.com/igalic))
+- add requirement expression in metadata of task [\#138](https://github.com/voxpupuli/puppet-yum/pull/138) ([Dan33l](https://github.com/Dan33l))
+- Update concat dependency to allow puppetlabs/concat 6.x [\#136](https://github.com/voxpupuli/puppet-yum/pull/136) ([treydock](https://github.com/treydock))
+- Allow `puppetlabs/stdlib` 6.x [\#135](https://github.com/voxpupuli/puppet-yum/pull/135) ([alexjfisher](https://github.com/alexjfisher))
+
 ## [v4.0.0](https://github.com/voxpupuli/puppet-yum/tree/v4.0.0) (2019-05-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v3.1.1...v4.0.0)
@@ -167,7 +190,7 @@ These should not affect the functionality of the module.
 **Merged pull requests:**
 
 - Contain the versionlock subclass to help with ordering around package resources [\#65](https://github.com/voxpupuli/puppet-yum/pull/65) ([bovy89](https://github.com/bovy89))
-- Support `ensure =\> absent` with yum::versionlock [\#62](https://github.com/voxpupuli/puppet-yum/pull/62) ([bovy89](https://github.com/bovy89))
+- Support `ensure => absent` with yum::versionlock [\#62](https://github.com/voxpupuli/puppet-yum/pull/62) ([bovy89](https://github.com/bovy89))
 
 ## [v2.0.0](https://github.com/voxpupuli/puppet-yum/tree/v2.0.0) (2017-06-14)
 

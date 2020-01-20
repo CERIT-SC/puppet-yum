@@ -53,6 +53,13 @@
       ]
     },
     {
+      "operatingsystem": "VirtuozzoLinux",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
       "operatingsystem": "Amazon",
       "operatingsystemrelease": [
         "2017"

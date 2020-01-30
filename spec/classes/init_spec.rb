@@ -363,16 +363,12 @@ describe 'yum' do
 
       context 'when utils_package_name is not set' do
         case facts[:os]['name']
-        when 'Fedora', 'RedHat', 'CentOS', 'Scientific', 'Amazon', 'OEL', 'OracleLinux'
-          case facts[:os]['release']['major']
-          when '8', '27', '28', '29', '30', '31', '32'
-            it { is_expected.to contain_package('dnf-utils') }
-          end
+        when 'Fedora'
+          it { is_expected.to contain_package('dnf-utils') }
         else
           it { is_expected.to contain_package('yum-utils') }
         end
       end
-
       context 'when utils_package_name is set' do
         let(:params) { { utils_package_name: 'dnf-utils' } }
 

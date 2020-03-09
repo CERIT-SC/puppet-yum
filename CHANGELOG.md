@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.1.1](https://github.com/voxpupuli/puppet-yum/tree/v4.1.1) (2020-03-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.1.0...v4.1.1)
+
+**Fixed bugs:**
+
+- Fedora/CentOS8: Ensure yum-utils/dnf-utils are present [\#159](https://github.com/voxpupuli/puppet-yum/pull/159) ([KeithWard](https://github.com/KeithWard))
+
+**Closed issues:**
+
+- CentOS/RHEL 8 Uses DNF but utils package is provided by yum-utils. [\#158](https://github.com/voxpupuli/puppet-yum/issues/158)
+
+**Merged pull requests:**
+
+- Support ensuring all yum group packages are installed [\#140](https://github.com/voxpupuli/puppet-yum/pull/140) ([treydock](https://github.com/treydock))
+
 ## [v4.1.0](https://github.com/voxpupuli/puppet-yum/tree/v4.1.0) (2020-01-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.0.0...v4.1.0)

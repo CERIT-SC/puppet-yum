@@ -150,7 +150,7 @@ describe 'yum' do
         end
 
         context 'and the CentOS base repo is negated' do
-          let(:facts) { facts.merge(hiera_fixture: 'repo_exclusions') }
+          let(:params) { super().merge(repo_exclusions: ['base']) }
 
           case facts[:os]['name']
           when 'CentOS'

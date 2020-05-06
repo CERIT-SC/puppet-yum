@@ -24,6 +24,10 @@
 
 **Data types**
 
+* [`Yum::RpmArch`](#yumrpmarch): Valid rpm architectures.
+* [`Yum::RpmName`](#yumrpmname): Valid rpm name.
+* [`Yum::RpmRelease`](#yumrpmrelease): Valid rpm release fields.
+* [`Yum::RpmVersion`](#yumrpmversion): Valid rpm version fields.
 * [`Yum::VersionlockString`](#yumversionlockstring): This type matches strings appropriate for use with yum-versionlock. Its basic format, using the `rpm(8)` query string format, is `%{EPOCH}:%{
 
 **Tasks**
@@ -536,23 +540,51 @@ Default value: `undef`
 Locks package from updates.
 
 * **Note** The resource title must use the format
+By default on CentOS 7 the following format is used.
 "%{EPOCH}:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}".  This can be retrieved via
 the command `rpm -q --qf '%{EPOCH}:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}'.
 If "%{EPOCH}" returns as '(none)', it should be set to '0'.  Wildcards may
 be used within token slots, but must not cover seperators, e.g.,
 '0:b*sh-4.1.2-9.*' covers Bash version 4.1.2, revision 9 on all
 architectures.
+By default on CentOS 8 and newer the resource title  to just set the
+package name.
+If a version is set on CentOS 7 then it behaves like CentOS 8
 
 * **See also**
 http://man7.org/linux/man-pages/man1/yum-versionlock.1.html
 
 #### Examples
 
-##### Sample usage
+##### Sample usage on CentOS 7
 
 ```puppet
-yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
+yum::versionlock { '0:bash-4.1.2-9.el7.*':
   ensure => present,
+}
+```
+
+##### Sample usage on CentOS 8
+
+```puppet
+yum::versionlock { 'bash':
+  ensure => present,
+  version => '4.1.2',
+  release => '9.el8',
+  epoch   => '0',
+  arch    => 'noarch',
+}
+```
+
+##### Sample usage on CentOS 7 with new style version, release, epoch, name parameters.
+
+```puppet
+yum::versionlock { 'bash':
+  ensure => present,
+  version => '3.1.2',
+  release => '9.el7',
+  epoch   => '0',
+  arch    => 'noarch',
 }
 ```
 
@@ -567,6 +599,39 @@ Data type: `Enum['present', 'absent', 'exclude']`
 Specifies if versionlock should be `present`, `absent` or `exclude`.
 
 Default value: 'present'
+
+##### `version`
+
+Data type: `Optional[Yum::RpmVersion]`
+
+Version of the package if CentOS 8 mechanism is used. This must be set for dnf based systems (e.g CentOS 8).
+If version is set then the name var is assumed to a package name and not the full versionlock string.
+
+Default value: `undef`
+
+##### `release`
+
+Data type: `Yum::RpmRelease`
+
+Release of the package if CentOS 8 mechanism is used.
+
+Default value: '*'
+
+##### `arch`
+
+Data type: `Optional[Variant[Yum::RpmArch, Enum['*']]]`
+
+Arch of the package if CentOS 8 mechanism is used.
+
+Default value: `undef`
+
+##### `epoch`
+
+Data type: `Integer[0]`
+
+Epoch of the package if CentOS 8 mechanism is used.
+
+Default value: 0
 
 ## Functions
 
@@ -641,6 +706,45 @@ Data type: `Hash`
 The hash on which to operate
 
 ## Data types
+
+### Yum::RpmArch
+
+Output of `rpm -q --queryformat '%{arch}\n' package`
+
+* **See also**
+https://github.com/rpm-software-management/rpm/blob/master/rpmrc.in
+
+Alias of `Enum['noarch', 'x86_64', 'i386', 'arm', 'ppc64', 'ppc64le', 'sparc64', 'ia64', 'alpha', 'ip', 'm68k', 'mips', 'mipsel', 'mk68k', 'mint', 'ppc', 'rs6000', 's390', 's390x', 'sh', 'sparc', 'xtensa']`
+
+### Yum::RpmName
+
+Can be alphanumeric or contain `.` `_` `+` `%` `{` `}` `-`.
+Output of `rpm -q --queryformat '%{name}\n package`
+Examples python36-foobar, netscape
+
+Alias of `Pattern[/\A([0-9a-zA-Z\._\+%\{\}-]+)\z/]`
+
+### Yum::RpmRelease
+
+It may not contain a dash.
+Output of `rpm -q --queryformat '%{release}\n' package`.
+Examples 3.4 3.4.el6, 3.4.el6_2
+
+* **See also**
+http://ftp.rpm.org/max-rpm/ch-rpm-file-format.html
+
+Alias of `Pattern[/\A^([^-]+)\z/]`
+
+### Yum::RpmVersion
+
+It may not contain a dash.
+Output of `rpm -q --queryformat '%{version}\n' package`.
+Examples 3.4, 2.5.alpha6
+
+* **See also**
+http://ftp.rpm.org/max-rpm/ch-rpm-file-format.html
+
+Alias of `Pattern[/\A([^-]+)\z/]`
 
 ### Yum::VersionlockString
 

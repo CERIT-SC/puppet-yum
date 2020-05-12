@@ -55,30 +55,23 @@
 #   Name of the utils package, e.g. 'yum-utils', or 'dnf-utils'.
 #
 # @example Enable management of the default repos for a supported OS:
-#   ```yaml
 #   ---
 #   yum::manage_os_default_repos: true
-#   ```
 #
 # @example Add Hiera data to disable *management* of the CentOS Base repo:
-#   ```yaml
 #   ---
 #   yum::manage_os_default_repos: true
 #   yum::repo_exclusions:
 #       - 'base'
-#   ```
 #
 # @example Ensure the CentOS base repo is removed from the agent system(s):
-#   ```yaml
 #   ---
 #   yum::manage_os_default_repos: true
 #   yum::repos:
 #       base:
 #           ensure: 'absent'
-#   ```
 #
 # @example Add a custom repo:
-#   ```yaml
 #   ---
 #   yum::managed_repos:
 #       - 'example_repo'
@@ -91,17 +84,14 @@
 #           gpgcheck: true
 #           gpgkey: 'file:///etc/pki/gpm-gpg/RPM-GPG-KEY-Example'
 #           target: '/etc/yum.repos.d/example.repo'
-#   ```
 #
 # @example Use a custom `baseurl` for the CentOS Base repo:
-#   ```yaml
 #   ---
 #   yum::manage_os_default_repos: true
 #   yum::repos:
 #       base:
 #           baseurl: 'https://repos.example.com/CentOS/base/'
 #           mirrorlist: '--'
-#   ```
 #
 class yum (
   Boolean $clean_old_kernels = true,

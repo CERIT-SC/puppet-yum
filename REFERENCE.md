@@ -41,39 +41,32 @@ A class to install and manage Yum configuration.
 ##### Enable management of the default repos for a supported OS:
 
 ```puppet
-```yaml
 ---
 yum::manage_os_default_repos: true
-```
 ```
 
 ##### Add Hiera data to disable *management* of the CentOS Base repo:
 
 ```puppet
-```yaml
 ---
 yum::manage_os_default_repos: true
 yum::repo_exclusions:
     - 'base'
 ```
-```
 
 ##### Ensure the CentOS base repo is removed from the agent system(s):
 
 ```puppet
-```yaml
 ---
 yum::manage_os_default_repos: true
 yum::repos:
     base:
         ensure: 'absent'
 ```
-```
 
 ##### Add a custom repo:
 
 ```puppet
-```yaml
 ---
 yum::managed_repos:
     - 'example_repo'
@@ -87,19 +80,16 @@ yum::repos:
         gpgkey: 'file:///etc/pki/gpm-gpg/RPM-GPG-KEY-Example'
         target: '/etc/yum.repos.d/example.repo'
 ```
-```
 
 ##### Use a custom `baseurl` for the CentOS Base repo:
 
 ```puppet
-```yaml
 ---
 yum::manage_os_default_repos: true
 yum::repos:
     base:
         baseurl: 'https://repos.example.com/CentOS/base/'
         mirrorlist: '--'
-```
 ```
 
 #### Parameters
@@ -595,7 +585,6 @@ be ignored, even if they contain Hashes.
 
 ```puppet
 
-```puppet
 Hash $foo = {
   bar => { 'a' => true, 'b' => 'b' },
   baz => false,
@@ -603,17 +592,14 @@ Hash $foo = {
 }
 
 yum::bool2num_hash_recursive($foo)
-```
 
 The above would return:
 
-```puppet
 {
   bar => { 'a' => 1, 'b' => 'b' },
   baz => 0,
   qux => [{ 'c' => true }, { 'd' => false }],
 }
-```
 ```
 
 #### `yum::bool2num_hash_recursive(Hash $arg)`
@@ -631,7 +617,6 @@ Returns: `Hash`
 
 ```puppet
 
-```puppet
 Hash $foo = {
   bar => { 'a' => true, 'b' => 'b' },
   baz => false,
@@ -639,17 +624,14 @@ Hash $foo = {
 }
 
 yum::bool2num_hash_recursive($foo)
-```
 
 The above would return:
 
-```puppet
 {
   bar => { 'a' => 1, 'b' => 'b' },
   baz => 0,
   qux => [{ 'c' => true }, { 'd' => false }],
 }
-```
 ```
 
 ##### `arg`
@@ -667,19 +649,19 @@ Its basic format, using the `rpm(8)` query string format, is
 `%{EPOCH}:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}`.  As a Regex, it
 breaks down into five distinct parts, plus the seperators.
 
-  # EPOCH: An unsigned integer
+  EPOCH: An unsigned integer
   type Yum::PackageEpoch   = Regexp[/[0-9]\*]+/]
 
-  # NAME: Any valid package name (see https://github.com/rpm-software-management/rpm/blob/master/doc/manual/spec)
+  NAME: Any valid package name (see https://github.com/rpm-software-management/rpm/blob/master/doc/manual/spec)
   type Yum::PackageName    = Regexp[/[0-9a-zA-Z\._\+%\{\}\*-]+/]
 
-  # VERSION: Any valid version string. The only limitation here, according to the RPM manual, is that it may not contain a dash (`-`).
+  VERSION: Any valid version string. The only limitation here, according to the RPM manual, is that it may not contain a dash (`-`).
   type Yum::PackageVersion = Regexp[/[^-]+/]
 
-  # RELEASE: Any valid release string. Only limitation is that it is not a dash (`-`)
+  RELEASE: Any valid release string. Only limitation is that it is not a dash (`-`)
   type Yum::PackageRelease = Regexp[/[^-]+/]
 
-  # ARCH: Matches a string such as `el7.x86_64`.  This is actuall two sub-expressions.  See below.
+  ARCH: Matches a string such as `el7.x86_64`.  This is actuall two sub-expressions.  See below.
   type Yum::PackageArch    = Regexp[/([0-9a-zZ-Z_\*]+)(?:\.(noarch|x86_64|i386|arm|ppc64|ppc64le|sparc64|ia64|alpha|ip|m68k|mips|mipsel|mk68k|mint|ppc|rs6000|s390|s390x|sh|sparc|xtensa|\*))?/]
 
 The `%{ARCH}` sub-expression is composed of two sub-expressions
@@ -687,10 +669,10 @@ separated by a dot (`.`), where the second part is optional.  The RPM
 specification calls the first field the `DistTag`, and the second the
 `BuildArch`.
 
-   # DistTag: Any string consiting of only letters, numbers, or an underscore, e.g., `el6`, `sl7`, or `fc24`.
+   DistTag: Any string consiting of only letters, numbers, or an underscore, e.g., `el6`, `sl7`, or `fc24`.
    type Yum::PackageDistTag   = Regexp[/[0-9a-zZ-Z_\*]+/]
 
-   # BuildArch: Any string from the list at https://github.com/rpm-software-management/rpm/blob/master/rpmrc.in.  Strings are roughly listed from most common to least common to improve performance.
+   BuildArch: Any string from the list at https://github.com/rpm-software-management/rpm/blob/master/rpmrc.in.  Strings are roughly listed from most common to least common to improve performance.
    type Yum::PackageBuildArch = Regexp[/noarch|x86_64|i386|arm|ppc64|ppc64le|sparc64|ia64|alpha|ip|m68k|mips|mipsel|mk68k|mint|ppc|rs6000|s390|s390x|sh|sparc|xtensa/]
 
 wildcard characters may not span the fields, may not cover the
@@ -745,7 +727,7 @@ Allows you to perform yum functions
 
 ##### `action`
 
-Data type: `Enum[update, upgrade]`
+Data type: `Enum[update, upgrade, 'list updates']`
 
 Action to perform 
 

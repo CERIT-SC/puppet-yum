@@ -10,7 +10,6 @@
 #
 # @example Usage
 #
-#   ```puppet
 #   Hash $foo = {
 #     bar => { 'a' => true, 'b' => 'b' },
 #     baz => false,
@@ -18,17 +17,14 @@
 #   }
 #
 #   yum::bool2num_hash_recursive($foo)
-#   ```
 #
 #   The above would return:
 #
-#   ```puppet
 #   {
 #     bar => { 'a' => 1, 'b' => 'b' },
 #     baz => 0,
 #     qux => [{ 'c' => true }, { 'd' => false }],
 #   }
-#   ```
 #
 function yum::bool2num_hash_recursive($arg) {
   assert_type(Hash, $arg)

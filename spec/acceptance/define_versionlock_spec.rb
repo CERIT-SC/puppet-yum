@@ -5,12 +5,37 @@ describe 'yum::versionlock define' do
     # Using puppet_apply as a helper
     it 'must work idempotently with no errors' do
       pp = <<-EOS
-      yum::versionlock{ '0:bash-4.1.2-9.el6_2.*':
-        ensure => present,
+      if versioncmp($facts['os']['release']['major'],'7') <= 0 {
+        yum::versionlock{ '0:bash-4.1.2-9.el6_2.*':
+          ensure => present,
+        }
+        yum::versionlock{ '0:tcsh-3.1.2-9.el6_2.*':
+          ensure => present,
+        }
+      } else {
+        yum::versionlock{ 'bash':
+          ensure  => present,
+          version => '4.1.2',
+          release => '9.el6_2',
+        }
+        yum::versionlock{ 'tcsh':
+          ensure  => present,
+          version => '3.1.2',
+          release => '9.el6_2',
+          arch    => '*',
+          epoch   => 0,
+        }
       }
-      yum::versionlock{ '0:tcsh-3.1.2-9.el6_2.*':
-        ensure => present,
+
+      # Lock a package with new style on all OSes
+      yum::versionlock{ 'netscape':
+        ensure  => present,
+        version => '8.1.2',
+        release => '9.el6_2',
+        arch    => '*',
+        epoch   => 2,
       }
+
       EOS
       # Run it twice and test for idempotency
       apply_manifest(pp, catch_failures: true)
@@ -18,8 +43,15 @@ describe 'yum::versionlock define' do
     end
     describe file('/etc/yum/pluginconf.d/versionlock.list') do
       it { is_expected.to be_file }
-      it { is_expected.to contain '0:bash-4.1.2-9.el6_2.*' }
-      it { is_expected.to contain '0:tcsh-3.1.2-9.el6_2.*' }
+      if %w[6 7].include?(fact('os.release.major'))
+        it { is_expected.to contain '0:bash-4.1.2-9.el6_2.*' }
+        it { is_expected.to contain '0:tcsh-3.1.2-9.el6_2.*' }
+        it { is_expected.to contain '2:netscape-8.1.2-9.el6_2.*' }
+      else
+        it { is_expected.to contain 'bash-0:4.1.2-9.el6_2.*' }
+        it { is_expected.to contain 'tcsh-0:3.1.2-9.el6_2.*' }
+        it { is_expected.to contain 'netscape-2:8.1.2-9.el6_2.*' }
+      end
     end
   end
   it 'must work if clean is specified' do
@@ -28,8 +60,17 @@ describe 'yum::versionlock define' do
     class{yum::plugin::versionlock:
       clean => true,
     }
-    yum::versionlock{ '0:bash-3.1.2-9.el6_2.*':
-      ensure  => present,
+    # Pick an obscure package that hopefully will not be installed.
+    if versioncmp($facts['os']['release']['major'],'7') <= 0 {
+      yum::versionlock{ '0:samba-devel-3.1.2-9.el6_2.*':
+        ensure  => present,
+      }
+    } else {
+      yum::versionlock{'samba-devel':
+        ensure  => present,
+        version => '3.1.2',
+        release => '9.el6_2',
+      }
     }
     EOS
     # Run it twice and test for idempotency
@@ -37,6 +78,12 @@ describe 'yum::versionlock define' do
     apply_manifest(pp, catch_changes:  true)
     # Check the cache is really empty.
     # all repos will have 0 packages.
-    shell('yum -C repolist -d0 | grep -v "repo id"  | awk "{print $NF}" FS=  | grep -v 0', acceptable_exit_codes: [1])
+    # bit confused by the motivation of the first test?
+    if %w[6 7].include?(fact('os.release.major'))
+      shell('yum -C repolist -d0 | grep -v "repo id"  | awk "{print $NF}" FS=  | grep -v 0', acceptable_exit_codes: [1])
+      shell('yum -q list available samba-devel', acceptable_exit_codes: [1])
+    else
+      shell('dnf -q list --available samba-devel', acceptable_exit_codes: [1])
+    end
   end
 end

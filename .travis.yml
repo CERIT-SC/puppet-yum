@@ -38,6 +38,14 @@ matrix:
     bundler_args: --without development release
     env: BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_setfile=centos7-64 CHECK=beaker
     services: docker
+  - rvm: 2.5.3
+    bundler_args: --without development release
+    env: BEAKER_PUPPET_COLLECTION=puppet5 BEAKER_setfile=centos8-64 CHECK=beaker
+    services: docker
+  - rvm: 2.5.3
+    bundler_args: --without development release
+    env: BEAKER_PUPPET_COLLECTION=puppet6 BEAKER_setfile=centos8-64 CHECK=beaker
+    services: docker
 branches:
   only:
   - master

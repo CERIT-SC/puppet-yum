@@ -309,7 +309,9 @@ yum::plugin { 'versionlock':
 ```
 
 ### Lock a package with the *versionlock* plugin
+The `versionlock` type changed between CentOS 7 and CentOS 8.
 
+#### CentOS 7 and older
 Locks explicitly specified packages from updates. Package name must be precisely
 specified in format *`EPOCH:NAME-VERSION-RELEASE.ARCH`*. Wild card in package
 name is allowed provided it does not span a field seperator.
@@ -335,6 +337,23 @@ class{'yum::plugin::versionlock':
 }
 yum::versionlock { '0:bash-4.1.2-9.el6_2.*':
   ensure => present,
+}
+```
+
+Note the CentOS 8 mechansim can be used if the parameter
+`version` is also set to anything other than the default `undef`. This allows
+common code to be used on CentOS  7 and 8 if the new style is used.
+
+#### CentOS 8 and newer
+Specify some of the version, release, epoch and arch values as parameters.
+
+```puppet
+yum::versionlock{'bash':
+  ensure => present,
+  version => '4.1.2',
+  release => '9.el8.2.*',
+  epoch   => 0,
+  arch    => 'x86_64',
 }
 ```
 

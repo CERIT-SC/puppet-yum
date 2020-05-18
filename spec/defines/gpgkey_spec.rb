@@ -4,7 +4,7 @@ describe 'yum::gpgkey' do
   context 'with no parameters' do
     let(:title) { '/test-key' }
 
-    it { is_expected.to raise_error(Puppet::PreformattedError, %r{Missing params: \$content or \$source must be specified}) }
+    it { is_expected.to compile.and_raise_error(%r{Missing params: \$content or \$source must be specified}) }
   end
 
   context 'with content provided' do
@@ -60,6 +60,6 @@ describe 'yum::gpgkey' do
       }
     end
 
-    it { is_expected.to raise_error(Puppet::PreformattedError, %r{You cannot specify more than one of content, source}) }
+    it { is_expected.to compile.and_raise_error(%r{You cannot specify more than one of content, source}) }
   end
 end

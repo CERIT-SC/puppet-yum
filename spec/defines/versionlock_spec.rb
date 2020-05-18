@@ -50,7 +50,7 @@ describe 'yum::versionlock' do
       context 'with version set namevar must be just a package name' do
         let(:params) { { version: '4.3' } }
 
-        it { is_expected.to raise_error(Puppet::PreformattedError, %r{Package name must be formatted as Yum::RpmName, not 'String'}) }
+        it { is_expected.to compile.and_raise_error(%r{Package name must be formatted as Yum::RpmName, not 'String'}) }
       end
     end
 
@@ -82,13 +82,13 @@ describe 'yum::versionlock' do
     context 'with an invalid title' do
       let(:title) { 'bash-4.1.2' }
 
-      it { is_expected.to raise_error(Puppet::PreformattedError, %r(%\{EPOCH\}:%\{NAME\}-%\{VERSION\}-%\{RELEASE\}\.%\{ARCH\})) }
+      it { is_expected.to compile.and_raise_error(%r(%\{EPOCH\}:%\{NAME\}-%\{VERSION\}-%\{RELEASE\}\.%\{ARCH\})) }
     end
 
     context 'with an invalid wildcard pattern' do
       let(:title) { '0:bash-4.1.2*' }
 
-      it { is_expected.to raise_error(Puppet::PreformattedError, %r(%\{EPOCH\}:%\{NAME\}-%\{VERSION\}-%\{RELEASE\}\.%\{ARCH\})) }
+      it { is_expected.to compile.and_raise_error(%r(%\{EPOCH\}:%\{NAME\}-%\{VERSION\}-%\{RELEASE\}\.%\{ARCH\})) }
     end
   end
 
@@ -135,7 +135,7 @@ describe 'yum::versionlock' do
     context 'with a simple, well-formed title, no version set' do
       let(:title) { 'bash' }
 
-      it { is_expected.to raise_error(Puppet::PreformattedError, %r{Version must be formatted as Yum::RpmVersion}) }
+      it { is_expected.to compile.and_raise_error(%r{Version must be formatted as Yum::RpmVersion}) }
 
       context 'and a version set to 4.3' do
         let(:params) { { version: '4.3' } }

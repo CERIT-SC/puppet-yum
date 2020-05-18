@@ -4,7 +4,7 @@ describe 'yum::config' do
   context 'with no parameters' do
     let(:title) { 'assumeyes' }
 
-    it { is_expected.to raise_error(Puppet::PreformattedError, %r{expects a value for parameter 'ensure'}) }
+    it { is_expected.to compile.and_raise_error(%r{expects a value for parameter 'ensure'}) }
   end
 
   context 'when ensure is a Boolean' do

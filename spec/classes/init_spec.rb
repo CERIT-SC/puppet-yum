@@ -289,8 +289,7 @@ describe 'yum' do
           let(:params) { { config_options: { 'installonly_limit' => false } } }
 
           it 'raises a useful error' do
-            is_expected.to raise_error(
-              Puppet::PreformattedError,
+            is_expected.to compile.and_raise_error(
               %r{The value or ensure for `\$yum::config_options\[installonly_limit\]` must be an Integer, but it is not\.}
             )
           end

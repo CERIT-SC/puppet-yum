@@ -21,6 +21,7 @@
     "yum",
     "package",
     "rpm",
+    "dnf",
     "voxpupuli"
   ],
   "operatingsystem_support": [

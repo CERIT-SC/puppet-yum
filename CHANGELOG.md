@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.2.0](https://github.com/voxpupuli/puppet-yum/tree/v4.2.0) (2020-05-22)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.1.1...v4.2.0)
+
+**Implemented enhancements:**
+
+- Enable and add CentOS 8 accept tests [\#172](https://github.com/voxpupuli/puppet-yum/pull/172) ([traylenator](https://github.com/traylenator))
+- Support paramatized yum::versionlock [\#169](https://github.com/voxpupuli/puppet-yum/pull/169) ([traylenator](https://github.com/traylenator))
+- Add gpg key for EPEL8 [\#166](https://github.com/voxpupuli/puppet-yum/pull/166) ([thomasmeeus](https://github.com/thomasmeeus))
+- Add support for yum facts \(similar to the apt ones\) [\#141](https://github.com/voxpupuli/puppet-yum/pull/141) ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- Rhel/Centos 8 versionlock doesn't work [\#150](https://github.com/voxpupuli/puppet-yum/issues/150)
+
+**Merged pull requests:**
+
+- Remove nested code blocks from string docs [\#171](https://github.com/voxpupuli/puppet-yum/pull/171) ([traylenator](https://github.com/traylenator))
+- Correct bolt URL [\#170](https://github.com/voxpupuli/puppet-yum/pull/170) ([traylenator](https://github.com/traylenator))
+- Fix several markdown lint issues [\#167](https://github.com/voxpupuli/puppet-yum/pull/167) ([dhoppe](https://github.com/dhoppe))
+- Use voxpupuli-acceptance [\#163](https://github.com/voxpupuli/puppet-yum/pull/163) ([ekohl](https://github.com/ekohl))
+- Fix yaml indentation inconsistency [\#161](https://github.com/voxpupuli/puppet-yum/pull/161) ([b3n4kh](https://github.com/b3n4kh))
+
 ## [v4.1.1](https://github.com/voxpupuli/puppet-yum/tree/v4.1.1) (2020-03-09)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.1.0...v4.1.1)

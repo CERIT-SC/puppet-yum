@@ -58,7 +58,7 @@ define yum::versionlock (
   Optional[Yum::RpmVersion]                 $version = undef,
   Yum::RpmRelease                           $release = '*',
   Integer[0]                                $epoch   = 0,
-  Optional[Variant[Yum::RpmArch, Enum['*']]] $arch    = undef,
+  Variant[Yum::RpmArch, Enum['*']]          $arch    = '*',
 ) {
   require yum::plugin::versionlock
 
@@ -85,15 +85,9 @@ define yum::versionlock (
       fail("Version must be formatted as Yum::RpmVersion, not \'${actual}\'. See Yum::RpmVersion documentation for details.")
     }
 
-    if $arch {
-      $_dotarch = ".${arch}"
-    } else {
-      $_dotarch = ''
-    }
-
     $_versionlock = $facts['package_provider'] ? {
-      'yum'   => "${line_prefix}${epoch}:${name}-${version}-${release}${_dotarch}",
-      default => "${line_prefix}${name}-${epoch}:${version}-${release}${_dotarch}",
+      'yum'   => "${line_prefix}${epoch}:${name}-${version}-${release}.${arch}",
+      default => "${line_prefix}${name}-${epoch}:${version}-${release}.${arch}",
     }
 
   }

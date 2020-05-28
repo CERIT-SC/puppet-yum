@@ -105,7 +105,7 @@ describe 'yum::versionlock' do
       let(:params) { { version: '4.3' } }
 
       it 'contains a well-formed Concat::Fragment' do
-        is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("0:bash-4.3-*\n")
+        is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("0:bash-4.3-*.*\n")
       end
     end
 
@@ -141,7 +141,7 @@ describe 'yum::versionlock' do
         let(:params) { { version: '4.3' } }
 
         it 'contains a well-formed Concat::Fragment' do
-          is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-*\n")
+          is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-*.*\n")
         end
         context 'and an arch set to x86_64' do
           let(:params)  { super().merge(arch: 'x86_64') }
@@ -154,14 +154,14 @@ describe 'yum::versionlock' do
           let(:params) { super().merge(release: '22.5') }
 
           it 'contains a well-formed Concat::Fragment' do
-            is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-22.5\n")
+            is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-22.5.*\n")
           end
         end
         context 'and an epoch set to 5' do
           let(:params) { super().merge(epoch: 5) }
 
           it 'contains a well-formed Concat::Fragment' do
-            is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-5:4.3-*\n")
+            is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-5:4.3-*.*\n")
           end
         end
       end

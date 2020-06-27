@@ -619,11 +619,11 @@ Default value: '*'
 
 ##### `arch`
 
-Data type: `Optional[Variant[Yum::RpmArch, Enum['*']]]`
+Data type: `Variant[Yum::RpmArch, Enum['*']]`
 
 Arch of the package if CentOS 8 mechanism is used.
 
-Default value: `undef`
+Default value: '*'
 
 ##### `epoch`
 

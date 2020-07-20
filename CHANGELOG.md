@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.3.0](https://github.com/voxpupuli/puppet-yum/tree/v4.3.0) (2020-07-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.2.0...v4.3.0)
+
+**Implemented enhancements:**
+
+- Improve extraction of available updates [\#181](https://github.com/voxpupuli/puppet-yum/pull/181) ([smortex](https://github.com/smortex))
+- Use simpler code for tests for expected failures [\#173](https://github.com/voxpupuli/puppet-yum/pull/173) ([traylenator](https://github.com/traylenator))
+
+**Fixed bugs:**
+
+- De-duplicate start of string match character [\#179](https://github.com/voxpupuli/puppet-yum/pull/179) ([traylenator](https://github.com/traylenator))
+- versionlock must specify at least .\* for arch. [\#177](https://github.com/voxpupuli/puppet-yum/pull/177) ([traylenator](https://github.com/traylenator))
+
+**Closed issues:**
+
+- yum\_package\_updates fact misinterprets output [\#180](https://github.com/voxpupuli/puppet-yum/issues/180)
+
+**Merged pull requests:**
+
+- Add dnf tag to metadata [\#175](https://github.com/voxpupuli/puppet-yum/pull/175) ([traylenator](https://github.com/traylenator))
+
 ## [v4.2.0](https://github.com/voxpupuli/puppet-yum/tree/v4.2.0) (2020-05-22)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.1.1...v4.2.0)

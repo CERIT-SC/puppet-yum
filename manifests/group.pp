@@ -23,7 +23,6 @@ define yum::group (
   Enum['present', 'installed', 'latest', 'absent', 'purged'] $ensure   = 'present',
   Optional[Integer] $timeout                                           = undef,
 ) {
-
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
     environment => 'LC_ALL=C',

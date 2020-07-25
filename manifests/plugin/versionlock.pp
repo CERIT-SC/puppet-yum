@@ -18,7 +18,6 @@ class yum::plugin::versionlock (
   String                    $path   = '/etc/yum/pluginconf.d/versionlock.list',
   Boolean                   $clean  = false,
 ) {
-
   yum::plugin { 'versionlock':
     ensure  => $ensure,
   }

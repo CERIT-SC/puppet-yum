@@ -35,7 +35,6 @@ define yum::gpgkey (
   String                    $group   = 'root',
   String                    $mode    = '0644'
 ) {
-
   $_creators = [$content, $source]
   $_used_creators = $_creators.filter |$value| { !empty($value) }
 

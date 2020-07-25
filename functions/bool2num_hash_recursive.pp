@@ -34,7 +34,7 @@ function yum::bool2num_hash_recursive($arg) {
       Hash    => yum::bool2num_hash_recursive($value),
       default => $value,
     }
-    Hash({ $key => $return_value })
+    Hash( { $key => $return_value })
   }.reduce |$attrs_memo, $kv| {
     merge($attrs_memo, $kv)
   }

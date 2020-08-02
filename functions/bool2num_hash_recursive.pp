@@ -34,6 +34,8 @@ function yum::bool2num_hash_recursive($arg) {
       Hash    => yum::bool2num_hash_recursive($value),
       default => $value,
     }
+    # see the issue for the strange/asymetrical whitespace
+    # https://github.com/kuleuven/puppet-lint-manifest_whitespace-check/issues/8
     Hash( { $key => $return_value })
   }.reduce |$attrs_memo, $kv| {
     merge($attrs_memo, $kv)

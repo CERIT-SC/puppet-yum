@@ -25,7 +25,6 @@ define yum::config (
   Variant[Boolean, Integer, Enum['absent'], String] $ensure,
   String                                            $key     = $title,
 ) {
-
   $_ensure = $ensure ? {
     Boolean => bool2num($ensure),
     default => $ensure,

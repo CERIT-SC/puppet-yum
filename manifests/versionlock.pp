@@ -68,15 +68,12 @@ define yum::versionlock (
   }
 
   if $facts['package_provider'] == 'yum' and $version =~ Undef {
-
     assert_type(Yum::VersionlockString, $name) |$_expected, $actual | {
       fail("Package name must be formatted as %{EPOCH}:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}, not \'${actual}\'. See Yum::Versionlock documentation for details.")
     }
 
     $_versionlock = "${line_prefix}${name}"
-
   } else {
-
     assert_type(Yum::RpmName, $name) |$_expected, $actual | {
       fail("Package name must be formatted as Yum::RpmName, not \'${actual}\'. See Yum::Rpmname documentation for details.")
     }
@@ -89,7 +86,6 @@ define yum::versionlock (
       'yum'   => "${line_prefix}${epoch}:${name}-${version}-${release}.${arch}",
       default => "${line_prefix}${name}-${epoch}:${version}-${release}.${arch}",
     }
-
   }
 
   unless $ensure == 'absent' {

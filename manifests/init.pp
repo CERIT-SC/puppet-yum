@@ -96,7 +96,7 @@
 class yum (
   Boolean $clean_old_kernels = true,
   Boolean $keep_kernel_devel = false,
-  Hash[String, Variant[String, Integer, Boolean, Hash[String, Variant[String, Integer, Boolean]]]] $config_options = { },
+  Hash[String, Variant[String, Integer, Boolean, Hash[String, Variant[String, Integer, Boolean]]]] $config_options = {},
   Optional[Hash[String, Optional[Hash[String, Variant[String, Integer, Boolean]]]]] $repos = {},
   Array[String] $managed_repos = [],
   Boolean $manage_os_default_repos = false,
@@ -105,7 +105,6 @@ class yum (
   Hash[String, Hash[String, String]] $gpgkeys = {},
   String $utils_package_name = 'yum-utils',
 ) {
-
   $module_metadata            = load_module_metadata($module_name)
   $supported_operatingsystems = $module_metadata['operatingsystem_support']
   $supported_os_names         = $supported_operatingsystems.map |$os| {
@@ -162,8 +161,8 @@ class yum (
       }
 
       $_normalized_ensure = $_ensure ? {
-        Boolean => Hash({ ensure => bool2num($_ensure) }), # lint:ignore:unquoted_string_in_selector
-        default => Hash({ ensure => $_ensure }), # lint:ignore:unquoted_string_in_selector
+        Boolean => Hash( { 'ensure' => bool2num($_ensure) }),
+        default => Hash( { ensure => $_ensure }), # lint:ignore:unquoted_string_in_selector
       }
 
       $_normalized_attrs = $attrs ? {
@@ -171,7 +170,7 @@ class yum (
         default => $_normalized_ensure,
       }
 
-      Hash({ $key => $_normalized_attrs })
+      Hash( { $key => $_normalized_attrs })
     }.reduce |$memo, $cfg_opt_hash| {
       merge($memo, $cfg_opt_hash)
     }

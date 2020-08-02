@@ -161,7 +161,7 @@ class yum (
       }
 
       $_normalized_ensure = $_ensure ? {
-        Boolean => Hash( { ensure => bool2num($_ensure) }), # lint:ignore:unquoted_string_in_selector
+        Boolean => Hash( { 'ensure' => bool2num($_ensure) }),
         default => Hash( { ensure => $_ensure }), # lint:ignore:unquoted_string_in_selector
       }
 

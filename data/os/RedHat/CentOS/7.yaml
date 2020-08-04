@@ -1,3 +1,8 @@
 ---
 yum::os_default_repos:
   - 'cr'
+  - 'base'
+  - 'updates'
+  - 'centos-media'
+  - 'base-source'
+  - 'updates-source'

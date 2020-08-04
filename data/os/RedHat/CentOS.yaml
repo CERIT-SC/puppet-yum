@@ -1,14 +1,9 @@
 ---
 yum::os_default_repos:
-  - 'base'
-  - 'updates'
   - 'extras'
   - 'centosplus'
-  - 'base-source'
-  - 'updates-source'
   - 'extras-source'
   - 'base-debuginfo'
-  - 'centos-media'
 yum::repos:
   base:
     enabled: true

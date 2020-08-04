@@ -1,3 +1,8 @@
 ---
 yum::os_default_repos:
   - 'contrib'
+  - 'base'
+  - 'updates'
+  - 'centos-media'
+  - 'base-source'
+  - 'updates-source'  

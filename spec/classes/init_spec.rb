@@ -256,7 +256,7 @@ describe 'yum' do
         # TODO: This should be generated with something like `lookup('yum::repos').keys`,
         # but the setup for `Puppet::Pops::Lookup` is to complicated to be worth it as of
         # this writing (2017-04-11).  For now, we just pull from `repos.yaml`.
-        repos_yaml_data = YAML.load(File.read('./spec/fixtures/modules/yum/data/repos.yaml'))
+        repos_yaml_data = YAML.safe_load(File.read('./spec/fixtures/modules/yum/data/repos.yaml'))
         supported_repos = repos_yaml_data['yum::repos'].keys
 
         supported_repos.each do |supported_repo|

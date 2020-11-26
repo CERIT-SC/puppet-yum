@@ -15,8 +15,10 @@
 #   RELEASE: Any valid release string. Only limitation is that it is not a dash (`-`)
 #   type Yum::PackageRelease = Regexp[/[^-]+/]
 #
+# lint:ignore:140chars
 #   ARCH: Matches a string such as `el7.x86_64`.  This is actuall two sub-expressions.  See below.
 #   type Yum::PackageArch    = Regexp[/([0-9a-zZ-Z_\*]+)(?:\.(noarch|x86_64|i386|arm|ppc64|ppc64le|sparc64|ia64|alpha|ip|m68k|mips|mipsel|mk68k|mint|ppc|rs6000|s390|s390x|sh|sparc|xtensa|\*))?/]
+# lint:endignore
 #
 # The `%{ARCH}` sub-expression is composed of two sub-expressions
 # separated by a dot (`.`), where the second part is optional.  The RPM
@@ -26,8 +28,10 @@
 #    DistTag: Any string consiting of only letters, numbers, or an underscore, e.g., `el6`, `sl7`, or `fc24`.
 #    type Yum::PackageDistTag   = Regexp[/[0-9a-zZ-Z_\*]+/]
 #
+# lint:ignore:140chars
 #    BuildArch: Any string from the list at https://github.com/rpm-software-management/rpm/blob/master/rpmrc.in.  Strings are roughly listed from most common to least common to improve performance.
 #    type Yum::PackageBuildArch = Regexp[/noarch|x86_64|i386|arm|ppc64|ppc64le|sparc64|ia64|alpha|ip|m68k|mips|mipsel|mk68k|mint|ppc|rs6000|s390|s390x|sh|sparc|xtensa/]
+# lint:endignore
 #
 # @note Each field may contain wildcard characters (`*`), but the
 # wildcard characters may not span the fields, may not cover the
@@ -40,4 +44,6 @@
 # @example An invalid string (wildcard spans the VERSION and RELEASE fields): `0:bash-4.*-el6.x86_64
 # @example An invlaid string (wildcard spans the VERSION, RELEASE, and ARCH fields): `0:bash-*`
 #
+# lint:ignore:140chars
 type Yum::VersionlockString = Pattern[/^([0-9\*]+):([0-9a-zA-Z\._\+%\{\}\*-]+)-([^-]+)-([^-]+)\.(([0-9a-zZ-Z_\*]+)(?:\.(noarch|x86_64|i386|arm|ppc64|ppc64le|sparc64|ia64|alpha|ip|m68k|mips|mipsel|mk68k|mint|ppc|rs6000|s390|s390x|sh|sparc|xtensa|\*))?)$/]
+# lint:endignore

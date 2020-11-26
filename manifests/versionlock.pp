@@ -69,7 +69,9 @@ define yum::versionlock (
 
   if $facts['package_provider'] == 'yum' and $version =~ Undef {
     assert_type(Yum::VersionlockString, $name) |$_expected, $actual | {
+      # lint:ignore:140chars
       fail("Package name must be formatted as %{EPOCH}:%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}, not \'${actual}\'. See Yum::Versionlock documentation for details.")
+      # lint:endignore
     }
 
     $_versionlock = "${line_prefix}${name}"

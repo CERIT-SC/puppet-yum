@@ -3,7 +3,6 @@ yum::os_default_repos:
   - 'BaseOS'
   - 'cr'
   - 'Devel'
-  - 'fasttrack'
   - 'HA'
   - 'PowerTools'
   - 'BaseOS-source'
@@ -43,14 +42,6 @@ yum::repos:
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
     target: '/etc/yum.repos.d/CentOS-Devel.repo'
-
-  fasttrack:
-    enabled: false
-    descr: 'CentOS-$releasever - fasttrack'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=fasttrack&infra=$infra'
-    gpgcheck: true
-    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-fasttrack.repo'    
 
   HA:
     enabled: false

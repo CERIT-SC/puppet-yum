@@ -49,9 +49,10 @@ describe 'yum' do
         when 'CentOS'
           it_behaves_like 'a catalog containing repos', [
             'extras',
+            'centosplus',
+            'fasttrack',
             'extras-source',
             'base-debuginfo',
-            'centosplus'
           ]
           case facts[:os]['release']['major']
           when '8'
@@ -60,7 +61,6 @@ describe 'yum' do
               'BaseOS',
               'cr',
               'Devel',
-              'fasttrack',
               'HA',
               'PowerTools',
               'BaseOS-source',
@@ -69,28 +69,27 @@ describe 'yum' do
               'c8-media-AppStream'
             ]
             it_behaves_like 'a catalog not containing repos', [
-              'contrib',
               'base',
               'updates',
-              'centos-media',
+              'contrib',
               'base-source',
-              'updates-source'
+              'updates-source',
+              'centos-media'
             ]
           when '7'
             it_behaves_like 'a catalog containing repos', [
-              'cr',
               'base',
               'updates',
-              'centos-media',
+              'cr',
               'base-source',
-              'updates-source'
+              'updates-source',
+              'centos-media'
             ]
             it_behaves_like 'a catalog not containing repos', [
               'contrib',
               'AppStream',
               'BaseOS',
               'Devel',
-              'fasttrack',
               'HA',
               'PowerTools',
               'BaseOS-source',
@@ -112,7 +111,6 @@ describe 'yum' do
               'AppStream',
               'BaseOS',
               'Devel',
-              'fasttrack',
               'HA',
               'PowerTools',
               'BaseOS-source',

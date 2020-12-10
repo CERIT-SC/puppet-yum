@@ -356,17 +356,17 @@ describe 'yum' do
         # but the setup for `Puppet::Pops::Lookup` is to complicated to be worth it as of
         # this writing (2017-04-11).  For now, we just pull from `repos.yaml`.
 
-        repos_yaml_data = YAML.load(File.read('./spec/fixtures/modules/yum/data/repos/repos.yaml'))
+        repos_yaml_data = YAML.safe_load(File.read('./spec/fixtures/modules/yum/data/repos/repos.yaml'))
 
         case facts[:os]['family']
         when 'RedHat'
           case facts[:os]['release']['major']
           when '8'
-            rh8_repos_yaml_data = YAML.load(File.read('./spec/fixtures/modules/yum/data/repos/RedHat/8.yaml'))
+            rh8_repos_yaml_data = YAML.safe_load(File.read('./spec/fixtures/modules/yum/data/repos/RedHat/8.yaml'))
             repos_yaml_data = repos_yaml_data.deep_merge(rh8_repos_yaml_data)
           end
         end
-        
+
         supported_repos = repos_yaml_data['yum::repos'].keys
 
         supported_repos.each do |supported_repo|

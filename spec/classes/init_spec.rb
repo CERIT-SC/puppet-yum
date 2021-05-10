@@ -40,6 +40,26 @@ describe 'yum' do
         let(:params) { { 'manage_os_default_repos' => true } }
 
         case facts[:os]['name']
+        when 'Rocky'
+          it_behaves_like 'a catalog containing repos', [
+            'baseos',
+            'appstream',
+            'extras',
+            'baseos-source',
+            'appstream-source',
+            'extras-source',
+            'plus-source',
+            'devel',
+            'ha',
+            'powertools',
+            'resilient-storage'
+          ]
+          case facts[:os]['release']['major']
+          when '8'
+            it { is_expected.to have_yumrepo_resource_count(11) }
+          else
+            it { is_expected.to have_yumrepo_resource_count(0) }
+          end
         when 'CentOS'
           it_behaves_like 'a catalog containing repos', [
             'base',
@@ -145,8 +165,6 @@ describe 'yum' do
               'virtuozzolinux-vz-factory-debuginfo'
             ]
           end
-        else
-          it { is_expected.to have_yumrepo_resource_count(0) }
         end
 
         context 'and the CentOS base repo is negated' do

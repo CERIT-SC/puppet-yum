@@ -64,13 +64,6 @@
       "operatingsystemrelease": [
         "2017"
       ]
-    },
-    {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "30",
-        "31"
-      ]
     }
   ],
   "requirements": [

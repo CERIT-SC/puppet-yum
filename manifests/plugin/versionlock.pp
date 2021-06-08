@@ -18,8 +18,14 @@ class yum::plugin::versionlock (
   String                    $path   = '/etc/yum/pluginconf.d/versionlock.list',
   Boolean                   $clean  = false,
 ) {
+  $pkg_prefix = $facts['os']['release']['major'] ? {
+    Variant[Integer[5,5], Enum['5']] => 'yum',
+    '8' => 'python3-dnf-plugin',
+    default => 'yum-plugin',
+  }
   yum::plugin { 'versionlock':
-    ensure  => $ensure,
+    ensure     => $ensure,
+    pkg_prefix => $pkg_prefix,
   }
 
   include yum::clean

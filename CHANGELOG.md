@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.0.0](https://github.com/voxpupuli/puppet-yum/tree/v5.0.0) (2021-06-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.3.0...v5.0.0)
+
+**Breaking changes:**
+
+- Drop EoL Fedora support [\#211](https://github.com/voxpupuli/puppet-yum/pull/211) ([bastelfreak](https://github.com/bastelfreak))
+- Drop EoL Puppet 5; Add Puppet 7 support [\#208](https://github.com/voxpupuli/puppet-yum/pull/208) ([bastelfreak](https://github.com/bastelfreak))
+- Drop EoL CentOS 6 support [\#207](https://github.com/voxpupuli/puppet-yum/pull/207) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add support for rocky linux [\#212](https://github.com/voxpupuli/puppet-yum/pull/212) ([TheMeier](https://github.com/TheMeier))
+
+**Fixed bugs:**
+
+- fix package name for yum plugin versionlock on RHEL/CentOS 8 [\#205](https://github.com/voxpupuli/puppet-yum/pull/205) ([TheMeier](https://github.com/TheMeier))
+
+**Closed issues:**
+
+- gpgkey cannot specify more than one of content, source [\#204](https://github.com/voxpupuli/puppet-yum/issues/204)
+- yum::plugin::versionlock fails on CentOS/RHEL 8 [\#197](https://github.com/voxpupuli/puppet-yum/issues/197)
+- No Repos getting added [\#168](https://github.com/voxpupuli/puppet-yum/issues/168)
+- module doesn't manage proxy setting [\#157](https://github.com/voxpupuli/puppet-yum/issues/157)
+
+**Merged pull requests:**
+
+- puppetlabs/concat: allow 7.x [\#210](https://github.com/voxpupuli/puppet-yum/pull/210) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: allow 7.x [\#209](https://github.com/voxpupuli/puppet-yum/pull/209) ([bastelfreak](https://github.com/bastelfreak))
+- Resolve puppet-lint [\#192](https://github.com/voxpupuli/puppet-yum/pull/192) ([jcpunk](https://github.com/jcpunk))
+- modulesync 3.0.0 & puppet-lint updates [\#188](https://github.com/voxpupuli/puppet-yum/pull/188) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v4.3.0](https://github.com/voxpupuli/puppet-yum/tree/v4.3.0) (2020-07-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v4.2.0...v4.3.0)
@@ -24,6 +56,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- prepare release 4.3.0 [\#186](https://github.com/voxpupuli/puppet-yum/pull/186) ([vchepkov](https://github.com/vchepkov))
 - Add dnf tag to metadata [\#175](https://github.com/voxpupuli/puppet-yum/pull/175) ([traylenator](https://github.com/traylenator))
 
 ## [v4.2.0](https://github.com/voxpupuli/puppet-yum/tree/v4.2.0) (2020-05-22)
@@ -265,7 +298,7 @@ These should not affect the functionality of the module.
 
 - Add module data for EPEL [\#44](https://github.com/voxpupuli/puppet-yum/pull/44) ([lamawithonel](https://github.com/lamawithonel))
 - Manage yumrepos via data [\#40](https://github.com/voxpupuli/puppet-yum/pull/40) ([lamawithonel](https://github.com/lamawithonel))
-- Update README.md [\#39](https://github.com/voxpupuli/puppet-yum/pull/39) ([Yuav](https://github.com/Yuav))
+- Update README.md [\#39](https://github.com/voxpupuli/puppet-yum/pull/39) ([jskarpe](https://github.com/jskarpe))
 - Be more strict about versionlock strings [\#38](https://github.com/voxpupuli/puppet-yum/pull/38) ([lamawithonel](https://github.com/lamawithonel))
 
 **Fixed bugs:**
@@ -310,8 +343,8 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Update changelog and version [\#12](https://github.com/voxpupuli/puppet-yum/pull/12) ([Yuav](https://github.com/Yuav))
-- Added basic spec tests [\#11](https://github.com/voxpupuli/puppet-yum/pull/11) ([Yuav](https://github.com/Yuav))
+- Update changelog and version [\#12](https://github.com/voxpupuli/puppet-yum/pull/12) ([jskarpe](https://github.com/jskarpe))
+- Added basic spec tests [\#11](https://github.com/voxpupuli/puppet-yum/pull/11) ([jskarpe](https://github.com/jskarpe))
 - Bug: Puppet creates empty key files when using Hiera and create\_resources\(\) [\#7](https://github.com/voxpupuli/puppet-yum/pull/7) ([lklimek](https://github.com/lklimek))
 - Manage yum::versionlock with concat [\#6](https://github.com/voxpupuli/puppet-yum/pull/6) ([jpoittevin](https://github.com/jpoittevin))
 

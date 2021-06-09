@@ -1,0 +1,101 @@
+---
+yum::os_default_repos:
+  - 'baseos'
+  - 'appstream'
+  - 'extras'
+  - 'baseos-source'
+  - 'appstream-source'
+  - 'extras-source'
+  - 'plus-source'
+  - 'devel'
+  - 'ha'
+  - 'powertools'
+  - 'resilient-storage'
+yum::repos:
+  baseos:
+    enabled: true
+    descr: 'Rocky Linux $releasever - BaseOS'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-BaseOS.repo'
+
+  appstream:
+    enabled: true
+    descr: 'Rocky Linux $releasever - AppStream'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=AppStream-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-AppStream.repo'
+
+  extras:
+    enabled: true
+    descr: 'Rocky Linux $releasever - extras'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=extras-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-extras.repo'
+
+  baseos-source:
+    enabled: false
+    descr: 'Rocky Linux $releasever - BaseOS'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=baseos-source-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-Sources.repo'
+
+  appstream-source:
+    enabled: false
+    descr: 'Rocky Linux $releasever - AppStream'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=appstream-source-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-Sources.repo'
+
+  extras-source:
+    enabled: false
+    descr: 'Rocky Linux $releasever - extras'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=extras-source-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-Sources.repo'
+
+  plus-source:
+    enabled: false
+    descr: 'Rocky Linux $releasever - extras'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=plus-source-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-Sources.repo'
+
+  devel:
+    enabled: false
+    descr: 'Rocky Linux $releasever - AppStream'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=Devel-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-Devel.repo'
+
+  ha:
+    enabled: false
+    descr: 'Rocky Linux $releasever - HighAvailability'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=HighAvailability-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-HighAvailability.repo'
+
+  powertools:
+    enabled: false
+    descr: 'Rocky Linux $releasever - PowerTools'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=PowerTools-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-PowerTools.repo'
+
+  resilient-storage:
+    enabled: false
+    descr: 'Rocky Linux $releasever - ResilientStorage'
+    mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=ResilientStorage-$releasever'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rockyofficial"
+    target: '/etc/yum.repos.d/Rocky-ResilientStorage.repo'

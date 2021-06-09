@@ -33,6 +33,12 @@
       ]
     },
     {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "7",

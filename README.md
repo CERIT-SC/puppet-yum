@@ -11,10 +11,12 @@ This module provides helpful definitions for dealing with *yum*.
 Module has been tested on:
 
 * Puppet 4.10.9 and newer
-* CentOS 6, 7
+* CentOS 7,8
 * Amazon Linux 2017
 * RHEL 7
 * Fedora 30 (partial support)
+
+For the official list of all tested distributions, please take a look at the metadata.json.
 
 ## Usage
 

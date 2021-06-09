@@ -10,11 +10,11 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.18.0 < 7.0.0"
+      "version_requirement": ">= 4.18.0 < 8.0.0"
     },
     {
       "name": "puppetlabs/concat",
-      "version_requirement": ">= 1.2.5 < 7.0.0"
+      "version_requirement": ">= 1.2.5 < 8.0.0"
     }
   ],
   "tags": [
@@ -28,7 +28,6 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6",
         "7",
         "8"
       ]
@@ -36,7 +35,6 @@
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "6",
         "7",
         "8"
       ]
@@ -44,7 +42,6 @@
     {
       "operatingsystem": "Scientific",
       "operatingsystemrelease": [
-        "6",
         "7",
         "8"
       ]
@@ -52,7 +49,6 @@
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "6",
         "7",
         "8"
       ]
@@ -60,7 +56,6 @@
     {
       "operatingsystem": "VirtuozzoLinux",
       "operatingsystemrelease": [
-        "6",
         "7"
       ]
     },
@@ -69,19 +64,12 @@
       "operatingsystemrelease": [
         "2017"
       ]
-    },
-    {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "30",
-        "31"
-      ]
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.5.8 < 7.0.0"
+      "version_requirement": ">= 6.1.0 < 8.0.0"
     }
   ]
 }

@@ -5,9 +5,9 @@
 # @param ensure Should the post_transaction actions plugin be installed
 #
 # @example Enable post_transaction_action plugin
-# class{'yum::plugin::post_transaction_actions':
-#   ensure => present,
-# }
+#   class{'yum::plugin::post_transaction_actions':
+#     ensure => present,
+#   }
 #
 class yum::plugin::post_transaction_actions (
   Enum['present', 'absent'] $ensure = 'present',

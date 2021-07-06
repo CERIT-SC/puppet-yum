@@ -225,9 +225,7 @@ A $(yum clean all) Exec to be notified if desired.
 
 ### <a name="yumpluginpost_transaction_actions"></a>`yum::plugin::post_transaction_actions`
 
-class{'yum::plugin::post_transaction_actions':
-  ensure => present,
-}
+Class to install post_transaction plugin
 
 * **See also**
   * https://dnf-plugins-core.readthedocs.io/en/latest/post-transaction-actions.html
@@ -238,7 +236,9 @@ class{'yum::plugin::post_transaction_actions':
 ##### Enable post_transaction_action plugin
 
 ```puppet
-
+class{'yum::plugin::post_transaction_actions':
+  ensure => present,
+}
 ```
 
 #### Parameters
@@ -611,11 +611,7 @@ Default value: ``undef``
 
 ### <a name="yumpost_transaction_action"></a>`yum::post_transaction_action`
 
-yum::post_transaction_action{'touch file on ssh package update':
-  key     => 'openssh-*',
-  state   => 'any',
-  command => 'touch /tmp/openssh-installed',
-}
+Creates post transaction configuratons for dnf or yum.
 
 * **See also**
   * https://dnf-plugins-core.readthedocs.io/en/latest/post-transaction-actions.html
@@ -626,7 +622,11 @@ yum::post_transaction_action{'touch file on ssh package update':
 ##### Touch a file when ssh is package is updated, installed or removed.
 
 ```puppet
-
+yum::post_transaction_action{'touch file on ssh package update':
+  key     => 'openssh-*',
+  state   => 'any',
+  command => 'touch /tmp/openssh-installed',
+}
 ```
 
 #### Parameters
@@ -636,7 +636,6 @@ The following parameters are available in the `yum::post_transaction_action` def
 * [`action`](#action)
 * [`key`](#key)
 * [`state`](#state)
-* [`action`](#action)
 * [`command`](#command)
 
 ##### <a name="action"></a>`action`
@@ -662,17 +661,11 @@ Can be `in`, `out` or `any` on DNF based systems.
 
 Default value: `'any'`
 
-##### <a name="action"></a>`action`
-
-The command to run
-
-Default value: `$title`
-
 ##### <a name="command"></a>`command`
 
 Data type: `String[1]`
 
-
+The command to run
 
 ### <a name="yumversionlock"></a>`yum::versionlock`
 

@@ -7,14 +7,14 @@
 # @param state
 #    Can be `install`, `update`, `remove` or `any` on YUM based systems.
 #    Can be `in`, `out` or `any` on DNF based systems.
-# @param action The command to run
+# @param command The command to run
 #
 # @example Touch a file when ssh is package is updated, installed or removed.
-# yum::post_transaction_action{'touch file on ssh package update':
-#   key     => 'openssh-*',
-#   state   => 'any',
-#   command => 'touch /tmp/openssh-installed',
-# }
+#   yum::post_transaction_action{'touch file on ssh package update':
+#     key     => 'openssh-*',
+#     state   => 'any',
+#     command => 'touch /tmp/openssh-installed',
+#   }
 #
 define yum::post_transaction_action (
   Variant[Enum['*'],Yum::RpmNameGlob,Stdlib::Unixpath] $key,

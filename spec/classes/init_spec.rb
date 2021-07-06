@@ -42,21 +42,25 @@ describe 'yum' do
         case facts[:os]['name']
         when 'Rocky'
           it_behaves_like 'a catalog containing repos', [
-            'baseos',
             'appstream',
-            'extras',
-            'baseos-source',
             'appstream-source',
-            'extras-source',
-            'plus-source',
+            'baseos',
+            'baseos-source',
             'devel',
+            'extras',
             'ha',
+            'ha-source',
+            'nfv',
+            'plus',
             'powertools',
-            'resilient-storage'
+            'powertools-source',
+            'resilient-storage',
+            'resilient-storage-source',
+            'rt'
           ]
           case facts[:os]['release']['major']
           when '8'
-            it { is_expected.to have_yumrepo_resource_count(11) }
+            it { is_expected.to have_yumrepo_resource_count(15) }
           else
             it { is_expected.to have_yumrepo_resource_count(0) } # rubocop:disable RSpec/RepeatedExample
           end

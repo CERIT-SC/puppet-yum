@@ -308,6 +308,28 @@ describe 'yum' do
                 'extras-debuginfo',
               ]
             end
+          when 'Rocky'
+            case facts[:os]['release']['major']
+            when '8'
+              it { is_expected.to have_yumrepo_resource_count(15) }
+              it_behaves_like 'a catalog containing repos', [
+                'appstream',
+                'appstream-source',
+                'baseos',
+                'baseos-source',
+                'devel',
+                'extras',
+                'ha',
+                'ha-source',
+                'nfv',
+                'plus',
+                'powertools',
+                'powertools-source',
+                'resilient-storage',
+                'resilient-storage-source',
+                'rt',
+              ]
+            end
           else
             it { is_expected.to have_yumrepo_resource_count(0) }
           end

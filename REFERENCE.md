@@ -145,7 +145,7 @@ Default value: `{}`
 
 ##### <a name="repos"></a>`repos`
 
-Data type: `Optional[Hash[String, Optional[Hash[String, Variant[String, Integer, Boolean]]]]]`
+Data type: `Hash[String, Optional[Hash[String, Variant[String, Integer, Boolean]]]]`
 
 A hash where keys are the names of `Yumrepo` resources and each value represents its respective
 Yumrepo's resource parameters.  This is used in conjunction with the `managed_repos` parameter

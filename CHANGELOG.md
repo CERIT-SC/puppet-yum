@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v5.2.0](https://github.com/voxpupuli/puppet-yum/tree/v5.2.0) (2021-09-28)
+## [v5.3.0](https://github.com/voxpupuli/puppet-yum/tree/v5.3.0) (2021-10-26)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.2.0...v5.3.0)
+
+**Implemented enhancements:**
+
+-  add CentOS 8 default repos [\#225](https://github.com/voxpupuli/puppet-yum/pull/225) ([oniGino](https://github.com/oniGino))
+
+## [v5.2.0](https://github.com/voxpupuli/puppet-yum/tree/v5.2.0) (2021-09-29)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.1.0...v5.2.0)
 

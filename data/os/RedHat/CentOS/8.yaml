@@ -14,82 +14,89 @@ yum::repos:
   AppStream:
     enabled: true
     descr: 'CentOS-$releasever - AppStream'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=AppStream&infra=$infra'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/AppStream/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-AppStream.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-AppStream.repo'
 
   BaseOS:
     enabled: true
     descr: 'CentOS-$releasever - Base'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=BaseOS&infra=$infra'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/BaseOS/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-Base.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-BaseOS.repo'
 
   cr:
     enabled: false
     descr: 'CentOS-$releasever - cr'
-    baseurl: 'http://mirror.centos.org/$contentdir/$releasever/cr/$basearch/os/'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/cr/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-CR.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-ContinuousRelease.repo'
 
   Devel:
     enabled: false
     descr: 'CentOS-$releasever - Devel WARNING! FOR BUILDROOT USE ONLY!'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=Devel&infra=$infra'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/Devel/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-Devel.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-Devel.repo'
 
   HA:
     enabled: false
     descr: 'CentOS-$releasever - HA'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=HighAvailability&infra=$infra'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/HighAvailability/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-HA.repo'
+    target: 'CentOS-Linux-HighAvailability.repo'
 
   extras:
     enabled: true
     descr: 'CentOS-$releasever - Extras'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/extras/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-Extras.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-Extras.repo'
 
   PowerTools:
     enabled: false
     descr: 'CentOS-$releasever - PowerTools'
-    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=PowerTools&infra=$infra'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/PowerTools/$basearch/os/'
+    mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: '/etc/yum.repos.d/CentOS-PowerTools.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-PowerTools.repo'
 
   BaseOS-source:
     enabled: false
     descr: 'CentOS-$releasever - BaseOS Sources'
-    baseurl: 'http://vault.centos.org/$contentdir/$releasever/BaseOS/Source/'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/BaseOS/Source/'
     gpgcheck: true
     gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial'
-    target: '/etc/yum.repos.d/CentOS-Sources.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-Sources.repo'
 
   Appstream-source:
     enabled: false
     descr: 'CentOS-$releasever - Appstream Sources'
-    baseurl: 'http://vault.centos.org/$contentdir/$releasever/Appstream/Source/'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/Appstream/Source/'
     gpgcheck: true
     gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial'
-    target: '/etc/yum.repos.d/CentOS-Sources.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-Sources.repo'
 
   centosplus-source:
     enabled: false
     descr: 'CentOS-$releasever - Plus Sources'
-    baseurl: 'http://vault.centos.org/$contentdir/$releasever/centosplus/Source/'
+    baseurl: 'https://vault.centos.org/$contentdir/$releasever/centosplus/Source/'
     gpgcheck: true
     gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial'
-    target: '/etc/yum.repos.d/CentOS-Sources.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-Sources.repo'
 
   c8-media-BaseOS:
     enabled: false

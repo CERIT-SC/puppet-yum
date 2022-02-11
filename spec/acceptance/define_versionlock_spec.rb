@@ -41,8 +41,10 @@ describe 'yum::versionlock define' do
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes:  true)
     end
+
     describe file('/etc/yum/pluginconf.d/versionlock.list') do
       it { is_expected.to be_file }
+
       if %w[7].include?(fact('os.release.major'))
         it { is_expected.to contain '0:bash-4.1.2-9.el6_2.*' }
         it { is_expected.to contain '0:tcsh-3.1.2-9.el6_2.*' }
@@ -53,6 +55,7 @@ describe 'yum::versionlock define' do
         it { is_expected.to contain 'netscape-2:8.1.2-9.el6_2.*' }
       end
     end
+
     if fact('os.release.major') == '8'
       describe package('python3-dnf-plugin-versionlock') do
         it { is_expected.to be_installed }
@@ -63,6 +66,7 @@ describe 'yum::versionlock define' do
       end
     end
   end
+
   it 'must work if clean is specified' do
     shell('yum repolist', acceptable_exit_codes: [0])
     pp = <<-EOS

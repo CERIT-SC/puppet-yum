@@ -13,11 +13,14 @@ describe 'yum::versionlock' do
       context 'and no parameters' do
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_concat__fragment('versionlock_header').with_content("# File managed by puppet\n") }
+
         it 'contains a well-formed Concat::Fragment' do
           is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
         end
+
         it { is_expected.to contain_concat('/etc/yum/pluginconf.d/versionlock.list').without_notify }
       end
+
       context 'clean set to true on module' do
         let :pre_condition do
           'class { "yum::plugin::versionlock": clean => true, }'
@@ -32,6 +35,7 @@ describe 'yum::versionlock' do
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_concat__fragment('versionlock_header').with_content("# File managed by puppet\n") }
+
         it 'contains a well-formed Concat::Fragment' do
           is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
         end
@@ -42,6 +46,7 @@ describe 'yum::versionlock' do
 
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_concat__fragment('versionlock_header').with_content("# File managed by puppet\n") }
+
         it 'contains a well-formed Concat::Fragment' do
           is_expected.not_to contain_concat__fragment("yum-versionlock-#{title}")
         end
@@ -58,6 +63,7 @@ describe 'yum::versionlock' do
       let(:title) { '0:bash-4.1.2-9.el6_2.*' }
 
       it { is_expected.to compile.with_all_deps }
+
       it 'contains a well-formed Concat::Fragment' do
         is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("#{title}\n")
       end
@@ -121,6 +127,7 @@ describe 'yum::versionlock' do
 
       context 'it works' do
         it { is_expected.to compile.with_all_deps }
+
         it 'contains a well-formed Concat::Fragment' do
           is_expected.to contain_concat__fragment("yum-versionlock-#{title}").with_content("42:bash-4.3-3.2.arm\n")
         end
@@ -145,6 +152,7 @@ describe 'yum::versionlock' do
         it 'contains a well-formed Concat::Fragment' do
           is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-*.*\n")
         end
+
         context 'and an arch set to x86_64' do
           let(:params)  { super().merge(arch: 'x86_64') }
 
@@ -152,6 +160,7 @@ describe 'yum::versionlock' do
             is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-*.x86_64\n")
           end
         end
+
         context 'and an release set to 22.x' do
           let(:params) { super().merge(release: '22.5') }
 
@@ -159,6 +168,7 @@ describe 'yum::versionlock' do
             is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-22.5.*\n")
           end
         end
+
         context 'and an epoch set to 5' do
           let(:params) { super().merge(epoch: 5) }
 
@@ -167,6 +177,7 @@ describe 'yum::versionlock' do
           end
         end
       end
+
       context 'with release, version, epoch, arch all set' do
         let(:params) do
           {

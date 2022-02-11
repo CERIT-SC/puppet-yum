@@ -11,6 +11,7 @@ def yum(action, quiet)
 
   stdout, stderr, status = Open3.capture3(*cmd)
   raise Puppet::Error, stderr unless status.success?
+
   { status: stdout.strip }
 end
 

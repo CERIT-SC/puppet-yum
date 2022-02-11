@@ -5,6 +5,7 @@ shared_examples 'a Yum class' do |value|
   value ||= 3
 
   it { is_expected.to contain_yum__config('installonly_limit').with_ensure(value.to_s) }
+
   it 'contains Exec[package-cleanup_oldkernels' do
     is_expected.to contain_exec('package-cleanup_oldkernels').with(
       command: "/usr/bin/package-cleanup --oldkernels --count=#{value} -y",
@@ -47,22 +48,22 @@ describe 'yum' do
 
         case facts[:os]['name']
         when 'Rocky'
-          it_behaves_like 'a catalog containing repos', [
-            'appstream',
-            'appstream-source',
-            'baseos',
-            'baseos-source',
-            'devel',
-            'extras',
-            'ha',
-            'ha-source',
-            'nfv',
-            'plus',
-            'powertools',
-            'powertools-source',
-            'resilient-storage',
-            'resilient-storage-source',
-            'rt'
+          it_behaves_like 'a catalog containing repos', %w[
+            appstream
+            appstream-source
+            baseos
+            baseos-source
+            devel
+            extras
+            ha
+            ha-source
+            nfv
+            plus
+            powertools
+            powertools-source
+            resilient-storage
+            resilient-storage-source
+            rt
           ]
           case facts[:os]['release']['major']
           when '8'
@@ -71,178 +72,183 @@ describe 'yum' do
             it { is_expected.to have_yumrepo_resource_count(0) } # rubocop:disable RSpec/RepeatedExample
           end
         when 'CentOS'
-          it_behaves_like 'a catalog containing repos', [
-            'extras',
-            'centosplus',
-            'fasttrack',
-            'extras-source',
-            'base-debuginfo',
+          it_behaves_like 'a catalog containing repos', %w[
+            extras
+            centosplus
+            fasttrack
+            extras-source
+            base-debuginfo
           ]
           case facts[:os]['release']['major']
           when '8'
-            it_behaves_like 'a catalog containing repos', [
-              'AppStream',
-              'BaseOS',
-              'cr',
-              'Devel',
-              'HA',
-              'PowerTools',
-              'BaseOS-source',
-              'Appstream-source',
-              'c8-media-BaseOS',
-              'c8-media-AppStream'
+            it_behaves_like 'a catalog containing repos', %w[
+              AppStream
+              BaseOS
+              cr
+              Devel
+              HA
+              PowerTools
+              BaseOS-source
+              Appstream-source
+              c8-media-BaseOS
+              c8-media-AppStream
             ]
-            it_behaves_like 'a catalog not containing repos', [
-              'base',
-              'updates',
-              'contrib',
-              'base-source',
-              'updates-source',
-              'centos-media'
+            it_behaves_like 'a catalog not containing repos', %w[
+              base
+              updates
+              contrib
+              base-source
+              updates-source
+              centos-media
             ]
           when '7'
-            it_behaves_like 'a catalog containing repos', [
-              'base',
-              'updates',
-              'cr',
-              'base-source',
-              'updates-source',
-              'centos-media'
+            it_behaves_like 'a catalog containing repos', %w[
+              base
+              updates
+              cr
+              base-source
+              updates-source
+              centos-media
             ]
-            it_behaves_like 'a catalog not containing repos', [
-              'contrib',
-              'AppStream',
-              'BaseOS',
-              'Devel',
-              'HA',
-              'PowerTools',
-              'BaseOS-source',
-              'Appstream-source',
-              'c8-media-BaseOS',
-              'c8-media-AppStream'
+            it_behaves_like 'a catalog not containing repos', %w[
+              contrib
+              AppStream
+              BaseOS
+              Devel
+              HA
+              PowerTools
+              BaseOS-source
+              Appstream-source
+              c8-media-BaseOS
+              c8-media-AppStream
             ]
           when '6'
-            it_behaves_like 'a catalog containing repos', [
-              'contrib',
-              'base',
-              'updates',
-              'centos-media',
-              'base-source',
-              'updates-source'
+            it_behaves_like 'a catalog containing repos', %w[
+              contrib
+              base
+              updates
+              centos-media
+              base-source
+              updates-source
             ]
-            it_behaves_like 'a catalog not containing repos', [
-              'cr',
-              'AppStream',
-              'BaseOS',
-              'Devel',
-              'HA',
-              'PowerTools',
-              'BaseOS-source',
-              'Appstream-source',
-              'c8-media-BaseOS',
-              'c8-media-AppStream'
+            it_behaves_like 'a catalog not containing repos', %w[
+              cr
+              AppStream
+              BaseOS
+              Devel
+              HA
+              PowerTools
+              BaseOS-source
+              Appstream-source
+              c8-media-BaseOS
+              c8-media-AppStream
             ]
           else
             it { is_expected.to have_yumrepo_resource_count(4) }
           end
         when 'Amazon'
           it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
-          it_behaves_like 'a catalog containing repos', [
-            'amzn-main',
-            'amzn-main-debuginfo',
-            'amzn-main-source',
-            'amzn-nosrc',
-            'amzn-preview',
-            'amzn-preview-debuginfo',
-            'amzn-preview-source',
-            'amzn-updates',
-            'amzn-updates-debuginfo',
-            'amzn-updates-source',
-            'epel',
-            'epel-debuginfo',
-            'epel-source',
-            'epel-testing',
-            'epel-testing-debuginfo',
-            'epel-testing-source'
+
+          it_behaves_like 'a catalog containing repos', %w[
+            amzn-main
+            amzn-main-debuginfo
+            amzn-main-source
+            amzn-nosrc
+            amzn-preview
+            amzn-preview-debuginfo
+            amzn-preview-source
+            amzn-updates
+            amzn-updates-debuginfo
+            amzn-updates-source
+            epel
+            epel-debuginfo
+            epel-source
+            epel-testing
+            epel-testing-debuginfo
+            epel-testing-source
           ]
         when 'RedHat'
           it { is_expected.to have_yumrepo_resource_count(18) }
-          it_behaves_like 'a catalog containing repos', [
-            'rhui-REGION-rhel-server-releases',
-            'rhui-REGION-rhel-server-releases-debug',
-            'rhui-REGION-rhel-server-releases-source',
-            'rhui-REGION-rhel-server-rhscl',
-            'rhui-REGION-rhel-server-debug-rhscl',
-            'rhui-REGION-rhel-server-source-rhscl',
-            'rhui-REGION-rhel-server-extras',
-            'rhui-REGION-rhel-server-debug-extras',
-            'rhui-REGION-rhel-server-source-extras',
-            'rhui-REGION-rhel-server-optional',
-            'rhui-REGION-rhel-server-debug-optional',
-            'rhui-REGION-rhel-server-source-optional',
-            'rhui-REGION-rhel-server-rh-common',
-            'rhui-REGION-rhel-server-debug-rh-common',
-            'rhui-REGION-rhel-server-source-rh-common',
-            'rhui-REGION-rhel-server-supplementary',
-            'rhui-REGION-rhel-server-debug-supplementary',
-            'rhui-REGION-rhel-server-source-supplementary'
+
+          it_behaves_like 'a catalog containing repos', %w[
+            rhui-REGION-rhel-server-releases
+            rhui-REGION-rhel-server-releases-debug
+            rhui-REGION-rhel-server-releases-source
+            rhui-REGION-rhel-server-rhscl
+            rhui-REGION-rhel-server-debug-rhscl
+            rhui-REGION-rhel-server-source-rhscl
+            rhui-REGION-rhel-server-extras
+            rhui-REGION-rhel-server-debug-extras
+            rhui-REGION-rhel-server-source-extras
+            rhui-REGION-rhel-server-optional
+            rhui-REGION-rhel-server-debug-optional
+            rhui-REGION-rhel-server-source-optional
+            rhui-REGION-rhel-server-rh-common
+            rhui-REGION-rhel-server-debug-rh-common
+            rhui-REGION-rhel-server-source-rh-common
+            rhui-REGION-rhel-server-supplementary
+            rhui-REGION-rhel-server-debug-supplementary
+            rhui-REGION-rhel-server-source-supplementary
           ]
         when 'VirtuozzoLinux'
           case facts[:os]['release']['major']
           when '6'
             it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
-            it_behaves_like 'a catalog containing repos', [
-              'virtuozzolinux-base',
-              'virtuozzolinux-updates',
-              'virtuozzolinux-base-debuginfo',
-              'virtuozzolinux-updates-debuginfo',
-              'virtuozzolinux-factory',
-              'virtuozzolinux-factory-debuginfo',
-              'virtuozzo-os',
-              'virtuozzo-updates',
-              'virtuozzo-os-debuginfo',
-              'virtuozzo-updates-debuginfo',
-              'virtuozzo-readykernel',
-              'obsoleted_tmpls'
+
+            it_behaves_like 'a catalog containing repos', %w[
+              virtuozzolinux-base
+              virtuozzolinux-updates
+              virtuozzolinux-base-debuginfo
+              virtuozzolinux-updates-debuginfo
+              virtuozzolinux-factory
+              virtuozzolinux-factory-debuginfo
+              virtuozzo-os
+              virtuozzo-updates
+              virtuozzo-os-debuginfo
+              virtuozzo-updates-debuginfo
+              virtuozzo-readykernel
+              obsoleted_tmpls
             ]
           when '7'
             it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
-            it_behaves_like 'a catalog containing repos', [
-              'virtuozzolinux-base',
-              'virtuozzolinux-updates',
-              'virtuozzolinux-base-debuginfo',
-              'virtuozzolinux-updates-debuginfo',
-              'virtuozzolinux-factory',
-              'virtuozzolinux-factory-debuginfo',
-              'virtuozzo-os',
-              'virtuozzo-updates',
-              'virtuozzo-os-debuginfo',
-              'virtuozzo-updates-debuginfo',
-              'virtuozzo-readykernel',
-              'obsoleted_tmpls',
-              'factory',
-              'factory-debuginfo',
-              'virtuozzolinux-vz-factory',
-              'virtuozzolinux-vz-factory-debuginfo'
+
+            it_behaves_like 'a catalog containing repos', %w[
+              virtuozzolinux-base
+              virtuozzolinux-updates
+              virtuozzolinux-base-debuginfo
+              virtuozzolinux-updates-debuginfo
+              virtuozzolinux-factory
+              virtuozzolinux-factory-debuginfo
+              virtuozzo-os
+              virtuozzo-updates
+              virtuozzo-os-debuginfo
+              virtuozzo-updates-debuginfo
+              virtuozzo-readykernel
+              obsoleted_tmpls
+              factory
+              factory-debuginfo
+              virtuozzolinux-vz-factory
+              virtuozzolinux-vz-factory-debuginfo
             ]
           end
         when 'AlmaLinux'
           case facts[:os]['release']['major']
           when '8'
             it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
-            it_behaves_like 'a catalog containing repos', [
-              'baseos',
-              'appstream',
-              'powertools',
-              'extras',
-              'baseos-source',
-              'appstream-source',
-              'powertools-source',
-              'extras-source',
-              'baseos-debuginfo',
-              'appstream-debuginfo',
-              'powertools-debuginfo',
-              'extras-debuginfo',
+
+            it_behaves_like 'a catalog containing repos', %w[
+              baseos
+              appstream
+              powertools
+              extras
+              baseos-source
+              appstream-source
+              powertools-source
+              extras-source
+              baseos-debuginfo
+              appstream-debuginfo
+              powertools-debuginfo
+              extras-debuginfo
             ]
           end
         else
@@ -261,172 +267,179 @@ describe 'yum' do
           when 'CentOS'
             it { is_expected.not_to contain_yumrepo('base') }
             it { is_expected.not_to contain_yumrepo('BaseOS') }
+
             case facts[:os]['release']['major']
             when '8'
-              it_behaves_like 'a catalog containing repos', [
-                'AppStream',
-                'cr',
-                'Devel',
-                'fasttrack',
-                'HA',
-                'PowerTools',
-                'BaseOS-source',
-                'Appstream-source',
-                'c8-media-BaseOS',
-                'c8-media-AppStream'
+              it_behaves_like 'a catalog containing repos', %w[
+                AppStream
+                cr
+                Devel
+                fasttrack
+                HA
+                PowerTools
+                BaseOS-source
+                Appstream-source
+                c8-media-BaseOS
+                c8-media-AppStream
               ]
             when '7'
-              it_behaves_like 'a catalog containing repos', [
-                'cr',
-                'updates',
-                'extras',
-                'base-source',
-                'updates-source',
-                'extras-source',
-                'base-debuginfo',
-                'centosplus',
-                'centos-media'
+              it_behaves_like 'a catalog containing repos', %w[
+                cr
+                updates
+                extras
+                base-source
+                updates-source
+                extras-source
+                base-debuginfo
+                centosplus
+                centos-media
               ]
             when '6'
-              it_behaves_like 'a catalog containing repos', [
-                'contrib',
-                'updates',
-                'extras',
-                'base-source',
-                'updates-source',
-                'extras-source',
-                'base-debuginfo',
-                'centosplus',
-                'centos-media'
+              it_behaves_like 'a catalog containing repos', %w[
+                contrib
+                updates
+                extras
+                base-source
+                updates-source
+                extras-source
+                base-debuginfo
+                centosplus
+                centos-media
               ]
             else
-              it_behaves_like 'a catalog containing repos', [
-                'extras',
-                'centosplus',
-                'extras-source',
-                'base-debuginfo'
+              it_behaves_like 'a catalog containing repos', %w[
+                extras
+                centosplus
+                extras-source
+                base-debuginfo
               ]
             end
           when 'Amazon'
             it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
-            it_behaves_like 'a catalog containing repos', [
-              'amzn-main',
-              'amzn-main-debuginfo',
-              'amzn-main-source',
-              'amzn-nosrc',
-              'amzn-preview',
-              'amzn-preview-debuginfo',
-              'amzn-preview-source',
-              'amzn-updates',
-              'amzn-updates-debuginfo',
-              'amzn-updates-source',
-              'epel',
-              'epel-debuginfo',
-              'epel-source',
-              'epel-testing',
-              'epel-testing-debuginfo',
-              'epel-testing-source'
+
+            it_behaves_like 'a catalog containing repos', %w[
+              amzn-main
+              amzn-main-debuginfo
+              amzn-main-source
+              amzn-nosrc
+              amzn-preview
+              amzn-preview-debuginfo
+              amzn-preview-source
+              amzn-updates
+              amzn-updates-debuginfo
+              amzn-updates-source
+              epel
+              epel-debuginfo
+              epel-source
+              epel-testing
+              epel-testing-debuginfo
+              epel-testing-source
             ]
           when 'RedHat'
             it { is_expected.to have_yumrepo_resource_count(18) }
-            it_behaves_like 'a catalog containing repos', [
-              'rhui-REGION-rhel-server-releases',
-              'rhui-REGION-rhel-server-releases-debug',
-              'rhui-REGION-rhel-server-releases-source',
-              'rhui-REGION-rhel-server-rhscl',
-              'rhui-REGION-rhel-server-debug-rhscl',
-              'rhui-REGION-rhel-server-source-rhscl',
-              'rhui-REGION-rhel-server-extras',
-              'rhui-REGION-rhel-server-debug-extras',
-              'rhui-REGION-rhel-server-source-extras',
-              'rhui-REGION-rhel-server-optional',
-              'rhui-REGION-rhel-server-debug-optional',
-              'rhui-REGION-rhel-server-source-optional',
-              'rhui-REGION-rhel-server-rh-common',
-              'rhui-REGION-rhel-server-debug-rh-common',
-              'rhui-REGION-rhel-server-source-rh-common',
-              'rhui-REGION-rhel-server-supplementary',
-              'rhui-REGION-rhel-server-debug-supplementary',
-              'rhui-REGION-rhel-server-source-supplementary'
+
+            it_behaves_like 'a catalog containing repos', %w[
+              rhui-REGION-rhel-server-releases
+              rhui-REGION-rhel-server-releases-debug
+              rhui-REGION-rhel-server-releases-source
+              rhui-REGION-rhel-server-rhscl
+              rhui-REGION-rhel-server-debug-rhscl
+              rhui-REGION-rhel-server-source-rhscl
+              rhui-REGION-rhel-server-extras
+              rhui-REGION-rhel-server-debug-extras
+              rhui-REGION-rhel-server-source-extras
+              rhui-REGION-rhel-server-optional
+              rhui-REGION-rhel-server-debug-optional
+              rhui-REGION-rhel-server-source-optional
+              rhui-REGION-rhel-server-rh-common
+              rhui-REGION-rhel-server-debug-rh-common
+              rhui-REGION-rhel-server-source-rh-common
+              rhui-REGION-rhel-server-supplementary
+              rhui-REGION-rhel-server-debug-supplementary
+              rhui-REGION-rhel-server-source-supplementary
             ]
           when 'VirtuozzoLinux'
             case facts[:os]['release']['major']
             when '6'
               it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
-              it_behaves_like 'a catalog containing repos', [
-                'virtuozzolinux-base',
-                'virtuozzolinux-updates',
-                'virtuozzolinux-base-debuginfo',
-                'virtuozzolinux-updates-debuginfo',
-                'virtuozzolinux-factory',
-                'virtuozzolinux-factory-debuginfo',
-                'virtuozzo-os',
-                'virtuozzo-updates',
-                'virtuozzo-os-debuginfo',
-                'virtuozzo-updates-debuginfo',
-                'virtuozzo-readykernel',
-                'obsoleted_tmpls'
+
+              it_behaves_like 'a catalog containing repos', %w[
+                virtuozzolinux-base
+                virtuozzolinux-updates
+                virtuozzolinux-base-debuginfo
+                virtuozzolinux-updates-debuginfo
+                virtuozzolinux-factory
+                virtuozzolinux-factory-debuginfo
+                virtuozzo-os
+                virtuozzo-updates
+                virtuozzo-os-debuginfo
+                virtuozzo-updates-debuginfo
+                virtuozzo-readykernel
+                obsoleted_tmpls
               ]
             when '7'
               it { is_expected.to have_yumrepo_resource_count(16) } # rubocop:disable RSpec/RepeatedExample
-              it_behaves_like 'a catalog containing repos', [
-                'virtuozzolinux-base',
-                'virtuozzolinux-updates',
-                'virtuozzolinux-base-debuginfo',
-                'virtuozzolinux-updates-debuginfo',
-                'virtuozzolinux-factory',
-                'virtuozzolinux-factory-debuginfo',
-                'virtuozzo-os',
-                'virtuozzo-updates',
-                'virtuozzo-os-debuginfo',
-                'virtuozzo-updates-debuginfo',
-                'virtuozzo-readykernel',
-                'obsoleted_tmpls',
-                'factory',
-                'factory-debuginfo',
-                'virtuozzolinux-vz-factory',
-                'virtuozzolinux-vz-factory-debuginfo'
+
+              it_behaves_like 'a catalog containing repos', %w[
+                virtuozzolinux-base
+                virtuozzolinux-updates
+                virtuozzolinux-base-debuginfo
+                virtuozzolinux-updates-debuginfo
+                virtuozzolinux-factory
+                virtuozzolinux-factory-debuginfo
+                virtuozzo-os
+                virtuozzo-updates
+                virtuozzo-os-debuginfo
+                virtuozzo-updates-debuginfo
+                virtuozzo-readykernel
+                obsoleted_tmpls
+                factory
+                factory-debuginfo
+                virtuozzolinux-vz-factory
+                virtuozzolinux-vz-factory-debuginfo
               ]
             end
           when 'AlmaLinux'
             case facts[:os]['release']['major']
             when '8'
               it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
-              it_behaves_like 'a catalog containing repos', [
-                'baseos',
-                'appstream',
-                'powertools',
-                'extras',
-                'baseos-source',
-                'appstream-source',
-                'powertools-source',
-                'extras-source',
-                'baseos-debuginfo',
-                'appstream-debuginfo',
-                'powertools-debuginfo',
-                'extras-debuginfo',
+
+              it_behaves_like 'a catalog containing repos', %w[
+                baseos
+                appstream
+                powertools
+                extras
+                baseos-source
+                appstream-source
+                powertools-source
+                extras-source
+                baseos-debuginfo
+                appstream-debuginfo
+                powertools-debuginfo
+                extras-debuginfo
               ]
             end
           when 'Rocky'
             case facts[:os]['release']['major']
             when '8'
               it { is_expected.to have_yumrepo_resource_count(15) }
-              it_behaves_like 'a catalog containing repos', [
-                'appstream',
-                'appstream-source',
-                'baseos',
-                'baseos-source',
-                'devel',
-                'extras',
-                'ha',
-                'ha-source',
-                'nfv',
-                'plus',
-                'powertools',
-                'powertools-source',
-                'resilient-storage',
-                'resilient-storage-source',
-                'rt',
+
+              it_behaves_like 'a catalog containing repos', %w[
+                appstream
+                appstream-source
+                baseos
+                baseos-source
+                devel
+                extras
+                ha
+                ha-source
+                nfv
+                plus
+                powertools
+                powertools-source
+                resilient-storage
+                resilient-storage-source
+                rt
               ]
             end
           else
@@ -468,6 +481,7 @@ describe 'yum' do
 
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to have_yumrepo_resource_count(supported_repos.count) }
+
           it_behaves_like 'a catalog containing repos', supported_repos
         end
       end
@@ -495,6 +509,7 @@ describe 'yum' do
           let(:params) { { config_options: { 'cachedir' => '/var/cache/yum' } } }
 
           it { is_expected.to contain_yum__config('cachedir').with_ensure('/var/cache/yum') }
+
           it_behaves_like 'a Yum class'
         end
 
@@ -502,6 +517,7 @@ describe 'yum' do
           let(:params) { { config_options: { 'debuglevel' => 5 } } }
 
           it { is_expected.to contain_yum__config('debuglevel').with_ensure('5') }
+
           it_behaves_like 'a Yum class'
         end
 
@@ -509,6 +525,7 @@ describe 'yum' do
           let(:params) { { config_options: { 'gpgcheck' => true } } }
 
           it { is_expected.to contain_yum__config('gpgcheck').with_ensure('1') }
+
           it_behaves_like 'a Yum class'
         end
 
@@ -517,6 +534,7 @@ describe 'yum' do
             let(:params) { { config_options: { 'my_cachedir' => { 'ensure' => '/var/cache/yum', 'key' => 'cachedir' } } } }
 
             it { is_expected.to contain_yum__config('my_cachedir').with_ensure('/var/cache/yum').with_key('cachedir') }
+
             it_behaves_like 'a Yum class'
           end
 
@@ -524,6 +542,7 @@ describe 'yum' do
             let(:params) { { config_options: { 'my_debuglevel' => { 'ensure' => 5, 'key' => 'debuglevel' } } } }
 
             it { is_expected.to contain_yum__config('my_debuglevel').with_ensure('5').with_key('debuglevel') }
+
             it_behaves_like 'a Yum class'
           end
 
@@ -531,6 +550,7 @@ describe 'yum' do
             let(:params) { { config_options: { 'my_gpgcheck' => { 'ensure' => true, 'key' => 'gpgcheck' } } } }
 
             it { is_expected.to contain_yum__config('my_gpgcheck').with_ensure('1').with_key('gpgcheck') }
+
             it_behaves_like 'a Yum class'
           end
         end
@@ -546,6 +566,7 @@ describe 'yum' do
         let(:params) { { managed_repos: ['epel'] } }
 
         it { is_expected.to contain_yumrepo('epel') }
+
         case facts[:os]['release']['major']
         when '8'
           it { is_expected.to contain_yum__gpgkey('/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8') }
@@ -564,6 +585,7 @@ describe 'yum' do
           it { is_expected.to contain_package('yum-utils') }
         end
       end
+
       context 'when utils_package_name is set' do
         let(:params) { { utils_package_name: 'dnf-utils' } }
 

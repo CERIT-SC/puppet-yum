@@ -12,6 +12,7 @@ describe 'yum::plugin::post_transaction_actions' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_concat('puppet_actions') }
           it { is_expected.to contain_concat__fragment('action_header') }
+
           case provider
           when 'yum'
             it { is_expected.to contain_package('yum-plugin-post-transaction-actions').with_ensure('present') }
@@ -30,6 +31,7 @@ describe 'yum::plugin::post_transaction_actions' do
             it { is_expected.to compile.with_all_deps }
             it { is_expected.not_to contain_concat('puppet_actions') }
             it { is_expected.not_to contain_concat__fragment('action_header') }
+
             case provider
             when 'yum'
               it { is_expected.to contain_package('yum-plugin-post-transaction-actions').with_ensure('absent') }

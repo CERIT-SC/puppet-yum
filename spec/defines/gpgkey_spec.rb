@@ -17,11 +17,12 @@ describe 'yum::gpgkey' do
       end
 
       it { is_expected.to compile.with_all_deps }
+
       it {
         is_expected.to contain_exec("rpm-import-#{title}").with(
-          'path'    => '/bin:/usr/bin:/sbin/:/usr/sbin',
+          'path' => '/bin:/usr/bin:/sbin/:/usr/sbin',
           'command' => "rpm --import #{title}",
-          'unless'  => "rpm -q gpg-pubkey-$(gpg --with-colons #{title} | head -n 1 | cut -d: -f5 | cut -c9-16 | tr '[A-Z]' '[a-z]')",
+          'unless' => "rpm -q gpg-pubkey-$(gpg --with-colons #{title} | head -n 1 | cut -d: -f5 | cut -c9-16 | tr '[A-Z]' '[a-z]')",
           'require' => "File[#{title}]"
         )
       }
@@ -33,11 +34,12 @@ describe 'yum::gpgkey' do
       end
 
       it { is_expected.to compile.with_all_deps }
+
       it {
         is_expected.to contain_exec("rpm-delete-#{title}").with(
-          'path'    => '/bin:/usr/bin:/sbin/:/usr/sbin',
+          'path' => '/bin:/usr/bin:/sbin/:/usr/sbin',
           'command' => "rpm -e gpg-pubkey-$(gpg --with-colons #{title} | head -n 1 | cut -d: -f5 | cut -c9-16 | tr '[A-Z]' '[a-z]')",
-          'onlyif'  => ["test -f #{title}", "rpm -q gpg-pubkey-$(gpg --with-colons #{title} | head -n 1 | cut -d: -f5 | cut -c9-16 | tr '[A-Z]' '[a-z]')"],
+          'onlyif' => ["test -f #{title}", "rpm -q gpg-pubkey-$(gpg --with-colons #{title} | head -n 1 | cut -d: -f5 | cut -c9-16 | tr '[A-Z]' '[a-z]')"],
           'before' => "File[#{title}]"
         )
       }

@@ -8,9 +8,7 @@ Facter.add('yum_package_updates') do
       unless yum_get_result.nil?
         yum_get_result.each_line do |line|
           %r{\A(?<package>\S+\.\S+)\s+(?<available_version>[[:digit:]]\S+)\s+(?<repository>\S+)\s*\z} =~ line
-          if package && available_version && repository
-            yum_updates.push(package)
-          end
+          yum_updates.push(package) if package && available_version && repository
         end
       end
     end

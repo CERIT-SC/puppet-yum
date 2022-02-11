@@ -23,6 +23,7 @@ describe 'yum::post_transaction_action define' do
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes:  true)
     end
+
     describe file('/tmp/vim-installed') do
       it { is_expected.to be_file }
     end

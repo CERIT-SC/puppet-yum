@@ -5,7 +5,7 @@ describe 'yum::bool2num_hash_recursive' do
   let(:nested_hash) do
     {
       'a' => {
-        'aa'  => true, 'ab'  => false, 'ac'  => 'c',
+        'aa' => true, 'ab' => false, 'ac' => 'c',
         'aaa' => true, 'aab' => false, 'aac' => 'c'
       },
       'b' => { 'ba' => true, 'bb' => false, 'bc' => 'c' },
@@ -23,7 +23,7 @@ describe 'yum::bool2num_hash_recursive' do
     is_expected.to run.with_params(nested_hash).
       and_return(
         'a' => {
-          'aa'  => 1, 'ab'  => 0, 'ac'  => 'c',
+          'aa' => 1, 'ab' => 0, 'ac' => 'c',
           'aaa' => 1, 'aab' => 0, 'aac' => 'c'
         },
         'b' => { 'ba' => 1, 'bb' => 0, 'bc' => 'c' },

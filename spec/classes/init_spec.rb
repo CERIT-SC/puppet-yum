@@ -265,6 +265,8 @@ describe 'yum' do
             let(:params) { super().merge(repo_exclusions: ['base']) }
           end
 
+          it { is_expected.to compile.with_all_deps }
+
           case facts[:os]['name']
           when 'CentOS'
             it { is_expected.not_to contain_yumrepo('base') }
@@ -580,6 +582,8 @@ describe 'yum' do
       end
 
       context 'when utils_package_name is not set' do
+        it { is_expected.to compile.with_all_deps }
+
         case facts[:os]['name']
         when 'Fedora'
           it { is_expected.to contain_package('dnf-utils') }

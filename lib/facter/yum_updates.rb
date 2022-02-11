@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Facter.add('yum_package_updates') do
   confine osfamily: 'RedHat'
   setcode do

@@ -1,16 +1,12 @@
-# Define: yum::plugin
 #
-# This definition installs Yum plugin.
+# @summary This definition installs Yum plugin.
 #
-# Parameters:
-#   [*ensure*]   - specifies if plugin should be present or absent
+# @param ensure specifies if plugin should be present or absent
+# @param pkg_prefix the package prefix for the plugins
+# @param pkg_name the actual package name
 #
-# Actions:
 #
-# Requires:
-#   RPM based system
-#
-# Sample usage:
+# @example Sample usage:
 #   yum::plugin { 'versionlock':
 #     ensure  => 'present',
 #   }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'English'
 
 Facter.add(:yum_reboot_required) do

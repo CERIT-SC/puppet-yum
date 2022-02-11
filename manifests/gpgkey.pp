@@ -1,24 +1,16 @@
-# Define: yum::gpgkey
 #
-# This definition saves and imports public GPG key for RPM. Key can
-# be stored on Puppet's fileserver or as inline content. Key can be
-# also removed from system.
 #
-# Parameters:
-#   [*path*]     - alternative file location (defaults to name)
-#   [*ensure*]   - specifies if key should be present or absent
-#   [*content*]  - content
-#   [*source*]   - source (e.g.: puppet:///)
-#   [*owner*]    - file owner
-#   [*group*]    - file group
-#   [*mode*]     - file mode
+# @summary imports/deleted public GPG key for RPM. Key can be stored on Puppet's fileserver or as inline content.
 #
-# Actions:
+# @param path alternative file location (defaults to name)
+# @param ensure specifies if key should be present or absent
+# @param content the actual file content
+# @param source source (e.g.: puppet:///)
+# @param owner file owner
+# @param group file group
+# @param mode file mode
 #
-# Requires:
-#   RPM based system
-#
-# Sample usage:
+# @example Sample usage:
 #   yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
 #     ensure  => 'present',
 #     content => '-----BEGIN PGP PUBLIC KEY BLOCK-----

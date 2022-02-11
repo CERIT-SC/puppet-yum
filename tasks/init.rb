@@ -1,4 +1,5 @@
 #!/opt/puppetlabs/puppet/bin/ruby
+# frozen_string_literal: true
 
 require 'json'
 require 'open3'
@@ -11,6 +12,7 @@ def yum(action, quiet)
 
   stdout, stderr, status = Open3.capture3(*cmd)
   raise Puppet::Error, stderr unless status.success?
+
   { status: stdout.strip }
 end
 
@@ -30,7 +32,7 @@ def process_list_updates(output)
   { status: result }
 end
 
-params = JSON.parse(STDIN.read)
+params = JSON.parse($stdin.read)
 action = params['action']
 quiet = params['quiet']
 

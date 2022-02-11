@@ -1,22 +1,15 @@
-# Define: yum::config
 #
-# This definition manages yum.conf
+# @summary This definition manages yum.conf
 #
-# Parameters:
-#   [*key*]      - alternative conf. key (defaults to name)
-#   [*ensure*]   - specifies value or absent keyword
-#   [*section*]  - config section (default to main)
+# @param ensure specifies value or absent keyword
+# @param key alternative conf. key (defaults to name)
 #
-# Actions:
-#
-# Requires:
-#   RPM based system
-#
-# Sample usage:
+# @example configure installonly limit
 #   yum::config { 'installonly_limit':
 #     ensure => 2,
 #   }
 #
+# @example remove a configuration
 #   yum::config { 'debuglevel':
 #     ensure => absent,
 #   }

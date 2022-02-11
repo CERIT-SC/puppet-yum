@@ -1,16 +1,11 @@
-# Class: yum::plugin::versionlock
 #
-# This class installs versionlock plugin
+# @summary This class installs versionlock plugin
 #
-# Parameters:
-#   [*ensure*] - specifies if versionlock should be present or absent
-#   [*clean*] - specifies if yum clean all should be called after edits. Defaults false.
+# @param ensure specifies if versionlock should be present or absent
+# @param clean specifies if yum clean all should be called after edits. Defaults false.
+# @param path filepath for the versionlocks
 #
-# Actions:
-#
-# Requires:
-#
-# Sample usage:
+# @example Sample usage:
 #   include yum::plugin::versionlock
 #
 class yum::plugin::versionlock (

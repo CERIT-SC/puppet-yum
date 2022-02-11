@@ -1,20 +1,11 @@
-# Define: yum::install
 #
-# This definition installs or removes rpms from local file or URL via
-# yum install command. This can be better than using just the rpm
-# provider because it will pull all the dependencies.
+# @summary This definition installs or removes rpms from local file or URL via yum install command. This can be better than using just the rpm provider because it will pull all the dependencies.
 #
-# Parameters:
-#   [*ensure*] - specifies if package group should be
-#                present (installed) or absent (purged)
-#   [*source*] - file or URL where RPM is available
+# @param source file or URL where RPM is available
+# @param ensure the desired state of the package
+# @param timeout optional timeout for the installation
 #
-# Actions:
-#
-# Requires:
-#   RPM based system
-#
-# Sample usage:
+# @example Sample usage:
 #   yum::install { 'epel-release':
 #     ensure => 'present',
 #     source => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm',

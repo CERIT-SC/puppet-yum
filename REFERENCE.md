@@ -9,15 +9,15 @@
 * [`yum`](#yum): A class to install and manage Yum configuration.
 * [`yum::clean`](#yumclean): A $(yum clean all) Exec to be notified if desired.
 * [`yum::plugin::post_transaction_actions`](#yumpluginpost_transaction_actions): Class to install post_transaction plugin
-* [`yum::plugin::versionlock`](#yumpluginversionlock): Class: yum::plugin::versionlock  This class installs versionlock plugin  Parameters:   [*ensure*] - specifies if versionlock should be presen
+* [`yum::plugin::versionlock`](#yumpluginversionlock): This class installs versionlock plugin
 
 ### Defined types
 
-* [`yum::config`](#yumconfig): Define: yum::config  This definition manages yum.conf  Parameters:   [*key*]      - alternative conf. key (defaults to name)   [*ensure*]   -
-* [`yum::gpgkey`](#yumgpgkey): Define: yum::gpgkey  This definition saves and imports public GPG key for RPM. Key can be stored on Puppet's fileserver or as inline content.
-* [`yum::group`](#yumgroup): Define: yum::group  This definition installs or removes yum package group.  Parameters:   [*ensure*]   - specifies if package group should be
-* [`yum::install`](#yuminstall): Define: yum::install  This definition installs or removes rpms from local file or URL via yum install command. This can be better than using 
-* [`yum::plugin`](#yumplugin): Define: yum::plugin  This definition installs Yum plugin.  Parameters:   [*ensure*]   - specifies if plugin should be present or absent  Acti
+* [`yum::config`](#yumconfig): This definition manages yum.conf
+* [`yum::gpgkey`](#yumgpgkey): imports/deleted public GPG key for RPM. Key can be stored on Puppet's fileserver or as inline content.
+* [`yum::group`](#yumgroup): This definition installs or removes yum package group.
+* [`yum::install`](#yuminstall): Installs/removes rpms from local file/URL via yum install command.
+* [`yum::plugin`](#yumplugin): This definition installs Yum plugin.
 * [`yum::post_transaction_action`](#yumpost_transaction_action): Creates post transaction configuratons for dnf or yum.
 * [`yum::versionlock`](#yumversionlock): Locks package from updates.
 
@@ -257,79 +257,71 @@ Default value: `'present'`
 
 ### <a name="yumpluginversionlock"></a>`yum::plugin::versionlock`
 
-Class: yum::plugin::versionlock
-
 This class installs versionlock plugin
 
-Parameters:
-  [*ensure*] - specifies if versionlock should be present or absent
-  [*clean*] - specifies if yum clean all should be called after edits. Defaults false.
+#### Examples
 
-Actions:
+##### Sample usage:
 
-Requires:
-
-Sample usage:
-  include yum::plugin::versionlock
+```puppet
+include yum::plugin::versionlock
+```
 
 #### Parameters
 
 The following parameters are available in the `yum::plugin::versionlock` class:
 
 * [`ensure`](#ensure)
-* [`path`](#path)
 * [`clean`](#clean)
+* [`path`](#path)
 
 ##### <a name="ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
-
+specifies if versionlock should be present or absent
 
 Default value: `'present'`
-
-##### <a name="path"></a>`path`
-
-Data type: `String`
-
-
-
-Default value: `'/etc/yum/pluginconf.d/versionlock.list'`
 
 ##### <a name="clean"></a>`clean`
 
 Data type: `Boolean`
 
-
+specifies if yum clean all should be called after edits. Defaults false.
 
 Default value: ``false``
+
+##### <a name="path"></a>`path`
+
+Data type: `String`
+
+filepath for the versionlocks
+
+Default value: `'/etc/yum/pluginconf.d/versionlock.list'`
 
 ## Defined types
 
 ### <a name="yumconfig"></a>`yum::config`
 
-Define: yum::config
-
 This definition manages yum.conf
 
-Parameters:
-  [*key*]      - alternative conf. key (defaults to name)
-  [*ensure*]   - specifies value or absent keyword
-  [*section*]  - config section (default to main)
+#### Examples
 
-Actions:
+##### configure installonly limit
 
-Requires:
-  RPM based system
+```puppet
+yum::config { 'installonly_limit':
+  ensure => 2,
+}
+```
 
-Sample usage:
-  yum::config { 'installonly_limit':
-    ensure => 2,
-  }
+##### remove a configuration
 
-  yum::config { 'debuglevel':
-    ensure => absent,
-  }
+```puppet
+yum::config { 'debuglevel':
+  ensure => absent,
+}
+```
 
 #### Parameters
 
@@ -342,45 +334,32 @@ The following parameters are available in the `yum::config` defined type:
 
 Data type: `Variant[Boolean, Integer, Enum['absent'], String]`
 
-
+specifies value or absent keyword
 
 ##### <a name="key"></a>`key`
 
 Data type: `String`
 
-
+alternative conf. key (defaults to name)
 
 Default value: `$title`
 
 ### <a name="yumgpgkey"></a>`yum::gpgkey`
 
-Define: yum::gpgkey
+imports/deleted public GPG key for RPM. Key can be stored on Puppet's fileserver or as inline content.
 
-This definition saves and imports public GPG key for RPM. Key can
-be stored on Puppet's fileserver or as inline content. Key can be
-also removed from system.
+#### Examples
 
-Parameters:
-  [*path*]     - alternative file location (defaults to name)
-  [*ensure*]   - specifies if key should be present or absent
-  [*content*]  - content
-  [*source*]   - source (e.g.: puppet:///)
-  [*owner*]    - file owner
-  [*group*]    - file group
-  [*mode*]     - file mode
+##### Sample usage:
 
-Actions:
-
-Requires:
-  RPM based system
-
-Sample usage:
-  yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
-    ensure  => 'present',
-    content => '-----BEGIN PGP PUBLIC KEY BLOCK-----
-  ...
-  -----END PGP PUBLIC KEY BLOCK-----';
-  }
+```puppet
+yum::gpgkey { '/etc/pki/rpm-gpg/RPM-GPG-KEY-puppet-smoketest1':
+  ensure  => 'present',
+  content => '-----BEGIN PGP PUBLIC KEY BLOCK-----
+...
+-----END PGP PUBLIC KEY BLOCK-----';
+}
+```
 
 #### Parameters
 
@@ -398,7 +377,7 @@ The following parameters are available in the `yum::gpgkey` defined type:
 
 Data type: `String`
 
-
+alternative file location (defaults to name)
 
 Default value: `$name`
 
@@ -406,7 +385,7 @@ Default value: `$name`
 
 Data type: `Enum['present', 'absent']`
 
-
+specifies if key should be present or absent
 
 Default value: `'present'`
 
@@ -414,7 +393,7 @@ Default value: `'present'`
 
 Data type: `Optional[String]`
 
-
+the actual file content
 
 Default value: ``undef``
 
@@ -422,7 +401,7 @@ Default value: ``undef``
 
 Data type: `Optional[String]`
 
-
+source (e.g.: puppet:///)
 
 Default value: ``undef``
 
@@ -430,7 +409,7 @@ Default value: ``undef``
 
 Data type: `String`
 
-
+file owner
 
 Default value: `'root'`
 
@@ -438,7 +417,7 @@ Default value: `'root'`
 
 Data type: `String`
 
-
+file group
 
 Default value: `'root'`
 
@@ -446,53 +425,37 @@ Default value: `'root'`
 
 Data type: `String`
 
-
+file mode
 
 Default value: `'0644'`
 
 ### <a name="yumgroup"></a>`yum::group`
 
-Define: yum::group
-
 This definition installs or removes yum package group.
 
-Parameters:
-  [*ensure*]   - specifies if package group should be
-                 present (installed) or absent (purged)
-  [*timeout*]  - exec timeout for yum groupinstall command
-  [*install_options*]  - options provided to yum groupinstall command
+#### Examples
 
-Actions:
+##### Sample usage:
 
-Requires:
-  RPM based system
-
-Sample usage:
-  yum::group { 'X Window System':
-    ensure  => 'present',
-  }
+```puppet
+yum::group { 'X Window System':
+  ensure  => 'present',
+}
+```
 
 #### Parameters
 
 The following parameters are available in the `yum::group` defined type:
 
-* [`install_options`](#install_options)
 * [`ensure`](#ensure)
 * [`timeout`](#timeout)
-
-##### <a name="install_options"></a>`install_options`
-
-Data type: `Array[String[1]]`
-
-
-
-Default value: `[]`
+* [`install_options`](#install_options)
 
 ##### <a name="ensure"></a>`ensure`
 
 Data type: `Enum['present', 'installed', 'latest', 'absent', 'purged']`
 
-
+specifies if package group should be present (installed) or absent (purged)
 
 Default value: `'present'`
 
@@ -500,33 +463,34 @@ Default value: `'present'`
 
 Data type: `Optional[Integer]`
 
-
+exec timeout for yum groupinstall command
 
 Default value: ``undef``
 
+##### <a name="install_options"></a>`install_options`
+
+Data type: `Array[String[1]]`
+
+options provided to yum groupinstall command
+
+Default value: `[]`
+
 ### <a name="yuminstall"></a>`yum::install`
 
-Define: yum::install
+Installs/removes rpms from local file/URL via yum install command.
 
-This definition installs or removes rpms from local file or URL via
-yum install command. This can be better than using just the rpm
-provider because it will pull all the dependencies.
+* **Note** This can be better than using just the rpm provider because it will pull all the dependencies.
 
-Parameters:
-  [*ensure*] - specifies if package group should be
-               present (installed) or absent (purged)
-  [*source*] - file or URL where RPM is available
+#### Examples
 
-Actions:
+##### Sample usage:
 
-Requires:
-  RPM based system
-
-Sample usage:
-  yum::install { 'epel-release':
-    ensure => 'present',
-    source => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm',
-  }
+```puppet
+yum::install { 'epel-release':
+  ensure => 'present',
+  source => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm',
+}
+```
 
 #### Parameters
 
@@ -540,13 +504,13 @@ The following parameters are available in the `yum::install` defined type:
 
 Data type: `String`
 
-
+file or URL where RPM is available
 
 ##### <a name="ensure"></a>`ensure`
 
 Data type: `Enum['present', 'installed', 'absent', 'purged']`
 
-
+the desired state of the package
 
 Default value: `'present'`
 
@@ -554,28 +518,23 @@ Default value: `'present'`
 
 Data type: `Optional[Integer]`
 
-
+optional timeout for the installation
 
 Default value: ``undef``
 
 ### <a name="yumplugin"></a>`yum::plugin`
 
-Define: yum::plugin
-
 This definition installs Yum plugin.
 
-Parameters:
-  [*ensure*]   - specifies if plugin should be present or absent
+#### Examples
 
-Actions:
+##### Sample usage:
 
-Requires:
-  RPM based system
-
-Sample usage:
-  yum::plugin { 'versionlock':
-    ensure  => 'present',
-  }
+```puppet
+yum::plugin { 'versionlock':
+  ensure  => 'present',
+}
+```
 
 #### Parameters
 
@@ -589,7 +548,7 @@ The following parameters are available in the `yum::plugin` defined type:
 
 Data type: `Enum['present', 'absent']`
 
-
+specifies if plugin should be present or absent
 
 Default value: `'present'`
 
@@ -597,7 +556,7 @@ Default value: `'present'`
 
 Data type: `Optional[String]`
 
-
+the package prefix for the plugins
 
 Default value: ``undef``
 
@@ -605,7 +564,7 @@ Default value: ``undef``
 
 Data type: `Optional[String]`
 
-
+the actual package name
 
 Default value: ``undef``
 
@@ -703,7 +662,7 @@ yum::versionlock { 'bash':
   ensure => present,
   version => '4.1.2',
   release => '9.el8',
-  epoch   => '0',
+  epoch   => 0,
   arch    => 'noarch',
 }
 ```
@@ -715,7 +674,7 @@ yum::versionlock { 'bash':
   ensure => present,
   version => '3.1.2',
   release => '9.el7',
-  epoch   => '0',
+  epoch   => 0,
   arch    => 'noarch',
 }
 ```

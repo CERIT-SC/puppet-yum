@@ -1,19 +1,19 @@
 # A class to install and manage Yum configuration.
 #
-# @param clean_old_kernels [Boolean]
+# @param clean_old_kernels
 #   Whether or not to purge old kernel version beyond the `keeponly_limit`.
 #
-# @param keep_kernel_devel [Boolean]
+# @param keep_kernel_devel
 #   Whether or not to keep kernel devel packages on old kernel purge.
 #
-# @param config_options [Hash]
+# @param config_options
 #   A Hash where keys are the names of `Yum::Config` resources and the values
 #   are either the direct `ensure` value, or a Hash of the resource's attributes.
 #
 #   @note Boolean parameter values will be converted to either a `1` or `0`; use a quoted string to
 #     get a literal `true` or `false`.
 #
-# @param repos [Hash]
+# @param repos
 #   A hash where keys are the names of `Yumrepo` resources and each value represents its respective
 #   Yumrepo's resource parameters.  This is used in conjunction with the `managed_repos` parameter
 #   to create `Yumrepo` resources en masse.  Some default data is provided for this using module
@@ -23,7 +23,7 @@
 #   @note Boolean parameter values will be converted to either a `1` or `0`; use a quoted string to
 #     get a literal `true` or `false`.
 #
-# @param managed_repos [Array]
+# @param managed_repos
 #   An array of first-level keys from the `repos` hash to include in the catalog.  The module uses
 #   this list to select `Yumrepo` resources from the `repos` hash for instantiation.  Defaults are
 #   set in the module's Hiera data.
@@ -31,17 +31,17 @@
 #   @note This only indicates the *managed* state of the repos, the `ensure` state must be managed
 #     in the `repos` data.
 #
-# @param manage_os_default_repos [Boolean]
+# @param manage_os_default_repos
 #   Whether or not to add an operating system's default repos to the `managed_repos` array.
 #
 #   @note This only works for operating systems with data in the module's data directory.  Currently
 #     the module only contains data for for CentOS 6 & 7.
 #
-# @param os_default_repos [Array]
+# @param os_default_repos
 #   A list of default repos to add to `managed_repos` if `manage_os_default_repos` is enabled.
 #   Normally this should not be modified.
 #
-# @param repo_exclusions [Array]
+# @param repo_exclusions
 #   An array of first-level keys from the `repos` hash to exclude from management via this module.
 #   Values in this array will be subtracted from the `managed_repos` array as a last step before
 #   instantiation.

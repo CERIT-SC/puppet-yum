@@ -1,19 +1,11 @@
-# Define: yum::group
 #
-# This definition installs or removes yum package group.
+# @summary This definition installs or removes yum package group.
 #
-# Parameters:
-#   [*ensure*]   - specifies if package group should be
-#                  present (installed) or absent (purged)
-#   [*timeout*]  - exec timeout for yum groupinstall command
-#   [*install_options*]  - options provided to yum groupinstall command
+# @param ensure specifies if package group should be present (installed) or absent (purged)
+# @param timeout exec timeout for yum groupinstall command
+# @param install_options options provided to yum groupinstall command
 #
-# Actions:
-#
-# Requires:
-#   RPM based system
-#
-# Sample usage:
+# @example Sample usage:
 #   yum::group { 'X Window System':
 #     ensure  => 'present',
 #   }

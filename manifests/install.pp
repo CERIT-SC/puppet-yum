@@ -1,5 +1,7 @@
 #
-# @summary This definition installs or removes rpms from local file or URL via yum install command. This can be better than using just the rpm provider because it will pull all the dependencies.
+# @summary Installs/removes rpms from local file/URL via yum install command.
+#
+# @note This can be better than using just the rpm provider because it will pull all the dependencies.
 #
 # @param source file or URL where RPM is available
 # @param ensure the desired state of the package

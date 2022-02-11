@@ -32,7 +32,7 @@ def process_list_updates(output)
   { status: result }
 end
 
-params = JSON.parse(STDIN.read)
+params = JSON.parse($stdin.read)
 action = params['action']
 quiet = params['quiet']
 

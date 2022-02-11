@@ -10,7 +10,7 @@
 #     ensure => present,
 #     version => '4.1.2',
 #     release => '9.el8',
-#     epoch   => '0',
+#     epoch   => 0,
 #     arch    => 'noarch',
 #   }
 #
@@ -20,7 +20,7 @@
 #     ensure => present,
 #     version => '3.1.2',
 #     release => '9.el7',
-#     epoch   => '0',
+#     epoch   => 0,
 #     arch    => 'noarch',
 #   }
 #

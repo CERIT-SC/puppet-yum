@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.3.1](https://github.com/voxpupuli/puppet-yum/tree/v5.3.1) (2022-02-15)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.3.0...v5.3.1)
+
+**Fixed bugs:**
+
+- yamllint failure on VirtuozzoLinux/7.yaml - duplication of key gpgkey [\#236](https://github.com/voxpupuli/puppet-yum/pull/236) ([bastelfreak](https://github.com/bastelfreak))
+- CentOS 8 has been archived [\#234](https://github.com/voxpupuli/puppet-yum/pull/234) ([vchepkov](https://github.com/vchepkov))
+
+**Merged pull requests:**
+
+- Fix examples in manifests/versionlock.pp [\#233](https://github.com/voxpupuli/puppet-yum/pull/233) ([yakatz](https://github.com/yakatz))
+- cleanup .fixtures.yml [\#230](https://github.com/voxpupuli/puppet-yum/pull/230) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v5.3.0](https://github.com/voxpupuli/puppet-yum/tree/v5.3.0) (2021-10-26)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.2.0...v5.3.0)

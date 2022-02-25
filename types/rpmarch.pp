@@ -5,6 +5,7 @@ type Yum::RpmArch = Enum[
   'noarch',
   'x86_64',
   'i386',
+  'aarch64',
   'arm',
   'ppc64',
   'ppc64le',

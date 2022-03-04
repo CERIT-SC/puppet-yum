@@ -54,7 +54,7 @@ yum::repos:
     mirrorlist: absent
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
-    target: 'CentOS-Linux-HighAvailability.repo'
+    target: '/etc/yum.repos.d/CentOS-Linux-HighAvailability.repo'
 
   extras:
     enabled: true

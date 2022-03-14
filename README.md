@@ -414,6 +414,16 @@ yum::install { 'package-name':
 }
 ```
 
+Reinstall if rpm-verify fails:
+
+```puppet
+yum::install { 'package-name':
+  ensure => present,
+  source => 'file:///path/to/package/filename.rpm',
+  require_verify => true,
+}
+```
+
 Please note that resource name must be same as installed package name.
 
 ### Puppet tasks

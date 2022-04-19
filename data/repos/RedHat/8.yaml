@@ -91,7 +91,7 @@ yum::repos:
 
   epel-modular:
     descr: "Extra Packages for Enterprise Linux Modular $releasever - $basearch"
-    metalink: "https://mirrors.fedoraproject.org/metalink?repo=modular-epel$releasever&arch=$basearch&infra=$infra&content=$contentdir"
+    metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-modular-$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
     enabled: true
     gpgcheck: true
@@ -100,7 +100,7 @@ yum::repos:
 
   epel-modular-debuginfo:
     descr: "Extra Packages for Enterprise Linux Modular $releasever - $basearch - Debug"
-    metalink: "https://mirrors.fedoraproject.org/metalink?repo=modular-debug-epel$releasever&arch=$basearch&infra=$infra&content=$contentdir"
+    metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-modular-debug-$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
     enabled: false
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
@@ -109,7 +109,7 @@ yum::repos:
 
   epel-modular-source:
     descr: "Extra Packages for Enterprise Linux Modular $releasever - $basearch - Source"
-    metalink: "https://mirrors.fedoraproject.org/metalink?repo=modular-source-epel$releasever&arch=$basearch&infra=$infra&content=$contentdir"
+    metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-modular-source-$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
     enabled: false
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"

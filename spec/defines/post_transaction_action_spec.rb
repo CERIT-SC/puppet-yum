@@ -81,7 +81,7 @@ describe 'yum::post_transaction_action' do
             it { is_expected.to contain_concat__fragment('post_trans_an entry').with_content(%r{^/etc/\*:any:foo bar$}) }
           end
 
-          context 'with simple package name and state in (dnf only option)' do # rubocop:disable RSpec/EmptyExampleGroup
+          context 'with simple package name and state in (dnf only option)' do
             let(:params) do
               {
                 key: 'openssh',
@@ -98,7 +98,7 @@ describe 'yum::post_transaction_action' do
             end
           end
 
-          context 'with simple package name and state install (yum only option)' do # rubocop:disable RSpec/EmptyExampleGroup
+          context 'with simple package name and state install (yum only option)' do
             let(:params) do
               {
                 key: 'openssh',

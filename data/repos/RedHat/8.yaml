@@ -6,6 +6,7 @@ yum::repos:
     descr: "Extra Packages for Enterprise Linux $releasever - $basearch"
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
+    failovermethod: absent
     enabled: true
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
@@ -15,6 +16,7 @@ yum::repos:
     descr: "Extra Packages for Enterprise Linux $releasever - $basearch - Debug"
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-debug-$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
+    failovermethod: absent
     enabled: false
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
     gpgcheck: true
@@ -24,6 +26,7 @@ yum::repos:
     descr: "Extra Packages for Enterprise Linux $releasever - $basearch - Source"
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=epel-source-$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
+    failovermethod: absent
     enabled: false
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
     gpgcheck: true
@@ -33,6 +36,7 @@ yum::repos:
     descr: "Extra Packages for Enterprise Linux $releasever - Testing - $basearch"
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=testing-epel$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
+    failovermethod: absent
     enabled: false
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
@@ -42,6 +46,7 @@ yum::repos:
     descr: "Extra Packages for Enterprise Linux $releasever - Testing - $basearch - Debug"
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=testing-debug-epel$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
+    failovermethod: absent
     enabled: false
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
     gpgcheck: true
@@ -51,6 +56,7 @@ yum::repos:
     descr: "Extra Packages for Enterprise Linux $releasever - Testing - $basearch - Source"
     metalink: "https://mirrors.fedoraproject.org/metalink?repo=testing-source-epel$releasever&arch=$basearch&infra=$infra&content=$contentdir"
     mirrorlist: absent
+    failovermethod: absent
     enabled: false
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
     gpgcheck: true
@@ -127,7 +133,7 @@ yum::repos:
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
     gpgcheck: true
     target: '/etc/yum.repos.d/epel-testing-modular.repo'
-    
+
   epel-testing-modular-source:
     descr: "Extra Packages for Enterprise Linux Modular $releasever - Testing -$basearch - Source"
     mirrorlist: absent

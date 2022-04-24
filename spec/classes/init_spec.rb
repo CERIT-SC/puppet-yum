@@ -195,7 +195,7 @@ describe 'yum' do
         when 'VirtuozzoLinux'
           case facts[:os]['release']['major']
           when '6'
-            it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
+            it { is_expected.to have_yumrepo_resource_count(12) }
 
             it_behaves_like 'a catalog containing repos', %w[
               virtuozzolinux-base
@@ -236,21 +236,30 @@ describe 'yum' do
         when 'AlmaLinux'
           case facts[:os]['release']['major']
           when '8'
-            it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
+            it { is_expected.to have_yumrepo_resource_count(21) }
 
             it_behaves_like 'a catalog containing repos', %w[
               baseos
               appstream
               powertools
               extras
+              ha
+              plus
+              resilientstorage
               baseos-source
               appstream-source
               powertools-source
               extras-source
+              ha-source
+              plus-source
+              resilientstorage-source
               baseos-debuginfo
               appstream-debuginfo
               powertools-debuginfo
               extras-debuginfo
+              ha-debuginfo
+              plus-debuginfo
+              resilientstorage-debuginfo
             ]
           end
         else
@@ -365,7 +374,7 @@ describe 'yum' do
           when 'VirtuozzoLinux'
             case facts[:os]['release']['major']
             when '6'
-              it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
+              it { is_expected.to have_yumrepo_resource_count(12) }
 
               it_behaves_like 'a catalog containing repos', %w[
                 virtuozzolinux-base
@@ -406,21 +415,30 @@ describe 'yum' do
           when 'AlmaLinux'
             case facts[:os]['release']['major']
             when '8'
-              it { is_expected.to have_yumrepo_resource_count(12) } # rubocop:disable RSpec/RepeatedExample
+              it { is_expected.to have_yumrepo_resource_count(21) }
 
               it_behaves_like 'a catalog containing repos', %w[
                 baseos
                 appstream
                 powertools
                 extras
+                ha
+                plus
+                resilientstorage
                 baseos-source
                 appstream-source
                 powertools-source
                 extras-source
+                ha-source
+                plus-source
+                resilientstorage-source
                 baseos-debuginfo
                 appstream-debuginfo
                 powertools-debuginfo
                 extras-debuginfo
+                ha-debuginfo
+                plus-debuginfo
+                resilientstorage-debuginfo
               ]
             end
           when 'Rocky'

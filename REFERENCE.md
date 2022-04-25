@@ -814,7 +814,7 @@ Output of `rpm -q --queryformat '%{arch}\n' package`
 Alias of
 
 ```puppet
-Enum['noarch', 'x86_64', 'i386', 'arm', 'ppc64', 'ppc64le', 'sparc64', 'ia64', 'alpha', 'ip', 'm68k', 'mips', 'mipsel', 'mk68k', 'mint', 'ppc', 'rs6000', 's390', 's390x', 'sh', 'sparc', 'xtensa']
+Enum['noarch', 'x86_64', 'i386', 'aarch64', 'arm', 'ppc64', 'ppc64le', 'sparc64', 'ia64', 'alpha', 'ip', 'm68k', 'mips', 'mipsel', 'mk68k', 'mint', 'ppc', 'rs6000', 's390', 's390x', 'sh', 'sparc', 'xtensa']
 ```
 
 ### <a name="yumrpmname"></a>`Yum::RpmName`

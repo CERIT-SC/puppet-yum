@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.4.0](https://github.com/voxpupuli/puppet-yum/tree/v5.4.0) (2022-04-25)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.3.1...v5.4.0)
+
+**Implemented enhancements:**
+
+- sync with upstream AlmaLinux repository set [\#249](https://github.com/voxpupuli/puppet-yum/pull/249) ([vchepkov](https://github.com/vchepkov))
+- Allow arch aarch64 in yum::versionlock [\#239](https://github.com/voxpupuli/puppet-yum/pull/239) ([traylenator](https://github.com/traylenator))
+
+**Fixed bugs:**
+
+- failovermethod parameter doesn't exist in dnf [\#250](https://github.com/voxpupuli/puppet-yum/pull/250) ([vchepkov](https://github.com/vchepkov))
+- RHEL8: Fix epel-modular repo names [\#247](https://github.com/voxpupuli/puppet-yum/pull/247) ([ccolic](https://github.com/ccolic))
+- fix centos8 HA yumrepo target [\#241](https://github.com/voxpupuli/puppet-yum/pull/241) ([vchepkov](https://github.com/vchepkov))
+
+**Closed issues:**
+
+- Use of  puppetlabs-yumrepo\_core [\#248](https://github.com/voxpupuli/puppet-yum/issues/248)
+- RHEL8, epel-modular is installed with the wrong repo-name [\#246](https://github.com/voxpupuli/puppet-yum/issues/246)
+
+**Merged pull requests:**
+
+- rubocop: autofix [\#251](https://github.com/voxpupuli/puppet-yum/pull/251) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v5.3.1](https://github.com/voxpupuli/puppet-yum/tree/v5.3.1) (2022-02-15)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.3.0...v5.3.1)

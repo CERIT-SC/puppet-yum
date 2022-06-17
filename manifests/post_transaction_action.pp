@@ -35,7 +35,7 @@ define yum::post_transaction_action (
     }
   }
 
-  include yum::plugin::post_transaction_actions
+  require yum::plugin::post_transaction_actions
 
   if $yum::plugin::post_transaction_actions::ensure == 'present' {
     concat::fragment { "post_trans_${action}":

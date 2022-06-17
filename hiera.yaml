@@ -19,5 +19,8 @@ hierarchy:
       - 'repos/%{facts.os.family}/%{facts.os.release.major}.yaml'
       - 'repos/repos.yaml'
 
+  - name: 'Yum vs DNF settings'
+    path: 'package_provider/%{facts.package_provider}.yaml'
+
   - name: 'Common Data'
     path: 'common.yaml'

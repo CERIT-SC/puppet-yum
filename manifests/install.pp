@@ -6,6 +6,7 @@
 # @param source file or URL where RPM is available
 # @param ensure the desired state of the package
 # @param timeout optional timeout for the installation
+# @param require_verify optional argument, will reinstall if rpm verify fails
 #
 # @example Sample usage:
 #   yum::install { 'epel-release':
@@ -16,6 +17,7 @@
 define yum::install (
   String                                           $source,
   Enum['present', 'installed', 'absent', 'purged'] $ensure  = 'present',
+  Boolean                                          $require_verify = false,
   Optional[Integer]                                $timeout = undef,
 ) {
   Exec {
@@ -25,6 +27,16 @@ define yum::install (
 
   case $ensure {
     'present', 'installed', default: {
+      if $require_verify {
+        exec { "yum-reinstall-${name}":
+          command => "yum -y reinstall '${source}'",
+          onlyif  => "rpm -q '${name}'",
+          unless  => "rpm -V '${name}'",
+          timeout => $timeout,
+          before  => Exec["yum-install-${name}"],
+        }
+      }
+
       exec { "yum-install-${name}":
         command => "yum -y install '${source}'",
         unless  => "rpm -q '${name}'",

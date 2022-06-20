@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.5.0](https://github.com/voxpupuli/puppet-yum/tree/v5.5.0) (2022-06-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.4.0...v5.5.0)
+
+**Implemented enhancements:**
+
+- Add `require_verify` option to install.pp [\#244](https://github.com/voxpupuli/puppet-yum/pull/244) ([jcpunk](https://github.com/jcpunk))
+
+**Fixed bugs:**
+
+- Avoid assumption that package\_provider is set [\#255](https://github.com/voxpupuli/puppet-yum/pull/255) ([traylenator](https://github.com/traylenator))
+
+**Merged pull requests:**
+
+- Finish out dnf path for versionlock. [\#253](https://github.com/voxpupuli/puppet-yum/pull/253) ([jcpunk](https://github.com/jcpunk))
+
 ## [v5.4.0](https://github.com/voxpupuli/puppet-yum/tree/v5.4.0) (2022-04-25)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.3.1...v5.4.0)

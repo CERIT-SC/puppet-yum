@@ -1,2 +1,0 @@
----
-yum::plugin::versionlock::path: /etc/yum/pluginconf.d/versionlock.list

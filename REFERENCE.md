@@ -264,7 +264,9 @@ This class installs versionlock plugin
 ##### Sample usage:
 
 ```puppet
-include yum::plugin::versionlock
+class { 'yum::plugin::versionlock':
+  ensure      => present,
+}
 ```
 
 #### Parameters
@@ -295,9 +297,7 @@ Default value: ``false``
 
 Data type: `String`
 
-filepath for the versionlocks
-
-Default value: `'/etc/yum/pluginconf.d/versionlock.list'`
+filepath for the versionlock.list, default based on your system.
 
 ## Defined types
 
@@ -499,6 +499,7 @@ The following parameters are available in the `yum::install` defined type:
 * [`source`](#source)
 * [`ensure`](#ensure)
 * [`timeout`](#timeout)
+* [`require_verify`](#require_verify)
 
 ##### <a name="source"></a>`source`
 
@@ -521,6 +522,14 @@ Data type: `Optional[Integer]`
 optional timeout for the installation
 
 Default value: ``undef``
+
+##### <a name="require_verify"></a>`require_verify`
+
+Data type: `Boolean`
+
+optional argument, will reinstall if rpm verify fails
+
+Default value: ``false``
 
 ### <a name="yumplugin"></a>`yum::plugin`
 

@@ -7,10 +7,26 @@ describe 'yum::post_transaction_action' do
 
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
+      let(:facts) do
+        os_facts
+      end
+
+      context 'with_package_provider unset' do
+        let(:params) do
+          {
+            key: 'openssh',
+            state: 'any',
+            command: 'foo bar',
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+      end
+
       %w[yum dnf].each do |provider|
         context "with package_provider #{provider}" do
           let(:facts) do
-            os_facts.merge(package_provider: provider)
+            super().merge(package_provider: provider)
           end
 
           context 'with simple package name and state any' do

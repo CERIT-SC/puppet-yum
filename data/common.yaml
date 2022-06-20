@@ -17,3 +17,6 @@ lookup_options:
     merge: 'unique'
   yum::repo_exclusions:
     merge: 'unique'
+
+# Default is currently yum path
+yum::plugin::versionlock::path: /etc/yum/pluginconf.d/versionlock.list

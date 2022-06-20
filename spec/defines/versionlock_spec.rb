@@ -196,4 +196,18 @@ describe 'yum::versionlock' do
       end
     end
   end
+
+  context 'with package_provider unset' do
+    let(:facts) do
+      { os: { release: { major: 7 } } }
+    end
+    let(:title) { 'bash' }
+    let(:params) { { version: '4.3' } }
+
+    it { is_expected.to compile.with_all_deps }
+
+    it 'contains a well-formed Concat::Fragment' do
+      is_expected.to contain_concat__fragment('yum-versionlock-bash').with_content("bash-0:4.3-*.*\n")
+    end
+  end
 end

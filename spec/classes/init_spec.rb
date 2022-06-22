@@ -74,14 +74,46 @@ describe 'yum' do
             it { is_expected.to have_yumrepo_resource_count(0) } # rubocop:disable RSpec/RepeatedExample
           end
         when 'CentOS'
-          it_behaves_like 'a catalog containing repos', %w[
-            extras
-            centosplus
-            fasttrack
-            extras-source
-            base-debuginfo
-          ]
           case facts[:os]['release']['major']
+          when '9'
+            it_behaves_like 'a catalog containing repos', %w[
+              appstream
+              baseos
+              crb
+              extras-common
+              appstream-source
+              appstream-debug
+              baseos-source
+              baseos-debug
+              crb-source
+              crb-debug
+              highavailability
+              highavailability-source
+              highavailability-debug
+              nfv
+              nfv-source
+              nfv-debug
+              rt
+              rt-source
+              rt-debug
+              resilientstorage
+              resilientstorage-source
+              resilientstorage-debug
+              extras-common
+              extras-common-source
+            ]
+            it_behaves_like 'a catalog not containing repos', %w[
+              AppStream
+              BaseOS
+              cr
+              Devel
+              HA
+              PowerTools
+              BaseOS-source
+              Appstream-source
+              c8-media-BaseOS
+              c8-media-AppStream
+            ]
           when '8'
             it_behaves_like 'a catalog containing repos', %w[
               AppStream
@@ -94,6 +126,11 @@ describe 'yum' do
               Appstream-source
               c8-media-BaseOS
               c8-media-AppStream
+              extras
+              centosplus
+              fasttrack
+              extras-source
+              base-debuginfo
             ]
             it_behaves_like 'a catalog not containing repos', %w[
               base
@@ -111,30 +148,14 @@ describe 'yum' do
               base-source
               updates-source
               centos-media
+              extras
+              centosplus
+              fasttrack
+              extras-source
+              base-debuginfo
             ]
             it_behaves_like 'a catalog not containing repos', %w[
               contrib
-              AppStream
-              BaseOS
-              Devel
-              HA
-              PowerTools
-              BaseOS-source
-              Appstream-source
-              c8-media-BaseOS
-              c8-media-AppStream
-            ]
-          when '6'
-            it_behaves_like 'a catalog containing repos', %w[
-              contrib
-              base
-              updates
-              centos-media
-              base-source
-              updates-source
-            ]
-            it_behaves_like 'a catalog not containing repos', %w[
-              cr
               AppStream
               BaseOS
               Devel

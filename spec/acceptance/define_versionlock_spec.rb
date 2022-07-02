@@ -58,7 +58,7 @@ describe 'yum::versionlock define' do
       end
     end
 
-    if fact('os.release.major') == '8'
+    if fact('os.release.major') >= '8'
       describe package('python3-dnf-plugin-versionlock') do
         it { is_expected.to be_installed }
       end

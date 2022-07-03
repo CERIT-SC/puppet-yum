@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.6.0](https://github.com/voxpupuli/puppet-yum/tree/v5.6.0) (2022-07-04)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.5.0...v5.6.0)
+
+**Implemented enhancements:**
+
+- Add RPMFusion repos [\#261](https://github.com/voxpupuli/puppet-yum/pull/261) ([jcpunk](https://github.com/jcpunk))
+- Add CentOS Stream9 repos [\#259](https://github.com/voxpupuli/puppet-yum/pull/259) ([jcpunk](https://github.com/jcpunk))
+- Permit easily purging unmanaged repos [\#258](https://github.com/voxpupuli/puppet-yum/pull/258) ([jcpunk](https://github.com/jcpunk))
+
+**Fixed bugs:**
+
+- Ensure any/all GPG keys are installed before attempting to install yum-utils [\#263](https://github.com/voxpupuli/puppet-yum/pull/263) ([bschonec](https://github.com/bschonec))
+
+**Merged pull requests:**
+
+- Simplify EPEL definitions for EL8/9 [\#260](https://github.com/voxpupuli/puppet-yum/pull/260) ([jcpunk](https://github.com/jcpunk))
+
 ## [v5.5.0](https://github.com/voxpupuli/puppet-yum/tree/v5.5.0) (2022-06-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.4.0...v5.5.0)

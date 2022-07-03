@@ -49,3 +49,26 @@ yum::repos:
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-%{facts.os.release.major}"
     gpgcheck: true
     target: '/etc/yum.repos.d/epel-testing.repo'
+
+  # RPMFusion
+  rpmfusion-free-updates:
+    descr: "RPM Fusion for EL %{facts.os.release.major} - Free - Updates"
+    metalink: "http://mirrors.rpmfusion.org/metalink?repo=free-el-updates-released-%{facts.os.release.major}&arch=$basearch"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/rpmfusion-free-updates.repo'
+  rpmfusion-free-updates-debuginfo:
+    descr: "RPM Fusion for EL %{facts.os.release.major} - Free - Updates Debug"
+    metalink: "http://mirrors.rpmfusion.org/metalink?repo=free-el-updates-released-debug-%{facts.os.release.major}&arch=$basearch"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/rpmfusion-free-updates.repo'
+  rpmfusion-free-updates-source:
+    descr: "RPM Fusion for EL %{facts.os.release.major} - Free - Updates Source"
+    metalink: "http://mirrors.rpmfusion.org/metalink?repo=free-el-updates-released-source-%{facts.os.release.major}&arch=$basearch"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-el-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/rpmfusion-free-updates.repo'

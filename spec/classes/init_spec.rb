@@ -303,6 +303,33 @@ describe 'yum' do
             it { is_expected.not_to contain_yumrepo('BaseOS') }
 
             case facts[:os]['release']['major']
+            when '9'
+              it_behaves_like 'a catalog containing repos', %w[
+                appstream
+                baseos
+                crb
+                extras-common
+                appstream-source
+                appstream-debug
+                baseos-source
+                baseos-debug
+                crb-source
+                crb-debug
+                highavailability
+                highavailability-source
+                highavailability-debug
+                nfv
+                nfv-source
+                nfv-debug
+                rt
+                rt-source
+                rt-debug
+                resilientstorage
+                resilientstorage-source
+                resilientstorage-debug
+                extras-common
+                extras-common-source
+              ]
             when '8'
               it_behaves_like 'a catalog containing repos', %w[
                 AppStream
@@ -315,6 +342,10 @@ describe 'yum' do
                 Appstream-source
                 c8-media-BaseOS
                 c8-media-AppStream
+                extras
+                centosplus
+                extras-source
+                base-debuginfo
               ]
             when '7'
               it_behaves_like 'a catalog containing repos', %w[
@@ -327,6 +358,10 @@ describe 'yum' do
                 base-debuginfo
                 centosplus
                 centos-media
+                extras
+                centosplus
+                extras-source
+                base-debuginfo
               ]
             when '6'
               it_behaves_like 'a catalog containing repos', %w[
@@ -339,13 +374,6 @@ describe 'yum' do
                 base-debuginfo
                 centosplus
                 centos-media
-              ]
-            else
-              it_behaves_like 'a catalog containing repos', %w[
-                extras
-                centosplus
-                extras-source
-                base-debuginfo
               ]
             end
           when 'Amazon'

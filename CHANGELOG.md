@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.6.1](https://github.com/voxpupuli/puppet-yum/tree/v5.6.1) (2022-07-06)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.6.0...v5.6.1)
+
+**Fixed bugs:**
+
+- bugfix: typo in appstream repo [\#267](https://github.com/voxpupuli/puppet-yum/pull/267) ([jcpunk](https://github.com/jcpunk))
+- Remove obsolete repos from CentOS 9 [\#266](https://github.com/voxpupuli/puppet-yum/pull/266) ([jcpunk](https://github.com/jcpunk))
+
 ## [v5.6.0](https://github.com/voxpupuli/puppet-yum/tree/v5.6.0) (2022-07-04)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.5.0...v5.6.0)

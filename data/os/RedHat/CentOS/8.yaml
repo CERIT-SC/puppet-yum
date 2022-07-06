@@ -9,6 +9,11 @@ yum::os_default_repos:
   - 'Appstream-source'
   - 'c8-media-BaseOS'
   - 'c8-media-AppStream'
+  - 'extras'
+  - 'fasttrack'
+  - 'extras-source'
+  - 'base-debuginfo'
+  - 'centosplus'
 
 yum::repos:
   AppStream:
@@ -113,3 +118,43 @@ yum::repos:
     gpgcheck: true
     gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial"
     target: '/etc/yum.repos.d/CentOS-Media.repo'
+
+  extras:
+    enabled: false
+    descr: 'CentOS-$releasever - Extras'
+    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/CentOS-Base.repo'
+
+  fasttrack:
+    enabled: false
+    descr: 'CentOS-$releasever - fasttrack'
+    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=fasttrack&infra=$infra'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/CentOS-fasttrack.repo'
+
+  extras-source:
+    enabled: false
+    descr: 'CentOS-$releasever - Extras Sources'
+    baseurl: 'http://vault.centos.org/centos/$releasever/extras/Source/'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/CentOS-Sources.repo'
+
+  base-debuginfo:
+    enabled: false
+    descr: 'CentOS-$releasever - Debuginfo'
+    baseurl: 'http://debuginfo.centos.org/$releasever/$basearch/'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Debug-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/CentOS-Debuginfo.repo'
+
+  centosplus:
+    enabled: false
+    descr: 'CentOS-$releasever - Plus'
+    mirrorlist: 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus&infra=$infra'
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-%{facts.os.release.major}"
+    target: '/etc/yum.repos.d/CentOS-Base.repo'

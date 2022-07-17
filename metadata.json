@@ -77,6 +77,13 @@
       "operatingsystemrelease": [
         "8"
       ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "35",
+        "36"
+      ]
     }
   ],
   "requirements": [

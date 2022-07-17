@@ -283,6 +283,22 @@ describe 'yum' do
               resilientstorage-debuginfo
             ]
           end
+        when 'Fedora'
+          it { is_expected.to have_yumrepo_resource_count(11) }
+
+          it_behaves_like 'a catalog containing repos', %w[
+            fedora
+            fedora-debuginfo
+            fedora-source
+            fedora-cisco-openh264
+            fedora-cisco-openh264-debuginfo
+            updates
+            updates-debuginfo
+            updates-source
+            updates-testing
+            updates-testing-debuginfo
+            updates-testing-source
+          ]
         else
           it { is_expected.to have_yumrepo_resource_count(0) } # rubocop:disable RSpec/RepeatedExample
         end
@@ -513,6 +529,22 @@ describe 'yum' do
                 rt
               ]
             end
+          when 'Fedora'
+            it { is_expected.to have_yumrepo_resource_count(11) }
+
+            it_behaves_like 'a catalog containing repos', %w[
+              fedora
+              fedora-debuginfo
+              fedora-source
+              fedora-cisco-openh264
+              fedora-cisco-openh264-debuginfo
+              updates
+              updates-debuginfo
+              updates-source
+              updates-testing
+              updates-testing-debuginfo
+              updates-testing-source
+            ]
           else
             it { is_expected.to have_yumrepo_resource_count(0) }
           end

@@ -14,7 +14,7 @@ Module has been tested on:
 * CentOS 7,8
 * Amazon Linux 2017
 * RHEL 7
-* Fedora 30 (partial support)
+* Fedora 35,36
 
 For the official list of all tested distributions, please take a look at the metadata.json.
 

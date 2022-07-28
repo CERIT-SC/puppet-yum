@@ -119,13 +119,16 @@ class yum (
     $os['operatingsystem']
   }
 
-  file { $repodir:
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    recurse => true,
-    purge   => $purge_unmanaged_repos,
+  if $purge_unmanaged_repos {
+    file { $repodir:
+      ensure       => 'directory',
+      owner        => 'root',
+      group        => 'root',
+      mode         => '0644',
+      recurse      => true,
+      recurselimit => 1,
+      purge        => true,
+    }
   }
 
   unless member($supported_os_names, $facts['os']['name']) {

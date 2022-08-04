@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.0.0](https://github.com/voxpupuli/puppet-yum/tree/v6.0.0) (2022-08-04)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.6.1...v6.0.0)
+
+**Breaking changes:**
+
+- manage $repodir only if $purge\_unmanaged\_repos is enabled [\#271](https://github.com/voxpupuli/puppet-yum/pull/271) ([vchepkov](https://github.com/vchepkov))
+
+**Implemented enhancements:**
+
+- add Fedora support [\#270](https://github.com/voxpupuli/puppet-yum/pull/270) ([vchepkov](https://github.com/vchepkov))
+
 ## [v5.6.1](https://github.com/voxpupuli/puppet-yum/tree/v5.6.1) (2022-07-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.6.0...v5.6.1)

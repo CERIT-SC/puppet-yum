@@ -1,6 +1,13 @@
 # Yum
 
-[![Build Status](https://travis-ci.org/voxpupuli/puppet-yum.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-yum)
+[![Build Status](https://github.com/voxpupuli/puppet-yum/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-yum/actions?query=workflow%3ACI)
+[![Release](https://github.com/voxpupuli/puppet-yum/actions/workflows/release.yml/badge.svg)](https://github.com/voxpupuli/puppet-yum/actions/workflows/release.yml)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/yum.svg)](https://forge.puppetlabs.com/puppet/yum)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/yum.svg)](https://forge.puppetlabs.com/puppet/yum)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/yum.svg)](https://forge.puppetlabs.com/puppet/yum)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/yum.svg)](https://forge.puppetlabs.com/puppet/yum)
+[![puppetmodule.info docs](http://www.puppetmodule.info/images/badge.png)](http://www.puppetmodule.info/m/puppet-yum)
+[![AGPL v3 License](https://img.shields.io/github/license/voxpupuli/puppet-yum.svg)](LICENSE)
 
 ## Module description
 

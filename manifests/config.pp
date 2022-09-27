@@ -18,7 +18,6 @@ define yum::config (
   Variant[Boolean, Integer, Enum['absent'], String, Sensitive[String]] $ensure,
   String                                            $key     = $title,
 ) {
-
   $_ensure = $ensure ? {
     Boolean   => bool2num($ensure),
     Sensitive => $ensure.unwrap,

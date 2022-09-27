@@ -11,7 +11,8 @@
 #   are either the direct `ensure` value, or a Hash of the resource's attributes.
 #
 #   @note Boolean parameter values will be converted to either a `1` or `0`; use a quoted string to
-#     get a literal `true` or `false`.
+#     get a literal `true` or `false`. Sensitive value will disable the `show_diff`.
+#
 #
 # @param repos
 #   A hash where keys are the names of `Yumrepo` resources and each value represents its respective
@@ -102,7 +103,7 @@
 class yum (
   Boolean $clean_old_kernels = true,
   Boolean $keep_kernel_devel = false,
-  Hash[String, Variant[String, Integer, Boolean, Hash[String, Variant[String, Integer, Boolean]]]] $config_options = {},
+  Hash[String, Variant[String, Integer, Boolean, Sensitive[String], Hash[String, Variant[String, Integer, Boolean, Sensitive[String]]]]] $config_options = {},
   Hash[String, Optional[Hash[String, Variant[String, Integer, Boolean]]]] $repos = {},
   Array[String] $managed_repos = [],
   Boolean $manage_os_default_repos = false,

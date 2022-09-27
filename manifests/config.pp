@@ -15,12 +15,13 @@
 #   }
 #
 define yum::config (
-  Variant[Boolean, Integer, Enum['absent'], String] $ensure,
+  Variant[Boolean, Integer, Enum['absent'], String, Sensitive[String]] $ensure,
   String                                            $key     = $title,
 ) {
   $_ensure = $ensure ? {
-    Boolean => bool2num($ensure),
-    default => $ensure,
+    Boolean   => bool2num($ensure),
+    Sensitive => $ensure.unwrap,
+    default   => $ensure,
   }
 
   $_changes = $ensure ? {
@@ -28,10 +29,16 @@ define yum::config (
     default   => "set ${key} '${_ensure}'",
   }
 
+  $_show_diff = $ensure ? {
+    Sensitive => false,
+    default   => true,
+  }
+
   augeas { "yum.conf_${key}":
-    incl    => '/etc/yum.conf',
-    lens    => 'Yum.lns',
-    context => '/files/etc/yum.conf/main/',
-    changes => $_changes,
+    incl      => '/etc/yum.conf',
+    lens      => 'Yum.lns',
+    context   => '/files/etc/yum.conf/main/',
+    changes   => $_changes,
+    show_diff => $_show_diff,
   }
 }

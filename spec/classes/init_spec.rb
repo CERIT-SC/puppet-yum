@@ -633,6 +633,14 @@ describe 'yum' do
           it_behaves_like 'a Yum class'
         end
 
+        context 'to a Sensitive value' do
+          let(:params) { { config_options: { 'proxy_password' => sensitive('secret') } } }
+
+          it { is_expected.to contain_yum__config('proxy_password').with_ensure('Sensitive [value redacted]') }
+
+          it_behaves_like 'a Yum class'
+        end
+
         context 'using the nested attributes syntax' do
           context 'to a String' do
             let(:params) { { config_options: { 'my_cachedir' => { 'ensure' => '/var/cache/yum', 'key' => 'cachedir' } } } }

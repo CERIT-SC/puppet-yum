@@ -47,4 +47,18 @@ describe 'yum::config' do
       )
     end
   end
+
+  context 'when ensure is a Sensitive[String]' do
+    let(:title) { 'assumeyes' }
+    let(:params) { { ensure: sensitive('secret') } }
+
+    it { is_expected.to compile.with_all_deps }
+
+    it 'contains an Augeas resource with the correct changes' do
+      is_expected.to contain_augeas("yum.conf_#{title}").with(
+        changes: "set assumeyes 'secret'",
+        show_diff: false
+      )
+    end
+  end
 end

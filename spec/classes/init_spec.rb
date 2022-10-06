@@ -706,6 +706,58 @@ describe 'yum' do
         it { is_expected.not_to contain_package('yum-utils') }
         it { is_expected.to contain_package('dnf-utils') }
       end
+
+      context 'when custom repos is set' do
+        let(:params) do
+          {
+            managed_repos: ['example'],
+            repos: {
+              example: {
+                baseurl: 'https://example.com',
+                gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-example'
+              }
+            },
+            gpgkeys: {
+              '/etc/pki/rpm-gpg/RPM-GPG-KEY-example' => {
+                'source' => 'http://example.com/gpg'
+              }
+            }
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to have_yumrepo_resource_count(1) }
+        it { is_expected.to contain_yumrepo('example') }
+        it { is_expected.to contain_yum__gpgkey('/etc/pki/rpm-gpg/RPM-GPG-KEY-example') }
+      end
+
+      context 'when custom repos with multiple gpgkeys is set' do
+        let(:params) do
+          {
+            managed_repos: ['example'],
+            repos: {
+              example: {
+                baseurl: 'https://example.com',
+                gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-example file:///etc/pki/rpm-gpg/RPM-GPG-KEY-example2',
+              }
+            },
+            gpgkeys: {
+              '/etc/pki/rpm-gpg/RPM-GPG-KEY-example' => {
+                'source' => 'http://example.com/gpg'
+              },
+              '/etc/pki/rpm-gpg/RPM-GPG-KEY-example2' => {
+                'source' => 'http://example.com/gpg2'
+              }
+            }
+          }
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to have_yumrepo_resource_count(1) }
+        it { is_expected.to contain_yumrepo('example') }
+        it { is_expected.to contain_yum__gpgkey('/etc/pki/rpm-gpg/RPM-GPG-KEY-example') }
+        it { is_expected.to contain_yum__gpgkey('/etc/pki/rpm-gpg/RPM-GPG-KEY-example2') }
+      end
     end
   end
 

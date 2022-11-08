@@ -505,6 +505,44 @@ describe 'yum' do
                 plus-debuginfo
                 resilientstorage-debuginfo
               ]
+            when '9'
+              it { is_expected.to have_yumrepo_resource_count(33) }
+
+              it_behaves_like 'a catalog containing repos', %w[
+                appstream
+                appstream-debug
+                appstream-source
+                plus
+                plus-debug
+                plus-source
+                saphana
+                saphana-debug
+                saphana-source
+                crb
+                crb-debug
+                crb-source
+                baseos
+                baseos-debug
+                baseos-source
+                highavailability
+                highavailability-debug
+                highavailability-source
+                extras
+                extras-debug
+                extras-source
+                nfv
+                nfv-debug
+                nfv-source
+                resilientstorage
+                resilientstorage-debug
+                resilientstorage-source
+                rt
+                rt-debug
+                rt-source
+                sap
+                sap-debug
+                sap-source
+              ]
             end
           when 'Rocky'
             case facts[:os]['release']['major']

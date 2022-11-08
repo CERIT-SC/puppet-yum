@@ -183,8 +183,8 @@ class yum (
       }
 
       $_normalized_ensure = $_ensure ? {
-        Boolean => Hash( { 'ensure' => bool2num($_ensure) }),
-        default => Hash( { ensure => $_ensure }), # lint:ignore:unquoted_string_in_selector
+        Boolean => Hash({ 'ensure' => bool2num($_ensure) }),
+        default => Hash({ ensure => $_ensure }), # lint:ignore:unquoted_string_in_selector
       }
 
       $_normalized_attrs = $attrs ? {
@@ -192,7 +192,7 @@ class yum (
         default => $_normalized_ensure,
       }
 
-      Hash( { $key => $_normalized_attrs })
+      Hash({ $key => $_normalized_attrs })
     }.reduce |$memo, $cfg_opt_hash| {
       merge($memo, $cfg_opt_hash)
     }

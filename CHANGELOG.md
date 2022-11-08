@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.1.0](https://github.com/voxpupuli/puppet-yum/tree/v6.1.0) (2022-11-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v6.0.0...v6.1.0)
+
+**Implemented enhancements:**
+
+- add AlmaLinux 9 support [\#281](https://github.com/voxpupuli/puppet-yum/pull/281) ([jhoblitt](https://github.com/jhoblitt))
+- Add sensitive support for configs [\#275](https://github.com/voxpupuli/puppet-yum/pull/275) ([teluq-pbrideau](https://github.com/teluq-pbrideau))
+
+**Fixed bugs:**
+
+- fix puppet-lint errors [\#282](https://github.com/voxpupuli/puppet-yum/pull/282) ([jhoblitt](https://github.com/jhoblitt))
+
 ## [v6.0.0](https://github.com/voxpupuli/puppet-yum/tree/v6.0.0) (2022-08-04)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v5.6.1...v6.0.0)

@@ -152,18 +152,21 @@ class yum (
         }
         # Handle GPG Key
         if ('gpgkey' in $attributes) {
-          $matches = $attributes['gpgkey'].match('^file://(.*)$')
-          if $matches {
-            $gpgkey = $matches[1]
-            if $gpgkey =~ Stdlib::AbsolutePath and $gpgkey in $gpgkeys {
-              if !defined(Yum::Gpgkey[$gpgkey]) {
-                yum::gpgkey { $gpgkey:
-                  *      => $gpgkeys[$gpgkey],
-                  before => Package[$utils_package_name],  # GPG Keys for any managed repository need to be installed before we attempt to install any packages.
-                }
-              } # end if Yum::Gpgkey[$gpgkey] is not defined
-            } # end if $gpgkey exists in gpgkeys
-          } # end if gpgkey is a file:// resource
+          $matches = $attributes['gpgkey'].split(/\s/).match('^file://(.*)$')
+          $matches.each |$match| {
+            if $match {
+              $gpgkey = $match[1]
+              if $gpgkey =~ Stdlib::AbsolutePath and $gpgkey in $gpgkeys {
+                if !defined(Yum::Gpgkey[$gpgkey]) {
+                  yum::gpgkey { $gpgkey:
+                    *      => $gpgkeys[$gpgkey],
+                    before => Package[$utils_package_name],
+                    # GPG Keys for any managed repository need to be installed before we attempt to install any packages.
+                  }
+                } # end if Yum::Gpgkey[$gpgkey] is not defined
+              } # end if $gpgkey exists in gpgkeys
+            } # end if gpgkey is a file:// resource
+          } # end each matches
         } # end if $attributes has a gpgkey
       }
     }

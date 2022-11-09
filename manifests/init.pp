@@ -160,7 +160,8 @@ class yum (
                 if !defined(Yum::Gpgkey[$gpgkey]) {
                   yum::gpgkey { $gpgkey:
                     *      => $gpgkeys[$gpgkey],
-                    before => Package[$utils_package_name],  # GPG Keys for any managed repository need to be installed before we attempt to install any packages.
+                    before => Package[$utils_package_name],
+                    # GPG Keys for any managed repository need to be installed before we attempt to install any packages.
                   }
                 } # end if Yum::Gpgkey[$gpgkey] is not defined
               } # end if $gpgkey exists in gpgkeys

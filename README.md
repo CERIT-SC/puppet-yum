@@ -100,7 +100,6 @@ yum::repos:
         baseurl: 'https://repos.example.com/example/'
         gpgcheck: true
         gpgkey: 'file:///etc/pki/gpm-gpg/RPM-GPG-KEY-Example'
-        target: '/etc/yum.repos.d/example.repo'
 ```
 
 You can include gpgkeys in yaml as well, and if the key filename matches a

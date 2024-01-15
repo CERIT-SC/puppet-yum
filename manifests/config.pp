@@ -22,18 +22,12 @@
 #   }
 #
 define yum::config (
-  $ensure,
-  $key     = $title,
-  $section = 'main'
+  Variant[Boolean, Integer, Enum['absent'], String, Sensitive[String]] $ensure,
+  String $key     = $title,
+  String $section = 'main',
 ) {
-  validate_string($key, $section)
-
-  unless is_integer($ensure) {
-    validate_string($ensure)
-  }
-
   $_changes = $ensure ? {
-    absent  => "rm  ${key}",
+    'absent'  => "rm  ${key}",
     default => "set ${key} ${ensure}",
   }
 

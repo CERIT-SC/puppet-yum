@@ -17,7 +17,7 @@
 #   }
 #
 define yum::versionlock (
-  String $ensure = present,
+  String $ensure = 'present',
   String $path   = '/etc/yum/pluginconf.d/versionlock.list',
 ) {
   require yum::plugin::versionlock

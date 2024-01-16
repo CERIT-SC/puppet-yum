@@ -20,7 +20,7 @@
 define yum::plugin (
   String $ensure               = 'present',
   Optional[String] $pkg_prefix = undef,
-  Optional[String] $pkg_name   = undef,
+  String $pkg_name             = '',
 ) {
   if $pkg_prefix {
     $_pkg_prefix = $pkg_prefix

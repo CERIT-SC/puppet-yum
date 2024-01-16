@@ -27,17 +27,14 @@
 #   }
 #
 define yum::gpgkey (
-  $path    = $name,
-  $ensure  = present,
-  $content = '',
-  $source  = '',
-  $owner   = 'root',
-  $group   = 'root',
-  $mode    = '0644'
+  String $path              = $name,
+  String $ensure            = 'present',
+  Optional[String] $content = undef,
+  Optional[String] $source  = undef,
+  String $owner             = 'root',
+  String $group             = 'root',
+  String $mode              = '0644',
 ) {
-  validate_absolute_path($path)
-  validate_string($owner, $group, $mode)
-
   file { $path:
     ensure => $ensure,
     owner  => $owner,
@@ -62,7 +59,7 @@ gpg --quiet --with-colon --homedir=/root --throw-keyids <${path} | \
 cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
 
   case $ensure {
-    present: {
+    'present': {
       exec { "rpm-import-${name}":
         path    => '/bin:/usr/bin:/sbin/:/usr/sbin',
         command => "rpm --import ${path}",
@@ -71,7 +68,7 @@ cut -d: -f5 | cut -c9- | tr '[A-Z]' '[a-z]' | head -1)"
       }
     }
 
-    absent: {
+    'absent': {
       exec { "rpm-delete-${name}":
         path    => '/bin:/usr/bin:/sbin/:/usr/sbin',
         command => "rpm -e ${rpmname}",

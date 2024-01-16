@@ -4,6 +4,8 @@
 #
 # Parameters:
 #   [*ensure*]   - specifies if plugin should be present or absent
+#   [*pkg_prefix*]
+#   [*pkg_name*]
 #
 # Actions:
 #
@@ -16,14 +18,14 @@
 #   }
 #
 define yum::plugin (
-  $ensure     = present,
-  $pkg_prefix = undef,
-  $pkg_name   = ''
+  String $ensure               = 'present',
+  Optional[String] $pkg_prefix = undef,
+  String $pkg_name             = '',
 ) {
   if $pkg_prefix {
     $_pkg_prefix = $pkg_prefix
   } else {
-    $_pkg_prefix = $::operatingsystemmajrelease ? {
+    $_pkg_prefix = $facts['os']['release']['major'] ? {
       5         => 'yum',
       default   => 'yum-plugin'
     }

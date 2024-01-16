@@ -13,7 +13,7 @@
 #   include yum::plugin::versionlock
 #
 class yum::plugin::versionlock (
-  $ensure = present
+  String $ensure = 'present',
 ) {
   yum::plugin { 'versionlock':
     ensure  => $ensure,

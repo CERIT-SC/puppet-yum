@@ -8,6 +8,7 @@
 #   [*ensure*] - specifies if package group should be
 #                present (installed) or absent (purged)
 #   [*source*] - file or URL where RPM is available
+#   [*timeout*] - timeout
 #
 # Actions:
 #
@@ -21,19 +22,17 @@
 #   }
 #
 define yum::install (
-  $source,
-  $ensure  = present,
-  $timeout = undef,
+  String $source,
+  String $ensure             = 'present',
+  Optional[Integer] $timeout = undef,
 ) {
-  validate_string($source)
-
   Exec {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
-    environment => 'LC_ALL=C'
+    environment => 'LC_ALL=C',
   }
 
   case $ensure {
-    present,installed: {
+    'present','installed': {
       exec { "yum-install-${name}":
         command => "yum -y install '${source}'",
         unless  => "rpm -q '${name}'",
@@ -41,7 +40,7 @@ define yum::install (
       }
     }
 
-    absent,purged: {
+    'absent','purged': {
       package { $name:
         ensure => $ensure,
       }

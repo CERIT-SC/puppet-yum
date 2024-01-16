@@ -22,26 +22,14 @@
 #   }
 #
 class yum (
-  $keepcache         = $yum::params::keepcache,
-  $debuglevel        = $yum::params::debuglevel,
-  $exactarch         = $yum::params::exactarch,
-  $obsoletes         = $yum::params::obsoletes,
-  $gpgcheck          = $yum::params::gpgcheck,
-  $installonly_limit = $yum::params::installonly_limit,
-  $keep_kernel_devel = $yum::params::keep_kernel_devel
+  Boolean $keepcache         = $yum::params::keepcache,
+  Integer $debuglevel        = $yum::params::debuglevel,
+  Boolean $exactarch         = $yum::params::exactarch,
+  Boolean $obsoletes         = $yum::params::obsoletes,
+  Boolean $gpgcheck          = $yum::params::gpgcheck,
+  Integer $installonly_limit = $yum::params::installonly_limit,
+  Boolean $keep_kernel_devel = $yum::params::keep_kernel_devel,
 ) inherits yum::params {
-
-  validate_bool($keepcache, $exactarch, $obsoletes, $gpgcheck)
-  validate_bool($keep_kernel_devel)
-
-  unless is_integer($installonly_limit) {
-    validate_string($installonly_limit)
-  }
-
-  unless is_integer($debuglevel) {
-    validate_string($debuglevel)
-  }
-
   # configure Yum
   yum::config { 'keepcache':
     ensure => bool2num($keepcache),
@@ -52,15 +40,15 @@ class yum (
   }
 
   yum::config { 'exactarch':
-    ensure => bool2num($exactarch)
+    ensure => bool2num($exactarch),
   }
 
   yum::config { 'obsoletes':
-    ensure => bool2num($obsoletes)
+    ensure => bool2num($obsoletes),
   }
 
   yum::config { 'gpgcheck':
-    ensure => bool2num($gpgcheck)
+    ensure => bool2num($gpgcheck),
   }
 
   yum::config { 'installonly_limit':
@@ -72,14 +60,14 @@ class yum (
   ensure_packages(['yum-utils'])
 
   $_pc_cmd = delete_undef_values([
-    '/usr/bin/package-cleanup',
-    '--oldkernels',
-    "--count=${installonly_limit}",
-    '-y',
-    $keep_kernel_devel ? {
-      true    => '--keepdevel',
-      default => undef,
-    },
+      '/usr/bin/package-cleanup',
+      '--oldkernels',
+      "--count=${installonly_limit}",
+      '-y',
+      $keep_kernel_devel ? {
+        true    => '--keepdevel',
+        default => undef,
+      },
   ])
 
   exec { 'package-cleanup_oldkernels':

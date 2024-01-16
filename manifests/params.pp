@@ -1,6 +1,6 @@
 class yum::params {
-  case $::osfamily {
-    redhat: {
+  case $facts['os']['family'] {
+    'redhat': {
       $keepcache = false
       $debuglevel = 2
       $exactarch = true
@@ -11,7 +11,7 @@ class yum::params {
     }
 
     default: {
-      fail("Unsupported OS family: ${::osfamily}")
+      fail("Unsupported OS family: ${facts['os']['family']}")
     }
   }
 }
